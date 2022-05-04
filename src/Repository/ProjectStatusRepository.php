@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\CompanyType;
+use App\Entity\ProjectStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CompanyType>
+ * @extends ServiceEntityRepository<ProjectStatus>
  *
- * @method CompanyType|null find($id, $lockMode = null, $lockVersion = null)
- * @method CompanyType|null findOneBy(array $criteria, array $orderBy = null)
- * @method CompanyType[]    findAll()
- * @method CompanyType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ProjectStatus|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProjectStatus|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProjectStatus[]    findAll()
+ * @method ProjectStatus[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompanyTypeRepository extends ServiceEntityRepository
+class ProjectStatusRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CompanyType::class);
+        parent::__construct($registry, ProjectStatus::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(CompanyType $entity, bool $flush = true): void
+    public function add(ProjectStatus $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class CompanyTypeRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(CompanyType $entity, bool $flush = true): void
+    public function remove(ProjectStatus $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,15 +48,15 @@ class CompanyTypeRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return CompanyType[] Returns an array of CompanyType objects
+    //  * @return ProjectStatus[] Returns an array of ProjectStatus objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
+            ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -65,10 +65,10 @@ class CompanyTypeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?CompanyType
+    public function findOneBySomeField($value): ?ProjectStatus
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

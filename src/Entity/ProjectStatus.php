@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CompanyTypeRepository;
+use App\Repository\ProjectStatusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CompanyTypeRepository::class)]
-class CompanyType
+#[ORM\Entity(repositoryClass: ProjectStatusRepository::class)]
+class ProjectStatus
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,12 +18,12 @@ class CompanyType
     #[ORM\Column(type: 'string', length: 255)]
     private $label;
 
-    #[ORM\OneToMany(mappedBy: 'companyType', targetEntity: Company::class)]
-    private $companies;
+    #[ORM\OneToMany(mappedBy: 'status', targetEntity: Project::class)]
+    private $projects;
 
     public function __construct()
     {
-        $this->companies = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -44,29 +44,29 @@ class CompanyType
     }
 
     /**
-     * @return Collection<int, Company>
+     * @return Collection<int, Project>
      */
-    public function getCompanies(): Collection
+    public function getProjects(): Collection
     {
-        return $this->companies;
+        return $this->projects;
     }
 
-    public function addCompany(Company $company): self
+    public function addProject(Project $project): self
     {
-        if (!$this->companies->contains($company)) {
-            $this->companies[] = $company;
-            $company->setCompanyType($this);
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setStatus($this);
         }
 
         return $this;
     }
 
-    public function removeCompany(Company $company): self
+    public function removeProject(Project $project): self
     {
-        if ($this->companies->removeElement($company)) {
+        if ($this->projects->removeElement($project)) {
             // set the owning side to null (unless already changed)
-            if ($company->getCompanyType() === $this) {
-                $company->setCompanyType(null);
+            if ($project->getStatus() === $this) {
+                $project->setStatus(null);
             }
         }
 

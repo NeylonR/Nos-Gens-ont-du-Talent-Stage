@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CompanyRepository;
+use App\Repository\TalentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CompanyRepository::class)]
-class Company
+#[ORM\Entity(repositoryClass: TalentRepository::class)]
+class Talent
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,13 +16,13 @@ class Company
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private $firstName;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $lastName;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $adress;
 
     #[ORM\Column(type: 'integer')]
     private $phoneNumber;
@@ -48,16 +48,23 @@ class Company
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $instagramLink;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'companies')]
-    private $companyCategory;
+    #[ORM\Column(type: 'boolean')]
+    private $ourTalent;
 
-    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'projectCompany')]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'talents')]
+    private $talentCategory;
+
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'projectTalent')]
     private $projects;
+
+    #[ORM\ManyToMany(targetEntity: Agency::class, mappedBy: 'agencyAssociate')]
+    private $agencies;
 
     public function __construct()
     {
-        $this->companyCategory = new ArrayCollection();
+        $this->talentCategory = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->agencies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -65,14 +72,26 @@ class Company
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->name;
+        return $this->firstName;
     }
 
-    public function setName(string $name): self
+    public function setFirstName(string $firstName): self
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -85,18 +104,6 @@ class Company
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getAdress(): ?string
-    {
-        return $this->adress;
-    }
-
-    public function setAdress(string $adress): self
-    {
-        $this->adress = $adress;
 
         return $this;
     }
@@ -124,7 +131,6 @@ class Company
 
         return $this;
     }
-
     public function getWebLink(): ?string
     {
         return $this->webLink;
@@ -197,26 +203,38 @@ class Company
         return $this;
     }
 
+    public function getOurTalent(): ?bool
+    {
+        return $this->ourTalent;
+    }
+
+    public function setOurTalent(bool $ourTalent): self
+    {
+        $this->ourTalent = $ourTalent;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Category>
      */
-    public function getCompanyCategory(): Collection
+    public function getTalentCategory(): Collection
     {
-        return $this->companyCategory;
+        return $this->talentCategory;
     }
 
-    public function addCompanyCategory(Category $companyCategory): self
+    public function addTalentCategory(Category $talentCategory): self
     {
-        if (!$this->companyCategory->contains($companyCategory)) {
-            $this->companyCategory[] = $companyCategory;
+        if (!$this->talentCategory->contains($talentCategory)) {
+            $this->talentCategory[] = $talentCategory;
         }
 
         return $this;
     }
 
-    public function removeCompanyCategory(Category $companyCategory): self
+    public function removeTalentCategory(Category $talentCategory): self
     {
-        $this->companyCategory->removeElement($companyCategory);
+        $this->talentCategory->removeElement($talentCategory);
 
         return $this;
     }
@@ -233,7 +251,7 @@ class Company
     {
         if (!$this->projects->contains($project)) {
             $this->projects[] = $project;
-            $project->addProjectCompany($this);
+            $project->addProjectTalent($this);
         }
 
         return $this;
@@ -242,7 +260,34 @@ class Company
     public function removeProject(Project $project): self
     {
         if ($this->projects->removeElement($project)) {
-            $project->removeProjectCompany($this);
+            $project->removeProjectTalent($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Agency>
+     */
+    public function getAgencies(): Collection
+    {
+        return $this->agencies;
+    }
+
+    public function addAgency(Agency $agency): self
+    {
+        if (!$this->agencies->contains($agency)) {
+            $this->agencies[] = $agency;
+            $agency->addAgencyAssociate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgency(Agency $agency): self
+    {
+        if ($this->agencies->removeElement($agency)) {
+            $agency->removeAgencyAssociate($this);
         }
 
         return $this;

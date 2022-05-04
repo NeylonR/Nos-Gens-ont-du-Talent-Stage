@@ -2,26 +2,25 @@
 
 namespace App\Entity;
 
-use App\Repository\CompanyRepository;
+use App\Repository\AgencyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CompanyRepository::class)]
-class Company
+#[ORM\Entity(repositoryClass: AgencyRepository::class)]
+class Agency
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adress;
 
     #[ORM\Column(type: 'integer')]
@@ -48,16 +47,16 @@ class Company
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $instagramLink;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'companies')]
-    private $companyCategory;
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'agencies')]
+    private $agencyCategory;
 
-    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'projectCompany')]
-    private $projects;
+    #[ORM\ManyToMany(targetEntity: Talent::class, inversedBy: 'agencies')]
+    private $agencyAssociate;
 
     public function __construct()
     {
-        $this->companyCategory = new ArrayCollection();
-        $this->projects = new ArrayCollection();
+        $this->agencyCategory = new ArrayCollection();
+        $this->agencyAssociate = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,50 +199,47 @@ class Company
     /**
      * @return Collection<int, Category>
      */
-    public function getCompanyCategory(): Collection
+    public function getAgencyCategory(): Collection
     {
-        return $this->companyCategory;
+        return $this->agencyCategory;
     }
 
-    public function addCompanyCategory(Category $companyCategory): self
+    public function addAgencyCategory(Category $agencyCategory): self
     {
-        if (!$this->companyCategory->contains($companyCategory)) {
-            $this->companyCategory[] = $companyCategory;
+        if (!$this->agencyCategory->contains($agencyCategory)) {
+            $this->agencyCategory[] = $agencyCategory;
         }
 
         return $this;
     }
 
-    public function removeCompanyCategory(Category $companyCategory): self
+    public function removeAgencyCategory(Category $agencyCategory): self
     {
-        $this->companyCategory->removeElement($companyCategory);
+        $this->agencyCategory->removeElement($agencyCategory);
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Project>
+     * @return Collection<int, Talent>
      */
-    public function getProjects(): Collection
+    public function getAgencyAssociate(): Collection
     {
-        return $this->projects;
+        return $this->agencyAssociate;
     }
 
-    public function addProject(Project $project): self
+    public function addAgencyAssociate(Talent $agencyAssociate): self
     {
-        if (!$this->projects->contains($project)) {
-            $this->projects[] = $project;
-            $project->addProjectCompany($this);
+        if (!$this->agencyAssociate->contains($agencyAssociate)) {
+            $this->agencyAssociate[] = $agencyAssociate;
         }
 
         return $this;
     }
 
-    public function removeProject(Project $project): self
+    public function removeAgencyAssociate(Talent $agencyAssociate): self
     {
-        if ($this->projects->removeElement($project)) {
-            $project->removeProjectCompany($this);
-        }
+        $this->agencyAssociate->removeElement($agencyAssociate);
 
         return $this;
     }
