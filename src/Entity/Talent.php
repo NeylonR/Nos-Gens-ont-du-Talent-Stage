@@ -60,6 +60,11 @@ class Talent
     #[ORM\ManyToMany(targetEntity: Agency::class, mappedBy: 'agencyAssociate')]
     private $agencies;
 
+    public function __toString()
+    {
+        return $this->firstName . " " . $this->lastName;
+    }
+
     public function __construct()
     {
         $this->talentCategory = new ArrayCollection();

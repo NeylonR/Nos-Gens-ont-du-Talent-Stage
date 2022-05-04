@@ -21,6 +21,11 @@ class ProjectStatus
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Project::class)]
     private $projects;
 
+    public function __toString()
+    {
+        return $this->label;
+    }
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
