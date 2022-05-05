@@ -5,9 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\Talent;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 
 class TalentCrudController extends AbstractCrudController
 {
@@ -16,15 +19,27 @@ class TalentCrudController extends AbstractCrudController
         return Talent::class;
     }
 
-    
+    public function createEntity(string $entityFqcn) {
+        $entity = new Talent();
+        $entity->setWebLink('http://www.')
+        ->setFacebookLink('http://www.')
+        ->setTwitterLink('http://www.')
+        ->setYoutubeLink('http://www.')
+        ->setLinkedinLink('http://www.')
+        ->setInstagramLink('http://www.')
+        ;
+        return $entity;
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('firstName', 'Prénom'),
+            TextField::new('firstName', 'Prénom')->setMaxLength(10),
             TextField::new('lastName', 'Nom'),
             TextField::new('email', 'Adresse Email'),
             TextEditorField::new('description', 'Description'),
-            NumberField::new('phoneNumber','Numéro de télephone'),
+            IntegerField::new('phoneNumber','Numéro de télephone'),
+            AssociationField::new('talentCategory', 'Categories lié au talent'),
             TextField::new('webLink', 'Lien du site web'),
             TextField::new('facebookLink', 'Lien profil Facebook')
             ->hideOnIndex(),

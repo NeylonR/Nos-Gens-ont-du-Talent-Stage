@@ -1,0 +1,33 @@
+<div>
+    <h2>{{project.name}}</h2>
+    <p>{{project.description|striptags}}</p>
+    <a href="{{project.link}}">Lien web</a>
+    <p>Status : {{project.status}}</p>
+    {% if project.projectTalent|length >= 1 %}
+        {% if project.projectTalent|length == 1 %}
+            Talent lié :
+            {% else %}
+            Talents lié :
+        {% endif %}
+    <ul>
+        {% for talent in project.projectTalent %}
+            <li>{{talent}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if project.projectCompany|length >= 1 %}
+        {% if project.projectCompany|length == 1 %}
+            Société lié :
+            {% else %}
+            Sociétés lié :
+        {% endif %}
+    
+    <ul>
+        {% for company in project.projectCompany %}
+            <li>{{company}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="{{path('app_project_detail', {id:project.id})}}">Détail</a>
+</div>

@@ -16,6 +16,18 @@ class CompanyCrudController extends AbstractCrudController
         return Company::class;
     }
 
+    public function createEntity(string $entityFqcn) {
+        $entity = new Company();
+        $entity->setWebLink('http://www.')
+        ->setFacebookLink('http://www.')
+        ->setTwitterLink('http://www.')
+        ->setYoutubeLink('http://www.')
+        ->setLinkedinLink('http://www.')
+        ->setInstagramLink('http://www.')
+        ;
+        return $entity;
+    }
+
     
     public function configureFields(string $pageName): iterable
     {

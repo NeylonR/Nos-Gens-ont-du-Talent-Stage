@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{project.name}}{% endblock %}
+
+{% block body %}
+<main>
+    <h1>{{project.name}}</h1>
+
+        {% if project.status == 'En cours' %}
+            <div style='background-color:green'>
+                {% include "project/projectCard.html.twig" %}
+            </div>
+        {% endif %}
+        
+        {% if project.status == 'En recherche de talents' %}
+            <div style='background-color:blue'>
+                {% include "project/projectCard.html.twig" %}
+            </div>
+        {% endif %}
+
+        {% if project.status == 'Terminé' %}
+            <div style='background-color:red'>
+                {% include "project/projectCard.html.twig" %}
+            </div>
+        {% endif %}
+        <a href="{{path('app_project_index')}}">Retour</a>
+</main>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{talent.firstName}} {{talent.lastName}}{% endblock %}
+
+{% block body %}
+<div>
+    <h2>{{talent.firstName}} {{talent.lastName}}</h2>
+    {% if talent.agencies|length >= 1 %}
+        <div>  
+        Agence :
+            {% for t in talent.agencies %}
+                <p>{{t}}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if talent.talentCategory|length >= 1 %}
+        <p>
+            {% for category in talent.talentCategory %}
+                #{{category}} 
+            {% endfor %}
+        
+    {% endif %}
+    <div class="socialsLink">
+        {% if talent.youtubeLink is not null %}
+        <a href="{{talent.youtubeLink}}">Youtube</a>
+        {% endif %}
+        {% if talent.twitterLink is not null %}
+        <a href="{{talent.twitterLink}}">Twitter</a>
+        {% endif %}
+        {% if talent.facebookLink is not null %}
+        <a href="{{talent.facebookLink}}">Facebook</a>
+        {% endif %}
+        {% if talent.instagramLink is not null %}
+        <a href="{{talent.instagramLink}}">Instagram</a>
+        {% endif %}
+        {% if talent.linkedinLink is not null %}
+        <a href="{{talent.linkedinLink}}">linkedin</a>
+        {% endif %}
+        {% if talent.webLink is not null %}
+        <a href="{{talent.webLink}}">Site web</a>
+    {% endif %}
+    </div>
+    <a href="{{path('app_talent_index')}}">Retour</a>
+</div>
+{% endblock %}

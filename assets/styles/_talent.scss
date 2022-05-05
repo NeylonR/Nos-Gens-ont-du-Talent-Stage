@@ -1,0 +1,32 @@
+.talentCard{
+    @include flex(flex-start, column, flex-start);
+    @include transi();
+    gap: .7em;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.753);
+    padding: 1em;
+    border-radius: 25px;
+    max-width: 350px;
+    min-height: 200px;
+
+    &:hover{
+        box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.753);
+    }
+
+    .socialsLink{
+        padding: .5em 0;
+        i{
+            font-size: 36px;
+            padding-right: .3em;
+        }
+    }
+}
+
+.talentContainer{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3,minmax(100px,1fr));
+    grid-row-gap: 2em;
+    justify-items: center;
+    align-items: center;
+    margin: 0 auto;
+}

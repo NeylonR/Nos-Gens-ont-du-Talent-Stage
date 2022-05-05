@@ -1,3 +1,5 @@
-body {
-    background-color: lightgray;
-}
+@import "mixin";
+@import "general";
+@import "header";
+@import "footer";
+@import "talent";

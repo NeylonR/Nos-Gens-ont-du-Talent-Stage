@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Prise de contact par {{contact.getFirstName()}} {{contact.getLastName()}}</h1>
+        <p>Mail de contact : {{contact.getEmail()}}</p>
+        <p>Sujet : {{contact.getSubject()}}</p>
+        <p>Questions du contact : {{contact.getContent()|raw}}</p>
+    </body>
+    
+</html>

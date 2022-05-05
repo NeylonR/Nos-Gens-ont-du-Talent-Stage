@@ -1,0 +1,18 @@
+#navbar{
+    @include flex(flex-end);
+    background-color: #99C4C8;
+
+    li{
+        padding: 2em 1em;
+        @include transi();
+        cursor: pointer;
+
+        &:hover{
+            background-color: #799ea1;
+        }
+    }
+
+    a{
+        font-family: robotoBold;
+    }
+}

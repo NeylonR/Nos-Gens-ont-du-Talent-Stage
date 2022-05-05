@@ -16,7 +16,18 @@ class AgencyCrudController extends AbstractCrudController
         return Agency::class;
     }
 
-    
+    public function createEntity(string $entityFqcn) {
+        $entity = new Agency();
+        $entity->setWebLink('http://www.')
+        ->setFacebookLink('http://www.')
+        ->setTwitterLink('http://www.')
+        ->setYoutubeLink('http://www.')
+        ->setLinkedinLink('http://www.')
+        ->setInstagramLink('http://www.')
+        ;
+        return $entity;
+    }
+ 
     public function configureFields(string $pageName): iterable
     {
         return [

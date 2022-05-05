@@ -1,0 +1,37 @@
+* {
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url(../../public/fonts/roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'robotoBold';
+    src: url(../../public/fonts/roboto/Roboto-Bold.ttf);
+}
+
+body{
+    scroll-behavior: smooth;
+    font-family: roboto;
+}
+
+a{
+    @include transi();
+    font-family: robotoBold;
+    color: black;
+
+    &:hover{
+        color: #E5CB9F;
+    }
+}
+
+main{
+    min-height: 100vh;
+    padding: 4em;
+    @include flex($align: flex-start);
+}

@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des groupes Talentueux{% endblock %}
+
+{% block body %}
+<div>
+    {% for group in group %}
+        {% if group.agencyAssociate is defined %}
+            <h2>Agence : {{group.Name}}</h2>
+
+            {% if group.agencyAssociate|length >= 1 %}
+                <div>  
+                Talents associé :
+                    {% for associate in group.agencyAssociate %}
+                        <p>{{associate}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if group.agencyCategory|length >= 1 %}
+                <p>
+                    {% for category in group.agencyCategory %}
+                        #{{category}} 
+                    {% endfor %}
+                
+            {% endif %}
+
+            <div class="socialsLink">
+                {% if group.youtubeLink is not null %}
+                <a href="{{group.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
+                {% endif %}
+                {% if group.twitterLink is not null %}
+                <a href="{{group.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
+                {% endif %}
+                {% if group.facebookLink is not null %}
+                <a href="{{group.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
+                {% endif %}
+                {% if group.instagramLink is not null %}
+                <a href="{{group.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
+                {% endif %}
+                {% if group.linkedinLink is not null %}
+                <a href="{{group.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
+                {% endif %}
+                {% if group.webLink is not null %}
+                <a href="{{group.webLink}}">Site web</a>
+                {% endif %}
+            </div>
+                    </br>
+            <a href="{{path('app_group_agency_detail',{id : group.id})}}">Lire plus</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{path('admin',{crudAction : 'edit' , entityId : group.id})}}">Modifier</a> 
+            {% endif %}
+
+        {% else %}
+            <h2>Société : {{group.Name}}</h2>
+
+            {% if group.projects|length >= 1 %}
+                <div>  
+                Projets :
+                    {% for project in group.projects %}
+                        <p>{{project}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if group.companyCategory|length >= 1 %}
+                <p>
+                    {% for category in group.companyCategory %}
+                        #{{category}} 
+                    {% endfor %}
+                
+            {% endif %}
+
+            <div class="socialsLink">
+                {% if group.youtubeLink is not null %}
+                <a href="{{group.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
+                {% endif %}
+                {% if group.twitterLink is not null %}
+                <a href="{{group.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
+                {% endif %}
+                {% if group.facebookLink is not null %}
+                <a href="{{group.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
+                {% endif %}
+                {% if group.instagramLink is not null %}
+                <a href="{{group.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
+                {% endif %}
+                {% if group.linkedinLink is not null %}
+                <a href="{{group.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
+                {% endif %}
+                {% if group.webLink is not null %}
+                <a href="{{group.webLink}}">Site web</a>
+                {% endif %}
+            </div>
+                    </br>
+            <a href="{{path('app_group_company_detail',{id : group.id})}}">Lire plus</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{path('admin',{crudAction : 'edit' , entityId : group.id})}}">Modifier</a> 
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
