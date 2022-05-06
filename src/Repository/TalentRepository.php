@@ -3,10 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\Talent;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
+use App\Data\FilterData;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Talent>
@@ -18,9 +21,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TalentRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Talent::class);
+        $this->paginator = $paginator;
     }
 
     /**
@@ -47,22 +56,25 @@ class TalentRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Talent[] Returns an array of Talent objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return PaginationInterface Returns an array of Talent objects
+     */
+    public function findFilter(FilterData $filter): PaginationInterface
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $query = $this->createQueryBuilder('talent')
+        ->select('category', 'talent')
+        ->join('talent.talentCategory', 'category')
         ;
+
+        if(!empty($filter->categories)){
+            $query = $query->andWhere('category.id IN (:categories)')
+            ->setParameter('categories', $filter->categories);
+            // dd($query);
+        }
+
+        $query = $query->getQuery();
+        return $this->paginator->paginate($query, $filter->page, 6);
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Talent

@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Talent;
+use App\Data\FilterData;
+use App\Form\FilterType;
 use App\Repository\TalentRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,11 +16,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TalentController extends AbstractController
 {
     #[Route('/', name: 'app_talent_index')]
-    public function talentIndex(TalentRepository $talentRepository): Response
+    public function talentIndex(TalentRepository $talentRepository, Request $request, EntityManagerInterface $em,): Response
     {
-        $talents = $talentRepository->findAll();
+        $filter = new FilterData();
+        $filter->page = $request->get('page', 1);
+
+        $form = $this->createForm(FilterType::class, $filter);
+        $form->handleRequest($request);
+
+        $talents = $talentRepository->findFilter($filter);
+        // dd($talents);
         return $this->render('talent/index.html.twig', [
             'talents' => $talents,
+            'form' => $form->createView(),
         ]);
     }
 

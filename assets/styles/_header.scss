@@ -1,6 +1,6 @@
 #navbar{
     @include flex(flex-end);
-    background-color: #99C4C8;
+    background-color: $primaryColor;
 
     li{
         padding: 2em 1em;

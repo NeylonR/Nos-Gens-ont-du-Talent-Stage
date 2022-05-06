@@ -32,6 +32,64 @@ a{
 
 main{
     min-height: 100vh;
-    padding: 4em;
+    // padding: 4em;
     @include flex($align: flex-start);
+}
+
+.button{
+    padding: .5em 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    @include transi();
+    background-color: $primaryColor;
+    border: 1px solid black;
+
+    &:hover{
+        box-shadow: 0 0 4px black;
+    }
+}
+
+.pagination{
+    @include flex();
+    gap: .5em;
+    background-color: $primaryColor;
+    border-radius: 15px;
+    padding: 1em;
+
+    .disabled{
+        display: none;
+    }
+}
+
+.filterForm{
+    @include flex(center,column);
+    width: 100%;
+    border: 1px black solid;
+    padding: 1em;
+    position: sticky;
+    top: 0;
+}
+
+.categoryForm{
+    @include flex();
+    padding: 1em 0;
+    input, label{
+        cursor: pointer;
+    }
+    input{
+        margin-right: .2em;
+    }
+    label:not(:last-of-type){
+        padding-right: .8em;
+        position: relative;
+        &:after{
+            content: '';
+            height: 100%;
+            width: 1px;
+            position: absolute;
+            right: .4em;
+            top: 0;
+            background-color: black;
+        }
+    }
 }
