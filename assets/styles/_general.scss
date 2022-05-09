@@ -3,6 +3,7 @@
     padding: 0;
     margin:0;
     text-decoration: none;
+    box-sizing: border-box;
 }
 
 @font-face {
@@ -32,8 +33,6 @@ a{
 
 main{
     min-height: 100vh;
-    // padding: 4em;
-    @include flex($align: flex-start);
 }
 
 .button{
@@ -55,6 +54,9 @@ main{
     background-color: $primaryColor;
     border-radius: 15px;
     padding: 1em;
+    width: 10%;
+    min-width: 150px;
+    margin: 0 auto;
 
     .disabled{
         display: none;
@@ -63,33 +65,73 @@ main{
 
 .filterForm{
     @include flex(center,column);
-    width: 100%;
+    gap: 1em;
+    background-color: white;
     border: 1px black solid;
     padding: 1em;
     position: sticky;
     top: 0;
 }
 
-.categoryForm{
+.categoryForm, .groupForm{
     @include flex();
     padding: 1em 0;
+    gap: 1em;
     input, label{
         cursor: pointer;
     }
-    input{
-        margin-right: .2em;
-    }
-    label:not(:last-of-type){
-        padding-right: .8em;
+
+    div:not(:last-of-type){
         position: relative;
         &:after{
             content: '';
             height: 100%;
             width: 1px;
             position: absolute;
-            right: .4em;
+            right: -0.5em;
             top: 0;
             background-color: black;
         }
     }
+}
+
+.groupForm{
+    padding: 0;
+}
+
+.home, .homeSection{
+    @include flex();
+    padding-top: 3em;
+    text-align: center;
+}
+
+.formContact{
+    padding-top: 5em;
+    @include flex(center,column);
+    gap: 1em;
+
+    input,textarea{
+        padding: 1em;
+        width: 40%;
+        outline: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+    }
+}
+.adminLogin{
+    @include flex();
+    padding-top: 3em;
+
+    #adminForm{
+        @include flex(center, column);
+        gap: .5em;
+    }
+}
+
+.noResult{
+    margin: 0 auto;
+    text-align: center;
+    padding: 1em 0;
+    font-family: robotoBold;
 }

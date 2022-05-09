@@ -1,4 +1,4 @@
-.talentContainer{
+.groupContainer{
     display: grid;
     width: 100%;
     grid-template-columns: repeat(3,minmax(100px,1fr));
@@ -9,7 +9,7 @@
     padding: 8em 0
 }
 
-.talentCard{
+.groupCard{
     @include flex(flex-start, column, flex-start);
     @include transi();
     gap: .7em;
@@ -36,7 +36,7 @@
     }
 }
 
-.talentDetail{
+.agencyCompanyDetail{
     @include flex($direction:column);
     gap: 2em;
     padding-top: 5em;

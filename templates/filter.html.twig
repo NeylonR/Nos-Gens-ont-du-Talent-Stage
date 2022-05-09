@@ -1,5 +1,27 @@
 {{ form_start(form, {'attr': {'class': 'filterForm'}})}}
-    {# {{ form_widget(form.q, {'attr': {'placeholder': 'Nom'}})}} #}
-    {{ form_widget(form.categories)}}
+    {% if form.agency is defined %}
+        <div class="groupForm">
+            <div>
+                <label for="{{form.agency.vars.id}}">{{form.agency.vars.name|capitalize }}</label>
+                {{ form_widget(form.agency)}}
+            </div>
+            <div>
+                <label for="{{form.company.vars.id}}">{{form.company.vars.name|capitalize }}</label>
+                {{ form_widget(form.company)}}
+            </div>
+        </div>
+    {% endif %}
+    
+    <div class="categoryForm">
+    {% for checkbox in form.categories %}
+    {# {{dump(checkbox.vars)}} #}
+        <div>
+            <label for="{{checkbox.vars.id}}">{{checkbox.vars.label}}</label>
+            {{ form_widget(checkbox)}}
+        </div>
+    {% endfor %}
+    </div>
+    
+    {# {{ form_widget(form.categories)}} #}
     <button type="submit" class="button">Filtrer</button>
 {{ form_end(form) }}

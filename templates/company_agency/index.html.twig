@@ -3,100 +3,119 @@
 {% block title %}Liste des groupes Talentueux{% endblock %}
 
 {% block body %}
-<div>
-    {% for group in group %}
-        {% if group.agencyAssociate is defined %}
-            <h2>Agence : {{group.Name}}</h2>
+<main>
+{% include "filter.html.twig" %}
+{% if group is empty %}
+<p class="noResult">Aucun résultat n'a été trouvé.</p>
+{% endif %}
+    <div class="groupContainer">
+        {% for group in group %}
+        <div class="groupCard">
+            {% if group.agencyAssociate is defined %}
+                <h2>Agence : {{group.Name}}</h2>
+                <p class="description">{{group.description|striptags > 50 ? group.description|striptags|slice(0, 51)|split(' ')|slice(0, -1)|join(' ') ~ '...' : group.description}}</p>
+                {% if group.agencyAssociate|length >= 1 %}
+                <p></p>
+                    <ul>
+                    <li>Talents associé : </li>
+                        {% for associate in group.agencyAssociate %}
+                                <li><a href="{{path('app_talent_detail', {id:associate.id})}}">{{associate}}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
-            {% if group.agencyAssociate|length >= 1 %}
-                <div>  
-                Talents associé :
-                    {% for associate in group.agencyAssociate %}
-                        <p>{{associate}}
-                    {% endfor %}
+                {% if group.agencyCategory|length >= 1 %}
+                    <p>
+                        {% for category in group.agencyCategory %}
+                            #{{category}} 
+                        {% endfor %}
+                    </p>
+                {% endif %}
+
+                <div class="socialsLink">
+                    {% if group.youtubeLink is not null %}
+                    <a href="{{group.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
+                    {% endif %}
+                    {% if group.twitterLink is not null %}
+                    <a href="{{group.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
+                    {% endif %}
+                    {% if group.facebookLink is not null %}
+                    <a href="{{group.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
+                    {% endif %}
+                    {% if group.instagramLink is not null %}
+                    <a href="{{group.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
+                    {% endif %}
+                    {% if group.linkedinLink is not null %}
+                    <a href="{{group.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
+                    {% endif %}
+                    {% if group.webLink is not null %}
+                    <a href="{{group.webLink}}">Site web</a>
+                    {% endif %}
                 </div>
-            {% endif %}
+                <a href="{{path('app_group_agency_detail',{id : group.id})}}">Lire plus</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    {% set url = ea_url()
+                    .setController('App\\Controller\\Admin\\AgencyCrudController')
+                    .setAction('edit')
+                    .setEntityId(group.id) %}
+                    <a href="{{ url }}">Modifier</a>
+                {% endif %}
 
-            {% if group.agencyCategory|length >= 1 %}
-                <p>
-                    {% for category in group.agencyCategory %}
-                        #{{category}} 
-                    {% endfor %}
-                
-            {% endif %}
+            {% else %}
+                <h2>Société : {{group.Name}}</h2>
+                <p class="description">{{group.description|striptags > 50 ? group.description|striptags|slice(0, 51)|split(' ')|slice(0, -1)|join(' ') ~ '...' : group.description}}</p>
+                {% if group.projects|length >= 1 %}
+                    <ul>
+                    <li>Projets : </li>
+                        {% for project in group.projects %}
+                                <li><a href="{{path('app_project_detail', {id:project.id})}}">{{project}}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
-            <div class="socialsLink">
-                {% if group.youtubeLink is not null %}
-                <a href="{{group.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
+                {% if group.companyCategory|length >= 1 %}
+                    <p>
+                        {% for category in group.companyCategory %}
+                            #{{category}} 
+                        {% endfor %}
+                    </p>
                 {% endif %}
-                {% if group.twitterLink is not null %}
-                <a href="{{group.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
-                {% endif %}
-                {% if group.facebookLink is not null %}
-                <a href="{{group.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
-                {% endif %}
-                {% if group.instagramLink is not null %}
-                <a href="{{group.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
-                {% endif %}
-                {% if group.linkedinLink is not null %}
-                <a href="{{group.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
-                {% endif %}
-                {% if group.webLink is not null %}
-                <a href="{{group.webLink}}">Site web</a>
-                {% endif %}
-            </div>
-                    </br>
-            <a href="{{path('app_group_agency_detail',{id : group.id})}}">Lire plus</a>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{path('admin',{crudAction : 'edit' , entityId : group.id})}}">Modifier</a> 
-            {% endif %}
 
-        {% else %}
-            <h2>Société : {{group.Name}}</h2>
-
-            {% if group.projects|length >= 1 %}
-                <div>  
-                Projets :
-                    {% for project in group.projects %}
-                        <p>{{project}}
-                    {% endfor %}
+                <div class="socialsLink">
+                    {% if group.youtubeLink is not null %}
+                    <a href="{{group.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
+                    {% endif %}
+                    {% if group.twitterLink is not null %}
+                    <a href="{{group.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
+                    {% endif %}
+                    {% if group.facebookLink is not null %}
+                    <a href="{{group.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
+                    {% endif %}
+                    {% if group.instagramLink is not null %}
+                    <a href="{{group.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
+                    {% endif %}
+                    {% if group.linkedinLink is not null %}
+                    <a href="{{group.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
+                    {% endif %}
+                    {% if group.webLink is not null %}
+                    <a href="{{group.webLink}}">Site web</a>
+                    {% endif %}
                 </div>
-            {% endif %}
 
-            {% if group.companyCategory|length >= 1 %}
-                <p>
-                    {% for category in group.companyCategory %}
-                        #{{category}} 
-                    {% endfor %}
-                
+                <a href="{{path('app_group_company_detail',{id : group.id})}}">Lire plus</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    {% set url = ea_url()
+                    .setController('App\\Controller\\Admin\\CompanyCrudController')
+                    .setAction('edit')
+                    .setEntityId(group.id) %}
+                    <a href="{{ url }}">Modifier</a> 
+                {% endif %}
             {% endif %}
-
-            <div class="socialsLink">
-                {% if group.youtubeLink is not null %}
-                <a href="{{group.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
-                {% endif %}
-                {% if group.twitterLink is not null %}
-                <a href="{{group.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
-                {% endif %}
-                {% if group.facebookLink is not null %}
-                <a href="{{group.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
-                {% endif %}
-                {% if group.instagramLink is not null %}
-                <a href="{{group.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
-                {% endif %}
-                {% if group.linkedinLink is not null %}
-                <a href="{{group.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
-                {% endif %}
-                {% if group.webLink is not null %}
-                <a href="{{group.webLink}}">Site web</a>
-                {% endif %}
-            </div>
-                    </br>
-            <a href="{{path('app_group_company_detail',{id : group.id})}}">Lire plus</a>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{path('admin',{crudAction : 'edit' , entityId : group.id})}}">Modifier</a> 
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(group, 'pagination.html.twig') }}
+    </div>
+</main>
 {% endblock %}

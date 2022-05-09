@@ -5,6 +5,11 @@
 {% block body %}
 <main>
 {% include "filter.html.twig" %}
+
+{% if talents is empty %}
+<p class="noResult">Aucun résultat n'a été trouvé.</p>
+{% endif %}
+
     <div class="talentContainer">
         {% for talent in talents %}
         <div class="talentCard">
@@ -15,8 +20,8 @@
             {% if talent.agencies|length >= 1 %}
                 <ul class="agencyList">  
                 <li>Agence :</li>
-                    {% for t in talent.agencies %}
-                        <li><a href="{{path('app_group_agency_detail', {id:t.id})}}">{{t}}</a></li>
+                    {% for agency in talent.agencies %}
+                        <li><a href="{{path('app_group_agency_detail', {id:agency.id})}}">{{agency}}</a></li>
                     {% endfor %}
                 </ul>
             {% endif %}
@@ -61,7 +66,12 @@
                     
             <a href="{{path('app_talent_detail',{id : talent.id})}}">Lire plus</a>
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{path('admin',{crudAction : 'edit' , entityId : talent.id})}}">Modifier</a>
+                {# <a href="{{path('admin',{crudAction : 'edit' , entityId : talent.id})}}">Modifier</a> #}
+                {% set url = ea_url()
+                .setController('App\\Controller\\Admin\\TalentCrudController')
+                .setAction('edit')
+                .setEntityId(talent.id) %}
+                <a href="{{ url }}">Modifier</a>
             {% endif %}
             </div>
         {% endfor %}
@@ -69,6 +79,6 @@
 
     <div class="navigation">
     {{ knp_pagination_render(talents, 'pagination.html.twig') }}
-</div>
+    </div>
 </main>
 {% endblock %}

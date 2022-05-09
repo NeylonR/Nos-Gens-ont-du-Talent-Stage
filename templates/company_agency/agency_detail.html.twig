@@ -3,51 +3,58 @@
 {% block title %}Liste des agences Talentueuses{% endblock %}
 
 {% block body %}
-<div>
+<main>
+<section class="agencyCompanyDetail">
+    <div class="groupCard">
     <h2>Agence : {{agency.Name}}</h2>
+    <p class="description">{{agency.description|raw}}</p>
+        {% if agency.agencyAssociate|length >= 1 %}
+            <ul>
+            <li>Talents associé : </li>
+                {% for associate in agency.agencyAssociate %}
+                        <li><a href="{{path('app_talent_detail', {id:associate.id})}}">{{associate}}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-    {% if agency.agencyAssociate|length >= 1 %}
-        <div>  
-        Talents associé :
-            {% for associate in agency.agencyAssociate %}
-                <p>{{associate}}
-            {% endfor %}
+        {% if agency.agencyCategory|length >= 1 %}
+            <p>
+                {% for category in agency.agencyCategory %}
+                    #{{category}} 
+                {% endfor %}
+            </p>
+        {% endif %}
+
+        <div class="socialsLink">
+            {% if agency.youtubeLink is not null %}
+            <a href="{{agency.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
+            {% endif %}
+            {% if agency.twitterLink is not null %}
+            <a href="{{agency.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
+            {% endif %}
+            {% if agency.facebookLink is not null %}
+            <a href="{{agency.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
+            {% endif %}
+            {% if agency.instagramLink is not null %}
+            <a href="{{agency.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
+            {% endif %}
+            {% if agency.linkedinLink is not null %}
+            <a href="{{agency.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
+            {% endif %}
+            {% if agency.webLink is not null %}
+            <a href="{{agency.webLink}}">Site web</a>
+            {% endif %}
         </div>
-    {% endif %}
 
-    {% if agency.agencyCategory|length >= 1 %}
-        <p>
-            {% for category in agency.agencyCategory %}
-                #{{category}} 
-            {% endfor %}
-        
-    {% endif %}
-
-    <div class="socialsLink">
-        {% if agency.youtubeLink is not null %}
-        <a href="{{agency.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
-        {% endif %}
-        {% if agency.twitterLink is not null %}
-        <a href="{{agency.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
-        {% endif %}
-        {% if agency.facebookLink is not null %}
-        <a href="{{agency.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
-        {% endif %}
-        {% if agency.instagramLink is not null %}
-        <a href="{{agency.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
-        {% endif %}
-        {% if agency.linkedinLink is not null %}
-        <a href="{{agency.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
-        {% endif %}
-        {% if agency.webLink is not null %}
-        <a href="{{agency.webLink}}">Site web</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            {% set url = ea_url()
+            .setController('App\\Controller\\Admin\\AgencyCrudController')
+            .setAction('edit')
+            .setEntityId(agency.id) %}
+            <a href="{{ url }}">Modifier</a> 
         {% endif %}
     </div>
-            </br>
-    <a href="{{path('app_group_agency_detail',{id : agency.id})}}">Lire plus</a>
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{path('admin',{crudAction : 'edit' , entityId : agency.id})}}">Modifier</a> 
-    {% endif %}
     <a href="{{path('app_group_index')}}">Retour</a>
-</div>
+</section>
+</main>
 {% endblock %}

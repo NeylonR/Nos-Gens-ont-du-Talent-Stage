@@ -4,25 +4,25 @@
 
 {% block body %}
 <main>
-    <h1>{{project.name}}</h1>
+<section class="projectDetail">
+    {% if project.status == 'En cours' %}
+        <div class="projectCard projectCurrentContainer">
+            {% include "project/projectCard.html.twig" %}                    
+        </div>
+    {% endif %}
+    
+    {% if project.status == 'En recherche de talents' %}
+        <div class="projectCard projectLookingContainer">
+            {% include "project/projectCard.html.twig" %}                    
+        </div>
+    {% endif %}
 
-        {% if project.status == 'En cours' %}
-            <div style='background-color:green'>
-                {% include "project/projectCard.html.twig" %}
-            </div>
-        {% endif %}
-        
-        {% if project.status == 'En recherche de talents' %}
-            <div style='background-color:blue'>
-                {% include "project/projectCard.html.twig" %}
-            </div>
-        {% endif %}
-
-        {% if project.status == 'Terminé' %}
-            <div style='background-color:red'>
-                {% include "project/projectCard.html.twig" %}
-            </div>
-        {% endif %}
-        <a href="{{path('app_project_index')}}">Retour</a>
+    {% if project.status == 'Terminé' %}
+        <div class="projectCard projectOverContainer">
+            {% include "project/projectCard.html.twig" %}                    
+        </div>
+    {% endif %}
+    <a href="{{path('app_project_index')}}">Retour</a>
+</section>
 </main>
 {% endblock %}

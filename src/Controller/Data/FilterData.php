@@ -5,17 +5,6 @@ use App\Entity\Category;
 
 class FilterData
 {
-
-    /**
-     * @var int
-     */
-    public int $page = 1;
-
-    /**
-     * @var string
-     */
-    public string $q = '';
-
     /**
      * @var Category[]
      */
@@ -24,6 +13,10 @@ class FilterData
     /**
      * @var boolean
      */
-    public bool $promo = false;
+    public bool $agency = true;
 
+    /**
+     * @var boolean
+     */
+    public bool $company = true;
 }

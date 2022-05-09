@@ -3,43 +3,70 @@
 {% block title %}{{talent.firstName}} {{talent.lastName}}{% endblock %}
 
 {% block body %}
-<div>
+<main>
+<section class="talentDetail">
+<div class="talentCard">
     <h2>{{talent.firstName}} {{talent.lastName}}</h2>
+
+    <p class="description">{{talent.description|raw}}</p>
+
     {% if talent.agencies|length >= 1 %}
-        <div>  
-        Agence :
-            {% for t in talent.agencies %}
-                <p>{{t}}
+        <ul class="agencyList">  
+        <li>Agence :</li>
+            {% for agency in talent.agencies %}
+                <li><a href="{{path('app_group_agency_detail', {id:agency.id})}}">{{agency}}</a></li>
             {% endfor %}
-        </div>
+        </ul>
     {% endif %}
+
+    {% if talent.projects|length >= 1 %}
+        <ul>
+        <li>Projet : </li>
+            {% for project in talent.projects %}
+                <li><a href="{{path('app_project_detail', {id:project.id})}}">{{project.name}}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
     {% if talent.talentCategory|length >= 1 %}
         <p>
             {% for category in talent.talentCategory %}
                 #{{category}} 
             {% endfor %}
-        
+        </p>
     {% endif %}
+
     <div class="socialsLink">
         {% if talent.youtubeLink is not null %}
-        <a href="{{talent.youtubeLink}}">Youtube</a>
+        <a href="{{talent.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
         {% endif %}
         {% if talent.twitterLink is not null %}
-        <a href="{{talent.twitterLink}}">Twitter</a>
+        <a href="{{talent.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
         {% endif %}
         {% if talent.facebookLink is not null %}
-        <a href="{{talent.facebookLink}}">Facebook</a>
+        <a href="{{talent.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
         {% endif %}
         {% if talent.instagramLink is not null %}
-        <a href="{{talent.instagramLink}}">Instagram</a>
+        <a href="{{talent.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
         {% endif %}
         {% if talent.linkedinLink is not null %}
-        <a href="{{talent.linkedinLink}}">linkedin</a>
+        <a href="{{talent.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
         {% endif %}
         {% if talent.webLink is not null %}
         <a href="{{talent.webLink}}">Site web</a>
-    {% endif %}
+        {% endif %}
     </div>
-    <a href="{{path('app_talent_index')}}">Retour</a>
+        
+    {% if is_granted('ROLE_ADMIN') %}
+        {# <a href="{{path('admin',{crudAction : 'edit' , entityId : talent.id})}}">Modifier</a> #}
+        {% set url = ea_url()
+        .setController('App\\Controller\\Admin\\TalentCrudController')
+        .setAction('edit')
+        .setEntityId(talent.id) %}
+        <a href="{{ url }}">Modifier</a>
+    {% endif %}
 </div>
+<a href="{{path('app_talent_index')}}">Retour</a>
+</section>
+</main>
 {% endblock %}

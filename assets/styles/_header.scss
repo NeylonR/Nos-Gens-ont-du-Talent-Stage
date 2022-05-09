@@ -4,15 +4,11 @@
 
     li{
         padding: 2em 1em;
-        @include transi();
-        cursor: pointer;
-
-        &:hover{
-            background-color: #799ea1;
-        }
     }
 
     a{
-        font-family: robotoBold;
+        &:hover{
+            background-color: #799ea1;
+        }
     }
 }

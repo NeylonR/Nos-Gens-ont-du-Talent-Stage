@@ -1,11 +1,16 @@
 <header>
     <ul id="navbar">
-        <li><a href="{{path('app_home')}}">Accueil</a></li>
-        <li><a href="{{path('app_talent_index')}}">Talents</a></li>
-        <li><a href="{{path('app_group_index')}}">Groupe</a></li>
-        <li><a href="{{path('app_our_talents_index')}}">Nos Talents</a></li>
-        <li><a href="{{path('app_project_index')}}">Nos Projets</a></li>
-        <li><a href="{{path('app_contact')}}">Nous contacter</a></li>
-        <li><a href="{{path('admin')}}">Admin</a></li>
+        <a href="{{path('app_home')}}"><li>Accueil</li></a>
+        <a href="{{path('app_talent_index')}}"><li>Talents</li></a>
+        <a href="{{path('app_group_index')}}"><li>Groupe</li></a>
+        <a href="{{path('app_our_talents_index')}}"><li>Nos Talents</li></a>
+        <a href="{{path('app_project_index')}}"><li>Nos Projets</li></a>
+        <a href="{{path('app_contact')}}"><li>Nous contacter</li></a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{path('admin')}}"><li>Admin</li></a>
+            <a href="{{path('app_logout')}}"><li>Deconnexion</li></a>
+        {% else %}
+            <a href="{{path('app_login')}}"><li>Connexion</li></a>
+        {% endif %}
     </ul>
 </header>

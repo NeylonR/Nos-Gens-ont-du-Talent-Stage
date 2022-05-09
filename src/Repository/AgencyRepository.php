@@ -3,10 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Agency;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
+use App\Data\FilterData;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Agency>
@@ -46,6 +48,24 @@ class AgencyRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    /**
+     * @return Agency Returns an array of Agency objects
+     */
+    public function findFilter(FilterData $filter): array
+    {
+        $query = $this->createQueryBuilder('agency')
+        ->select('agency')
+        ->join('agency.agencyCategory', 'category')
+        ;
+
+        if(!empty($filter->categories)){
+            $query = $query->andWhere('category.id IN (:categories)')
+            ->setParameter('categories', $filter->categories);
+        }
+        return $query->getQuery()->getResult();
+    }
+
 
     // /**
     //  * @return Agency[] Returns an array of Agency objects

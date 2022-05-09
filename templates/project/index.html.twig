@@ -4,11 +4,48 @@
 
 {% block body %}
 <main>
+<section id="projectSection">
     <h1>Nos projets</h1>
-    <p>Projet finito : ({{countOver}})</p>
-    <p>Projet en cours : ({{countProgress}})</p>
-    <p>Projet en recherche de talents : ({{countLookingFor}})</p>
-    {% for project in projects %}
+
+    <div class="projectContainer">
+        <div class=" project">
+        <p>Projet en cours : ({{countProgress}})</p>
+        {% for project in projects %}
+            {% if project.status == 'En cours' %}
+                    <div class="projectCard projectCurrentContainer">
+                        {% include "project/projectCard.html.twig" %}                    
+                    </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+
+        <div class=" project">
+        <p>Projet en recherche de talents : ({{countLookingFor}})</p>
+        {% for project in projects %}
+            {% if project.status == 'En recherche de talents' %}
+                    <div class="projectCard projectLookingContainer">
+                        {% include "project/projectCard.html.twig" %}                    
+                    </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+
+        <div class=" project">
+        <p>Projet terminé : ({{countOver}})</p>
+        {% for project in projects %}
+            {% if project.status == 'Terminé' %}
+                    <div class="projectCard projectOverContainer">
+                        {% include "project/projectCard.html.twig" %}                    
+                    </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+    {# {% for project in projects %}
 
         {% if project.status == 'En cours' %}
             <div style='background-color:green'>
@@ -28,7 +65,8 @@
             </div>
         {% endif %}
 
-    {% endfor %}
+    {% endfor %} #}
+
 
 </main>
 {% endblock %}

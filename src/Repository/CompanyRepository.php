@@ -3,10 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\Company;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
+use App\Data\FilterData;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Company>
@@ -46,6 +49,24 @@ class CompanyRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    /**
+     * @return Company Returns an array of Company objects
+     */
+    public function findFilter(FilterData $filter): array
+    {
+        $query = $this->createQueryBuilder('company')
+        ->select('company')
+        ->join('company.companyCategory', 'category')
+        ;
+
+        if(!empty($filter->categories)){
+            $query = $query->andWhere('category.id IN (:categories)')
+            ->setParameter('categories', $filter->categories);
+        }
+        return $query->getQuery()->getResult();
+    }
+
 
     // /**
     //  * @return Company[] Returns an array of Company objects

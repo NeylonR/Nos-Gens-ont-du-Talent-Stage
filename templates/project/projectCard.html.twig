@@ -1,33 +1,44 @@
-<div>
+{# <div class="projectCard"> #}
     <h2>{{project.name}}</h2>
     <p>{{project.description|striptags}}</p>
     <a href="{{project.link}}">Lien web</a>
     <p>Status : {{project.status}}</p>
     {% if project.projectTalent|length >= 1 %}
-        {% if project.projectTalent|length == 1 %}
-            Talent lié :
-            {% else %}
-            Talents lié :
-        {% endif %}
     <ul>
+        <p>
+            {% if project.projectTalent|length == 1 %}
+                Talent lié :
+                {% else %}
+                Talents lié :
+            {% endif %}
+        </p>
         {% for talent in project.projectTalent %}
-            <li>{{talent}}</li>
+            <li><a href="{{path('app_talent_detail', {id:talent.id})}}">{{talent}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
 
     {% if project.projectCompany|length >= 1 %}
-        {% if project.projectCompany|length == 1 %}
-            Société lié :
-            {% else %}
-            Sociétés lié :
-        {% endif %}
-    
     <ul>
+        <p>
+            {% if project.projectCompany|length == 1 %}
+                Société lié :
+                {% else %}
+                Sociétés lié :
+            {% endif %}
+        </p>
         {% for company in project.projectCompany %}
-            <li>{{company}}</li>
+            <li><a href="{{path('app_group_company_detail', {id:company.id})}}">{{company}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
-    <a href="{{path('app_project_detail', {id:project.id})}}">Détail</a>
-</div>
+    <a href="{{path('app_project_detail', {id:project.id})}}">Détails</a>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        {% set url = ea_url()
+        .setController('App\\Controller\\Admin\\ProjectCrudController')
+        .setAction('edit')
+        .setEntityId(project.id) %}
+        <a href="{{ url }}">Modifier</a>
+    {% endif %}
+{# </div> #}

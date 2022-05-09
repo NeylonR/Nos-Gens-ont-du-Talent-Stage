@@ -8,8 +8,6 @@ use Doctrine\ORM\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Knp\Component\Pager\Pagination\PaginationInterface;
-use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Talent>
@@ -21,15 +19,9 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class TalentRepository extends ServiceEntityRepository
 {
-    /**
-     * @var PaginatorInterface
-     */
-    private $paginator;
-
-    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Talent::class);
-        $this->paginator = $paginator;
     }
 
     /**
@@ -57,23 +49,43 @@ class TalentRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return PaginationInterface Returns an array of Talent objects
+     * @return Talent Returns an array of Talent objects
      */
-    public function findFilter(FilterData $filter): PaginationInterface
+    public function findFilter(FilterData $filter): array
     {
         $query = $this->createQueryBuilder('talent')
-        ->select('category', 'talent')
+        ->select('talent')
         ->join('talent.talentCategory', 'category')
+        ->orderBy('talent.firstName', 'ASC')
         ;
 
         if(!empty($filter->categories)){
             $query = $query->andWhere('category.id IN (:categories)')
             ->setParameter('categories', $filter->categories);
-            // dd($query);
+        }
+        // dd($query->getQuery());
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @return Talent Returns an array of Talent objects
+     */
+    public function findFilterOurTalent(FilterData $filter): array
+    {
+        $query = $this->createQueryBuilder('talent')
+        ->select('talent')
+        ->join('talent.talentCategory', 'category')
+        ->orderBy('talent.firstName', 'ASC')
+        ->where('talent.ourTalent = true')
+        ;
+
+        if(!empty($filter->categories)){
+            $query = $query->andWhere('category.id IN (:categories)')
+            ->setParameter('categories', $filter->categories)
+            ;
         }
 
-        $query = $query->getQuery();
-        return $this->paginator->paginate($query, $filter->page, 6);
+        return $query->getQuery()->getResult();
     }
 
     /*

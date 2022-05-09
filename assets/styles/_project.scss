@@ -1,0 +1,59 @@
+#projectSection{
+    @include flex();
+    padding: 2em 0;
+
+    .projectContainer{
+        width: 100%;
+        @include flex(center, column, flex-start);
+
+        .project{
+            padding: 2em;
+            width: 100%;
+            @include flex($direction:column);
+            gap: 1em;
+        }
+    }
+}
+
+.projectCard{
+    @include flex(flex-start, column, flex-start);
+    @include transi();
+    gap: .5em;
+    padding: 1em;
+    border-radius: 25px;
+    width: 80%;
+    min-height: 200px;
+
+    .socialsLink{
+        padding: .5em 0;
+        i{
+            font-size: 36px;
+            padding-right: .3em;
+        }
+    }
+}
+
+.projectCurrentContainer{
+    box-shadow: 0 0 4px 1px rgba(8, 147, 202, 0.753);
+    &:hover{
+        box-shadow: 0 0 12px 1px rgba(8, 147, 202, 0.753);
+    }
+}
+.projectLookingContainer{
+    box-shadow: 0 0 4px 1px rgba(212, 177, 21, 0.753);
+    &:hover{
+        box-shadow: 0 0 12px 1px rgba(212, 177, 21, 0.753);
+    }
+}
+.projectOverContainer{
+    box-shadow: 0 0 4px 1px rgba(4, 173, 18, 0.753);
+    &:hover{
+        box-shadow: 0 0 12px 1px rgba(4, 173, 18, 0.753);
+    }
+}
+
+.projectDetail{
+    @include flex($direction:column);
+    gap: 2em;
+    padding-top: 5em;
+}

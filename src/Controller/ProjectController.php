@@ -17,6 +17,7 @@ class ProjectController extends AbstractController
         $countProgress = 0;
         $countOver = 0;
         $countLookingFor = 0;
+        // dd(...$projects);
 
         foreach($projects as $p){
             if($p->getStatus() == 'En cours'){
