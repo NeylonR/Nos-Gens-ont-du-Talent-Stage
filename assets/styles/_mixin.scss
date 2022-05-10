@@ -9,7 +9,7 @@
 @mixin transi($time : .3s) {
   transition: all $time ease-in-out;
 }
-
+$primaryColor0: #363062;
 $primaryColor: #a3d7db;
 $secondaryColor: #d4d7f2;
 $thirdColor: hsl(227deg 25% 21%);
