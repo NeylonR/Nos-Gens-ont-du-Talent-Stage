@@ -4,39 +4,66 @@
 
 {% block body %}
 <main>
-<section class="talentDetail">
-<div class="talentCard">
-    <h2>{{talent.firstName}} {{talent.lastName}}</h2>
+<section id="talentDetail">
+    <div class="profileContainer">
+        <img src="{{asset('images/copium.png')}}" alt="">
+        
+        <div>
+            <h2>{{talent.firstName}} {{talent.lastName}}</h2>
 
-    <p class="description">{{talent.description|raw}}</p>
+            {% if talent.talentCategory|length >= 1 %}
+                <div class="categories">
+                {% if talent.talentCategory|length > 1 %}
+                    <p>Spécialités :</p>
+                {% else %}
+                    <p>Spécialité :</p>
+                {% endif %}
+                    {% for category in talent.talentCategory %}
+                        <span class="tags">{{category}} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
-    {% if talent.agencies|length >= 1 %}
-        <ul class="agencyList">  
-        <li>Agence :</li>
-            {% for agency in talent.agencies %}
-                <li><a href="{{path('app_group_agency_detail', {id:agency.id})}}">{{agency}}</a></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="introContainer">{{talent.description|raw}}</div>
 
     {% if talent.projects|length >= 1 %}
-        <ul>
-        <li>Projet : </li>
+    <div class="projectContainer">
+        {% if talent.projects|length == 1 %}
+            <h2>Le projet auquel {{talent.firstName}} a participé :</h2>
+        {% else %}
+            <h2>Les projets auxquels {{talent.firstName}} a participé :</h2>
+        {% endif %}
+        <div class="projects">
             {% for project in talent.projects %}
-                <li><a href="{{path('app_project_detail', {id:project.id})}}">{{project.name}}</a></li>
+                <a href="{{path('app_project_detail', {id:project.id})}}">{{project.name}}</a>
             {% endfor %}
-        </ul>
-    {% endif %}
-    
-    {% if talent.talentCategory|length >= 1 %}
-        <p>
-            {% for category in talent.talentCategory %}
-                #{{category}} 
-            {% endfor %}
-        </p>
+        </div>
+    </div>
     {% endif %}
 
-    <div class="socialsLink">
+    {% if talent.agencies|length >= 1 %}
+    <div class="agencyContainer">
+        {% if talent.agencies|length == 1 %}
+            <h2>{{talent.firstName}} fait partie de l'agence :</h2>
+        {% else %}
+            <h2>{{talent.firstName}} fait partie des agences :</h2>
+        {% endif %}
+        <div class="cardContainer">
+            {% for agency in talent.agencies %}
+            <div class="card">
+                {% include "company_agency/agencyCard.html.twig" with {group: agency} %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="contactContainer">
+        <h2>Prise de contact</h2>
+        <p>Retrouvez {{talent.firstName}} {{talent.lastName}} sur ses réseaux ou sur son site</p>
+        <div class="socialsLink">
         {% if talent.youtubeLink is not null %}
         <a href="{{talent.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
         {% endif %}
@@ -55,7 +82,14 @@
         {% if talent.webLink is not null %}
         <a href="{{talent.webLink}}">Site web</a>
         {% endif %}
+        </div>
+        <p>Vous pouvez aussi prendre contact par mail ou par téléphone</p>
+        <a href="" target="_blank" ><i class="fa-solid fa-envelope"></i> {{talent.email}}</a>
+        <a href="" target="_blank" ><i class="fa-solid fa-phone"></i> {{talent.phoneNumber}}</a>
     </div>
+
+
+
         
     {% if is_granted('ROLE_ADMIN') %}
         {# <a href="{{path('admin',{crudAction : 'edit' , entityId : talent.id})}}">Modifier</a> #}
@@ -63,10 +97,9 @@
         .setController('App\\Controller\\Admin\\TalentCrudController')
         .setAction('edit')
         .setEntityId(talent.id) %}
-        <a href="{{ url }}">Modifier</a>
+        <a href="{{ url }}" class="button">Modifier</a>
     {% endif %}
-</div>
-<a href="{{path('app_talent_index')}}">Retour</a>
+<a href="{{path('app_talent_index')}}" class="button">Retour</a>
 </section>
 </main>
 {% endblock %}

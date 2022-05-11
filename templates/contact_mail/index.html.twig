@@ -4,14 +4,23 @@
 
 {% block body %}
 <main>
-<section class="contactSection">
+<section id="contactSection">
+    <div class="introContainer">
+        <h1>Nous contacter.</h1>
+
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus alias quidem ipsa iste sunt facere, reprehenderit aliquid nisi nostrum asperiores dolores obcaecati ducimus in recusandae expedita debitis delectus architecto quis?
+        Dolores nostrum tempora ad aut quidem ab magnam accusantium voluptatibus, illum, eveniet saepe veniam perferendis tempore adipisci doloribus natus, earum quaerat hic sed magni? Commodi ea nam possimus accusantium excepturi.</p>
+
+        <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
+    </div>
+
     {{ form_start(form, {'attr': {'class': 'formContact'}})}}
-    {{ form_widget(form.firstName, {'attr': {'placeholder': 'Nom'}})}}
-    {{ form_widget(form.lastName, {'attr': {'placeholder': 'Prenom'}})}}
-    {{ form_widget(form.subject, {'attr': {'placeholder': 'Objet'}})}}
-    {{ form_widget(form.email, {'attr': {'placeholder': 'Email'}})}}
-    {{ form_widget(form.content, {'attr': {'placeholder': 'Vos questions...'}})}}
-    <button type="submit" class="button">Envoyer</button>
+        {{ form_widget(form.firstName, {'attr': {'placeholder': 'Nom'}})}}
+        {{ form_widget(form.lastName, {'attr': {'placeholder': 'Prenom'}})}}
+        {{ form_widget(form.subject, {'attr': {'placeholder': 'Objet'}})}}
+        {{ form_widget(form.email, {'attr': {'placeholder': 'Email'}})}}
+        {{ form_widget(form.content, {'attr': {'placeholder': 'Vos questions...', 'rows': '8'}})}}
+        <button type="submit" class="button">Envoyer</button>
     {{ form_end(form) }}
 </section>
 </main>

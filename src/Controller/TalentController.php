@@ -26,11 +26,12 @@ class TalentController extends AbstractController
         $form->handleRequest($request);
 
         $talents = $talentRepository->findFilter($filter);
-        $talents = $paginator->paginate($talents, $request->query->getInt('page', 1), 3);
+        $talents = $paginator->paginate($talents, $request->query->getInt('page', 1), 8);
         // dd($talents);
         return $this->render('talent/index.html.twig', [
             'talents' => $talents,
             'form' => $form->createView(),
+            'version' => 'normal'
         ]);
     }
 
@@ -45,11 +46,12 @@ class TalentController extends AbstractController
 
         // $talents = $talentRepository->findBy(['ourTalent' => 'true']);
         $talents = $talentRepository->findFilterOurTalent($filter);
-        $talents = $paginator->paginate($talents, $request->query->getInt('page', 1), 3);
+        $talents = $paginator->paginate($talents, $request->query->getInt('page', 1), 4);
 
         return $this->render('talent/index.html.twig', [
             'talents' => $talents,
             'form' => $form->createView(),
+            'version' => 'ourTalent'
         ]);
     }
 

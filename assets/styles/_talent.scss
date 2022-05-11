@@ -1,43 +1,130 @@
-.talentContainer{
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(3,minmax(100px,1fr));
-    grid-row-gap: 2em;
-    justify-items: center;
-    align-items: flex-start;
-    margin: 0 auto;
-    padding: 8em 0
+#talentSection{
+    @include flex(center, column, center);
+    padding-bottom: 4em;
+
+    // .talentContainer{
+    //     display: grid;
+    //     grid-template-columns: repeat(4,minmax(100px,1fr));
+    //     grid-row-gap: 5em;
+    //     justify-items: center;
+    //     justify-content: center;
+    //     align-items: start;
+    //     align-content: center;
+    //     margin: 0 auto;
+    //     padding: 5em 0;
+    //     width: 80%;
+    // }
+    
+    // .talentCard{
+    //     @include flex(center, column, center);
+    //     @include transi();
+    //     gap: .7em;
+    //     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.753);
+    //     padding: 1em;
+    //     border-radius: 25px;
+    //     max-width: 350px;
+    //     width: 80%;
+    //     min-height: 200px;
+    
+    //     &:hover{
+    //         box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.753);
+    //     }
+
+    //     img{
+    //         width: 90px;
+    //         height: 90px;
+    //         border: 1px solid black;
+    //         border-radius: 50%;
+    //     }
+
+    //     .button{
+    //         background-color: $primaryColor;
+
+    //         &:hover{
+    //             background-color: white;
+    //             color: $primaryColor;
+    //         }
+    //     }
+    // }
+    
+    .talentDetail{
+        @include flex($direction:column);
+        gap: 2em;
+        padding-top: 5em;
+    }
 }
 
-.talentCard{
-    @include flex(flex-start, column, flex-start);
-    @include transi();
-    gap: .7em;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.753);
-    padding: 1em;
-    border-radius: 25px;
-    max-width: 350px;
-    width: 80%;
-    min-height: 200px;
-
-    &:hover{
-        box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.753);
+#talentDetail{
+    @include flex(center, column, center);
+    padding-top: 3em;
+    padding-bottom: 4em;
+    gap: 3em;
+    img{
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 1px solid black;
     }
 
-    .socialsLink{
-        padding: .5em 0;
+    .profileContainer{
+        @include flex();
+        gap: 3em;
+        // padding-bottom: 3em;
+    }
+
+    .projectContainer{
+        @include flex(center, column, center);
+        width: 80%;
+        h2{
+            padding-bottom: 1em;
+        }
         a{
             display: inline-block;
-            margin-right: .3em;
-        }
-        i{
-            font-size: 36px;
+            padding: .5em;
+            box-shadow: 0 3px 4px rgb(87, 87, 87);
+
+            &:hover{
+                box-shadow: 0 3px 4px $thirdColor;
+            }
         }
     }
-}
 
-.talentDetail{
-    @include flex($direction:column);
-    gap: 2em;
-    padding-top: 5em;
+    .projects{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(80px,1fr));
+        grid-row-gap: 1em;
+        gap: 2em;
+        justify-items: center;
+        justify-content: center;
+        align-items: start;
+        align-content: center;
+        margin: 0 auto;
+        width: 100%;
+        
+    }
+
+    .agencyContainer{
+        @include flex(center, column, center);
+        width: 80%;
+    }
+
+    .contactContainer{
+        @include flex(center,column);
+        gap: 1em;
+        padding: 2em;
+        border: 1px solid black;
+        border-radius: 15px;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+
+        .socialsLink{
+            padding: .5em 0;
+            a{
+                display: inline-block;
+                margin-right: .3em;
+            }
+            i{
+                font-size: 36px;
+            }
+        }
+    }
 }

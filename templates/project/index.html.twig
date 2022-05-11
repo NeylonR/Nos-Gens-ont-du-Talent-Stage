@@ -5,36 +5,43 @@
 {% block body %}
 <main>
 <section id="projectSection">
-    <h1>Nos projets</h1>
+    <div class="introContainer">
+        <h1>Nos projets</h1>
+
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus alias quidem ipsa iste sunt facere, reprehenderit aliquid nisi nostrum asperiores dolores obcaecati ducimus in recusandae expedita debitis delectus architecto quis?
+        Dolores nostrum tempora ad aut quidem ab magnam accusantium voluptatibus, illum, eveniet saepe veniam perferendis tempore adipisci doloribus natus, earum quaerat hic sed magni? Commodi ea nam possimus accusantium excepturi.</p>
+
+        <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
+    </div>
 
     <div class="projectContainer">
-        <div class=" project">
-        <p>Projet en cours : ({{countProgress}})</p>
-        {% for project in projects %}
+        <h2>Projet en cours : ({{countProgress}})</h2>
+        <div class="project">
+            {% for project in projects %}
             {% if project.status == 'En cours' %}
-                    <div class="projectCard projectCurrentContainer">
+                    <div class="projectCard projectCurrent">
                         {% include "project/projectCard.html.twig" %}                    
                     </div>
             {% endif %}
         {% endfor %}
         </div>
 
+        <h2>Projet en recherche de talents : ({{countLookingFor}})</h2>
         <div class=" project">
-        <p>Projet en recherche de talents : ({{countLookingFor}})</p>
         {% for project in projects %}
             {% if project.status == 'En recherche de talents' %}
-                    <div class="projectCard projectLookingContainer">
+                    <div class="projectCard projectLooking">
                         {% include "project/projectCard.html.twig" %}                    
                     </div>
             {% endif %}
         {% endfor %}
         </div>
 
+        <h2>Projet terminé : ({{countOver}})</h2>
         <div class=" project">
-        <p>Projet terminé : ({{countOver}})</p>
         {% for project in projects %}
             {% if project.status == 'Terminé' %}
-                    <div class="projectCard projectOverContainer">
+                    <div class="projectCard projectOver">
                         {% include "project/projectCard.html.twig" %}                    
                     </div>
             {% endif %}

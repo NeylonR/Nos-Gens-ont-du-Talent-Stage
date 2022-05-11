@@ -4,111 +4,40 @@
 
 {% block body %}
 <main>
-{% include "filter.html.twig" %}
-{% if group is empty %}
-<p class="noResult">Aucun résultat n'a été trouvé.</p>
-{% endif %}
-    <div class="groupContainer">
+<section id="groupSection">
+    {% include "filter.html.twig" %}
+    <div class="introContainer">
+        <h1>A la recherche d’une Agence ou d’une Société.</h1>
+
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus alias quidem ipsa iste sunt facere, reprehenderit aliquid nisi nostrum asperiores dolores obcaecati ducimus in recusandae expedita debitis delectus architecto quis?
+        Dolores nostrum tempora ad aut quidem ab magnam accusantium voluptatibus, illum, eveniet saepe veniam perferendis tempore adipisci doloribus natus, earum quaerat hic sed magni? Commodi ea nam possimus accusantium excepturi.</p>
+
+        <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
+    </div>
+    {% if group is empty %}
+    <p class="noResult">Aucun résultat n'a été trouvé.</p>
+    {% endif %}
+    <div class="groupContainer cardContainer">
         {% for group in group %}
-        <div class="groupCard">
+        <div class="groupCard card">
             {% if group.agencyAssociate is defined %}
-                <h2>Agence : {{group.Name}}</h2>
-                <p class="description">{{group.description|striptags > 50 ? group.description|striptags|slice(0, 51)|split(' ')|slice(0, -1)|join(' ') ~ '...' : group.description}}</p>
-                {% if group.agencyAssociate|length >= 1 %}
-                <p></p>
-                    <ul>
-                    <li>Talents associé : </li>
-                        {% for associate in group.agencyAssociate %}
-                                <li><a href="{{path('app_talent_detail', {id:associate.id})}}">{{associate}}</a></li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-
-                {% if group.agencyCategory|length >= 1 %}
-                    <p>
-                        {% for category in group.agencyCategory %}
-                            #{{category}} 
-                        {% endfor %}
-                    </p>
-                {% endif %}
-
-                <div class="socialsLink">
-                    {% if group.youtubeLink is not null %}
-                    <a href="{{group.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
-                    {% endif %}
-                    {% if group.twitterLink is not null %}
-                    <a href="{{group.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
-                    {% endif %}
-                    {% if group.facebookLink is not null %}
-                    <a href="{{group.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
-                    {% endif %}
-                    {% if group.instagramLink is not null %}
-                    <a href="{{group.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
-                    {% endif %}
-                    {% if group.linkedinLink is not null %}
-                    <a href="{{group.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
-                    {% endif %}
-                    {% if group.webLink is not null %}
-                    <a href="{{group.webLink}}">Site web</a>
-                    {% endif %}
-                </div>
-                <a href="{{path('app_group_agency_detail',{id : group.id})}}">Lire plus</a>
+                {% include "company_agency/agencyCard.html.twig" %}
                 {% if is_granted('ROLE_ADMIN') %}
                     {% set url = ea_url()
                     .setController('App\\Controller\\Admin\\AgencyCrudController')
                     .setAction('edit')
                     .setEntityId(group.id) %}
-                    <a href="{{ url }}">Modifier</a>
+                    <a href="{{ url }}" class="button">Modifier</a>
                 {% endif %}
 
             {% else %}
-                <h2>Société : {{group.Name}}</h2>
-                <p class="description">{{group.description|striptags > 50 ? group.description|striptags|slice(0, 51)|split(' ')|slice(0, -1)|join(' ') ~ '...' : group.description}}</p>
-                {% if group.projects|length >= 1 %}
-                    <ul>
-                    <li>Projets : </li>
-                        {% for project in group.projects %}
-                                <li><a href="{{path('app_project_detail', {id:project.id})}}">{{project}}</a></li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-
-                {% if group.companyCategory|length >= 1 %}
-                    <p>
-                        {% for category in group.companyCategory %}
-                            #{{category}} 
-                        {% endfor %}
-                    </p>
-                {% endif %}
-
-                <div class="socialsLink">
-                    {% if group.youtubeLink is not null %}
-                    <a href="{{group.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
-                    {% endif %}
-                    {% if group.twitterLink is not null %}
-                    <a href="{{group.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
-                    {% endif %}
-                    {% if group.facebookLink is not null %}
-                    <a href="{{group.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
-                    {% endif %}
-                    {% if group.instagramLink is not null %}
-                    <a href="{{group.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
-                    {% endif %}
-                    {% if group.linkedinLink is not null %}
-                    <a href="{{group.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
-                    {% endif %}
-                    {% if group.webLink is not null %}
-                    <a href="{{group.webLink}}">Site web</a>
-                    {% endif %}
-                </div>
-
-                <a href="{{path('app_group_company_detail',{id : group.id})}}">Lire plus</a>
+                {% include "company_agency/companyCard.html.twig" %}
                 {% if is_granted('ROLE_ADMIN') %}
                     {% set url = ea_url()
                     .setController('App\\Controller\\Admin\\CompanyCrudController')
                     .setAction('edit')
                     .setEntityId(group.id) %}
-                    <a href="{{ url }}">Modifier</a> 
+                    <a href="{{ url }}" class="button">Modifier</a> 
                 {% endif %}
             {% endif %}
         </div>
@@ -117,5 +46,6 @@
     <div class="navigation">
         {{ knp_pagination_render(group, 'pagination.html.twig') }}
     </div>
+</section>
 </main>
 {% endblock %}

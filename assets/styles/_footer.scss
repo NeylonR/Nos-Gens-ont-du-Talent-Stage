@@ -1,4 +1,47 @@
 footer{
-    background-color: #99C4C8;
-    padding: 2em;
+    @include flex(space-between);
+    background-color: $primaryColor;
+    color: white;
+    padding: 1em 2em;
+    font-size: 12px;
+
+    .right{
+        @include flex();
+        gap: 1em;
+        font-size: 14px;
+
+        .socialsLink{
+            @include flex();
+            gap: 1em;
+        }
+
+        i{
+            font-size: 26px;
+        }
+
+        & > a:first-of-type{
+            position: relative;
+            &:after, &:before{
+                content: '';
+                width: 2px;
+                height: 150%;
+                background-color: white;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            &:after{
+                right: -.5em;
+            }
+
+            &:before{
+                left: -.5em;
+            }
+        }
+    }
+
+    a{
+        color: white;
+    }
 }

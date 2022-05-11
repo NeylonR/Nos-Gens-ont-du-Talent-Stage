@@ -1,54 +1,60 @@
 #projectSection{
-    @include flex();
+    @include flex(center, column, center);
     padding: 2em 0;
 
     .projectContainer{
-        width: 100%;
+        width: 80%;
         @include flex(center, column, flex-start);
 
         .project{
-            padding: 2em;
+            display: grid;
             width: 100%;
-            @include flex($direction:column);
-            gap: 1em;
+            grid-template-columns: repeat(3,minmax(100px,1fr));
+            grid-row-gap: 5em;
+            justify-items: center;
+            justify-content: center;
+            align-items: start;
+            align-content: center;
+            margin: 0 auto;
+            padding: 2em 0 4em;
+        }
+
+        .projectCard{
+            @include flex(center, column, center);
+            @include transi();
+            gap: .5em;
+            padding: 1em;
+            border-radius: 25px;
+            width: 80%;
+            min-height: 200px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        
+            .socialsLink{
+                padding: .5em 0;
+                i{
+                    font-size: 36px;
+                    padding-right: .3em;
+                }
+            }
         }
     }
 }
-
-.projectCard{
-    @include flex(flex-start, column, flex-start);
-    @include transi();
-    gap: .5em;
-    padding: 1em;
-    border-radius: 25px;
-    width: 80%;
-    min-height: 200px;
-
-    .socialsLink{
-        padding: .5em 0;
-        i{
-            font-size: 36px;
-            padding-right: .3em;
-        }
+.projectCurrent{
+    box-shadow: 2px 2px 3px 1px $secondaryColor;
+    &:hover{
+        box-shadow: 2px 2px 10px 1px $secondaryColor;
     }
 }
-
-.projectCurrentContainer{
-    box-shadow: 0 0 4px 1px rgba(8, 147, 202, 0.753);
+.projectLooking{
+    box-shadow: 2px 2px 3px 1px $fourthColor;
     &:hover{
-        box-shadow: 0 0 12px 1px rgba(8, 147, 202, 0.753);
+        box-shadow: 2px 2px 10px 1px $fourthColor;
     }
 }
-.projectLookingContainer{
-    box-shadow: 0 0 4px 1px rgba(212, 177, 21, 0.753);
+.projectOver{
+    box-shadow: 2px 2px 3px 1px hsl(120, 33%, 36%);
     &:hover{
-        box-shadow: 0 0 12px 1px rgba(212, 177, 21, 0.753);
-    }
-}
-.projectOverContainer{
-    box-shadow: 0 0 4px 1px rgba(4, 173, 18, 0.753);
-    &:hover{
-        box-shadow: 0 0 12px 1px rgba(4, 173, 18, 0.753);
+        box-shadow: 2px 2px 10px 1px hsl(120, 33%, 36%);
     }
 }
 

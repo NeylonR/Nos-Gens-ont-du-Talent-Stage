@@ -1,43 +1,55 @@
-.groupContainer{
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(3,minmax(100px,1fr));
-    grid-row-gap: 2em;
-    justify-items: center;
-    align-items: flex-start;
-    margin: 0 auto;
-    padding: 8em 0
-}
-
-.groupCard{
-    @include flex(flex-start, column, flex-start);
-    @include transi();
-    gap: .7em;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.753);
-    padding: 1em;
-    border-radius: 25px;
-    max-width: 350px;
-    width: 80%;
-    min-height: 200px;
-
-    &:hover{
-        box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.753);
+#groupSection{
+    @include flex(center, column, center);
+    padding-bottom: 4em;
+    // .groupContainer{
+    //     display: grid;
+    //     width: 100%;
+    //     grid-template-columns: repeat(4,minmax(100px,1fr));
+    //     grid-row-gap: 5em;
+    //     justify-items: center;
+    //     justify-content: center;
+    //     align-items: start;
+    //     align-content: center;
+    //     margin: 0 auto;
+    //     padding: 5em 0;
+    //     width: 80%;
+    // }
+    
+    // .groupCard{
+    //     @include flex(center, column, center);
+    //     @include transi();
+    //     gap: .7em;
+    //     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.753);
+    //     padding: 1em;
+    //     border-radius: 25px;
+    //     max-width: 350px;
+    //     width: 80%;
+    //     min-height: 200px;
+    
+    //     &:hover{
+    //         box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.753);
+    //     }
+    
+    //     img{
+    //         height: 90px;
+    //         width: 90px;
+    //         border-radius: 50%;
+    //         border: 1px solid black;
+    //     }
+    
+    //     .button{
+    //         background-color: $primaryColor;
+    
+    //         &:hover{
+    //             background-color: white;
+    //             color: $primaryColor;
+    //         }
+    //     }
+    // }
+    
+    .agencyCompanyDetail{
+        @include flex($direction:column);
+        gap: 2em;
+        padding-top: 5em;
     }
-
-    .socialsLink{
-        padding: .5em 0;
-        a{
-            display: inline-block;
-            margin-right: .3em;
-        }
-        i{
-            font-size: 36px;
-        }
-    }
-}
-
-.agencyCompanyDetail{
-    @include flex($direction:column);
-    gap: 2em;
-    padding-top: 5em;
 }

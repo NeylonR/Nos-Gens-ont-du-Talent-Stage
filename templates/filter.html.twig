@@ -1,27 +1,36 @@
 {{ form_start(form, {'attr': {'class': 'filterForm'}})}}
+{% if form.agency is defined %}
+    <p>Filtres : </p>
+    {% else %}
+    <p>Filtrer par catégorie : </p>
+{% endif %}
     {% if form.agency is defined %}
         <div class="groupForm">
             <div>
-                <label for="{{form.agency.vars.id}}">{{form.agency.vars.name|capitalize }}</label>
+                <label class="inputLabel" for="{{form.agency.vars.id}}">
                 {{ form_widget(form.agency)}}
+                <span>Agence</span>
+                </label>
             </div>
             <div>
-                <label for="{{form.company.vars.id}}">{{form.company.vars.name|capitalize }}</label>
+                <label class="inputLabel" for="{{form.company.vars.id}}">
                 {{ form_widget(form.company)}}
+                <span>Société</span>
+                </label>
             </div>
+            
         </div>
     {% endif %}
     
     <div class="categoryForm">
     {% for checkbox in form.categories %}
-    {# {{dump(checkbox.vars)}} #}
         <div>
-            <label for="{{checkbox.vars.id}}">{{checkbox.vars.label}}</label>
+            <label class="inputLabel" for="{{checkbox.vars.id}}">
             {{ form_widget(checkbox)}}
+            <span>{{checkbox.vars.label}}</span>
+            </label>
         </div>
     {% endfor %}
     </div>
-    
-    {# {{ form_widget(form.categories)}} #}
     <button type="submit" class="button">Filtrer</button>
 {{ form_end(form) }}

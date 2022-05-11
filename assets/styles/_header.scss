@@ -1,14 +1,41 @@
 #navbar{
-    @include flex(flex-end);
+    @include flex();
     background-color: $primaryColor;
 
+
     li{
-        padding: 2em 1em;
+        display: inline;
+        position: relative;
+        &::after{
+            content: '';
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 50px;
+            top: 100%;
+            left: 0;
+            transform-origin: 100% 50%;
+            transform: scale3d(0, 1, 1);
+            transition: transform .3s;
+        }
+
+        &:hover::after{
+            transform-origin: 0% 50%;
+            transform: scale3d(1, 1, 1);
+        }
     }
 
     a{
+        color: white;
+        padding: 2em 1em;
+        // display: block;
         &:hover{
-            background-color: #799ea1;
+            background-color: $secondaryColor;
+            li::after{
+                transform-origin: 0% 50%;
+                transform: scale3d(1, 1, 1);
+            }
         }
     }
 }

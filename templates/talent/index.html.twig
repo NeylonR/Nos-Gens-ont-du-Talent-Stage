@@ -4,44 +4,37 @@
 
 {% block body %}
 <main>
-{% include "filter.html.twig" %}
+<section id="talentSection">
+    {% include "filter.html.twig" %}
+    <div class="introContainer">
+    {% if version == "normal" %}
+        <h1>A la recherche d’un Talent ?</h1>
 
-{% if talents is empty %}
-<p class="noResult">Aucun résultat n'a été trouvé.</p>
-{% endif %}
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus alias quidem ipsa iste sunt facere, reprehenderit aliquid nisi nostrum asperiores dolores obcaecati ducimus in recusandae expedita debitis delectus architecto quis?
+        Dolores nostrum tempora ad aut quidem ab magnam accusantium voluptatibus, illum, eveniet saepe veniam perferendis tempore adipisci doloribus natus, earum quaerat hic sed magni? Commodi ea nam possimus accusantium excepturi.</p>
 
-    <div class="talentContainer">
+        <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
+    {% elseif version == "ourTalent" %}
+        <h1>La liste de nos Talents</h1>
+
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus alias quidem ipsa iste sunt facere, reprehenderit aliquid nisi nostrum asperiores dolores obcaecati ducimus in recusandae expedita debitis delectus architecto quis?
+        Dolores nostrum tempora ad aut quidem ab magnam accusantium voluptatibus, illum, eveniet saepe veniam perferendis tempore adipisci doloribus natus, earum quaerat hic sed magni? Commodi ea nam possimus accusantium excepturi.</p>
+
+        <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
+    {% endif %}
+    </div>
+
+    {% if talents is empty %}
+    <p class="noResult">Aucun résultat n'a été trouvé.</p>
+    {% endif %}
+
+    <div class="talentContainer cardContainer">
         {% for talent in talents %}
-        <div class="talentCard">
+        <div class="talentCard card">
+            <img src="{{asset('images/copium.png')}}" alt="">
             <h2>{{talent.firstName}} {{talent.lastName}}</h2>
 
-            <p class="description">{{talent.description|striptags > 50 ? talent.description|striptags|slice(0, 51)|split(' ')|slice(0, -1)|join(' ') ~ '...' : talent.description}}</p>
-
-            {% if talent.agencies|length >= 1 %}
-                <ul class="agencyList">  
-                <li>Agence :</li>
-                    {% for agency in talent.agencies %}
-                        <li><a href="{{path('app_group_agency_detail', {id:agency.id})}}">{{agency}}</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-
-            {% if talent.projects|length >= 1 %}
-                <ul>
-                <li>Projet : </li>
-                    {% for project in talent.projects %}
-                        <li><a href="{{path('app_project_detail', {id:project.id})}}">{{project.name}}</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            
-            {% if talent.talentCategory|length >= 1 %}
-                <p>
-                    {% for category in talent.talentCategory %}
-                        #{{category}} 
-                    {% endfor %}
-                </p>
-            {% endif %}
+            <p class="description">{{talent.description|striptags > 150 ? talent.description|striptags|slice(0, 151)|split(' ')|slice(0, -1)|join(' ') ~ '...' : talent.description}}</p>
 
             <div class="socialsLink">
                 {% if talent.youtubeLink is not null %}
@@ -63,15 +56,23 @@
                 <a href="{{talent.webLink}}">Site web</a>
                 {% endif %}
             </div>
+
+            {% if talent.talentCategory|length >= 1 %}
+                <div class="categories">
+                    {% for category in talent.talentCategory %}
+                        <span class="tags">{{category}} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
                     
-            <a href="{{path('app_talent_detail',{id : talent.id})}}">Lire plus</a>
+            <a href="{{path('app_talent_detail',{id : talent.id})}}" class="button">Lire plus</a>
             {% if is_granted('ROLE_ADMIN') %}
                 {# <a href="{{path('admin',{crudAction : 'edit' , entityId : talent.id})}}">Modifier</a> #}
                 {% set url = ea_url()
                 .setController('App\\Controller\\Admin\\TalentCrudController')
                 .setAction('edit')
                 .setEntityId(talent.id) %}
-                <a href="{{ url }}">Modifier</a>
+                <a href="{{ url }}" class="button">Modifier</a>
             {% endif %}
             </div>
         {% endfor %}
@@ -80,5 +81,6 @@
     <div class="navigation">
     {{ knp_pagination_render(talents, 'pagination.html.twig') }}
     </div>
+</section>
 </main>
 {% endblock %}

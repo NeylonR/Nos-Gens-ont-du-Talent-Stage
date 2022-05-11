@@ -41,7 +41,7 @@ class CompanyAgencyController extends AbstractController
             );
         }
         
-        $group = $paginator->paginate($group, $request->query->getInt('page', 1), 3);
+        $group = $paginator->paginate($group, $request->query->getInt('page', 1), 4);
 
         return $this->render('company_agency/index.html.twig', [
             'group' => $group,
