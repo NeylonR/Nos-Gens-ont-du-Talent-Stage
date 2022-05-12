@@ -1,0 +1,57 @@
+@media screen and(max-width: 850px){
+    .introContainer{
+        width: 95%;
+    }
+    .cardContainer{
+        width: 90%;
+    }
+}
+
+
+@media screen and(max-width: 650px){
+    .filterForm{
+        padding: 1em;
+    }
+    .categoryForm, .groupForm{
+        gap: 1.5em;
+    }
+}
+
+@media screen and(max-width: 600px){
+    .detailSection{
+        .profileContainer{
+            width: 80%;
+            @include flex(center, column);
+            div{
+                @include flex(flex-start, column, flex-start);
+            }
+
+            .categories{
+                @include flex(flex-start);
+                p{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and(max-width: 550px){
+    .introContainer{
+        padding: 2em 1em;
+    }
+
+    .formContact, #adminForm{
+        width: 100%;
+        input,textarea{
+            width: 85%;
+            min-width: auto;
+        }
+    }
+}
+
+@media screen and(max-width: 400px){
+    .card{
+        width: 90%;
+    }
+}

@@ -4,9 +4,13 @@
 
 {% block body %}
 <main>
-<section id="talentDetail">
+<section class="detailSection">
     <div class="profileContainer">
-        <img src="{{asset('images/copium.png')}}" alt="">
+        {% if talent.image is not null %}
+        <img src="{{vich_uploader_asset(talent)}}" alt="">
+        {% else %}
+            <img src="{{asset('images/placeholder.png')}}" alt="">
+        {% endif %}
         
         <div>
             <h2>{{talent.firstName}} {{talent.lastName}}</h2>
@@ -18,16 +22,21 @@
                 {% else %}
                     <p>Spécialité :</p>
                 {% endif %}
+                <div>
                     {% for category in talent.talentCategory %}
                         <span class="tags">{{category}} </span>
                     {% endfor %}
+                </div>
+                    
                 </div>
             {% endif %}
         </div>
     </div>
 
-    <div class="introContainer">{{talent.description|raw}}</div>
-
+    <div class="introContainer">
+        {{talent.description|raw}}
+    </div>
+    
     {% if talent.projects|length >= 1 %}
     <div class="projectContainer">
         {% if talent.projects|length == 1 %}
@@ -60,7 +69,7 @@
     </div>
     {% endif %}
 
-    <div class="contactContainer">
+    <div class="contactInfoContainer">
         <h2>Prise de contact</h2>
         <p>Retrouvez {{talent.firstName}} {{talent.lastName}} sur ses réseaux ou sur son site</p>
         <div class="socialsLink">

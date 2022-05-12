@@ -53,3 +53,16 @@
         padding-top: 5em;
     }
 }
+
+#agencyCompanyDetail{
+    @include flex(center, column, center);
+    padding-top: 3em;
+    padding-bottom: 4em;
+    gap: 3em;
+    img{
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+}

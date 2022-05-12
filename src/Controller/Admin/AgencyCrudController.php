@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Agency;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -36,6 +37,9 @@ class AgencyCrudController extends AbstractCrudController
             TextField::new('adress', 'Adresse de la société'),
             NumberField::new('phoneNumber','Numéro de télephone'),
             TextEditorField::new('description', 'Description'),
+            ImageField::new('image')
+            ->setBasePath('images/agency_image')
+            ->setUploadDir('public/images/agency_image'),
             AssociationField::new('agencyCategory', 'Categories lié à l\'agence'),
             AssociationField::new('agencyAssociate', 'Talent lié à l\'agence'),
             TextField::new('webLink', 'Lien du site web'),

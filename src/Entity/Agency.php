@@ -2,12 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\AgencyRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Talent;
+use App\Entity\Category;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AgencyRepository;
+use Vich\UploaderBundle\Entity\File;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AgencyRepository::class)]
+/**
+ * @ORM\Entity
+ * @Vich\Uploadable
+ */
 class Agency
 {
     #[ORM\Id]
@@ -52,6 +60,17 @@ class Agency
 
     #[ORM\ManyToMany(targetEntity: Talent::class, inversedBy: 'agencies')]
     private $agencyAssociate;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
+
+    /** 
+     * @Vich\UploadableField(mapping= "agency_image", fileNameProperty="image")
+     */
+    private $imageFile;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $updatedAt;
 
     public function __construct()
     {
@@ -245,6 +264,46 @@ class Agency
     public function removeAgencyAssociate(Talent $agencyAssociate): self
     {
         $this->agencyAssociate->removeElement($agencyAssociate);
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+ 
+        if($imageFile !== null){
+            $this->updatedAt = new \DateTime();
+        }
+
+        return;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

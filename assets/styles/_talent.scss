@@ -107,24 +107,4 @@
         @include flex(center, column, center);
         width: 80%;
     }
-
-    .contactContainer{
-        @include flex(center,column);
-        gap: 1em;
-        padding: 2em;
-        border: 1px solid black;
-        border-radius: 15px;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-
-        .socialsLink{
-            padding: .5em 0;
-            a{
-                display: inline-block;
-                margin-right: .3em;
-            }
-            i{
-                font-size: 36px;
-            }
-        }
-    }
 }

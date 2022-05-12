@@ -3,14 +3,17 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Talent;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 
 class TalentCrudController extends AbstractCrudController
 {
@@ -38,6 +41,12 @@ class TalentCrudController extends AbstractCrudController
             TextField::new('lastName', 'Nom'),
             TextField::new('email', 'Adresse Email'),
             TextEditorField::new('description', 'Description'),
+            ImageField::new('image')
+            ->setBasePath('images/talent_image')
+            ->setUploadDir('public/images/talent_image'),
+            // Field::new('imageFile')
+            // ->setFormType(VichImageType::class)
+            // ->hideOnIndex(),
             IntegerField::new('phoneNumber','Numéro de télephone'),
             AssociationField::new('talentCategory', 'Categories lié au talent'),
             TextField::new('webLink', 'Lien du site web'),

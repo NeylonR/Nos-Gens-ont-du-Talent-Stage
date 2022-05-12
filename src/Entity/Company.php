@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\CompanyRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Entity\File;
+use App\Repository\CompanyRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
+/**
+ * @ORM\Entity
+ * @Vich\Uploadable
+ */
 class Company
 {
     #[ORM\Id]
@@ -53,6 +59,17 @@ class Company
 
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'projectCompany')]
     private $projects;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
+
+    /** 
+     * @Vich\UploadableField(mapping= "company_image", fileNameProperty="image")
+     */
+    private $imageFile;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $updatedAt;
 
     public function __construct()
     {
@@ -249,6 +266,46 @@ class Company
         if ($this->projects->removeElement($project)) {
             $project->removeProjectCompany($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+ 
+        if($imageFile !== null){
+            $this->updatedAt = new \DateTime();
+        }
+
+        return;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

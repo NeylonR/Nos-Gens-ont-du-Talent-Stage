@@ -1,0 +1,31 @@
+@media screen and(max-width: 850px){
+    footer{
+        @include flex(center, column-reverse);
+        gap: 1em;
+
+        .right{
+            i{
+                font-size: 30px;
+            }
+        }
+    }
+}
+@media screen and(max-width: 520px){
+    footer{
+        .right{
+            gap: 1.5em;
+            .socialsLink{
+                width: 90%;
+                gap: 2em;
+            }
+
+            i{
+                font-size: 32px;
+            }
+
+            a:first-of-type::before, a:first-of-type::after{
+                display: none;
+            }
+        }
+    }
+}

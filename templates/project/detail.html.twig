@@ -4,25 +4,69 @@
 
 {% block body %}
 <main>
-<section class="projectDetail">
-    {% if project.status == 'En cours' %}
-        <div class="projectCard projectCurrentContainer">
-            {% include "project/projectCard.html.twig" %}                    
+<section class="projectDetail detailSection">
+    <div class="profileContainer">
+        <div>
+            <h2>{{project.name}}</h2>
+            <p>Status du projet : {{project.status}}</p>
+            <a href="{{project.link}}">Voir le site.</a>
         </div>
-    {% endif %}
-    
-    {% if project.status == 'En recherche de talents' %}
-        <div class="projectCard projectLookingContainer">
-            {% include "project/projectCard.html.twig" %}                    
+    </div>
+
+    <div class="introContainer">
+        {{project.description|raw}}
+    </div>
+
+    {% if project.projectTalent|length >= 1 %}
+        <div class="talentContainer">
+            {% if project.projectTalent|length == 1 %}
+                <h2>Talent ayant travaillé sur le projet :</h2>
+            {% else %}
+                <h2>Talents ayant travaillé sur le projet :</h2>
+            {% endif %}
+            <div class="cardContainer">
+                {% for talent in project.projectTalent %}
+                <div class="card">
+                    <div>
+                        {% if talent.image is not null %}
+                            <img src="{{vich_uploader_asset(talent)}}" alt="">
+                        {% else %}
+                            <img src="{{asset('images/placeholder.png')}}" alt="">
+                        {% endif %}
+                        <h2>{{talent.firstName}} {{talent.lastName}}</h2>
+                    </div>
+                    <a href="{{path('app_talent_detail',{id : talent.id})}}" class="button">Lire plus</a>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 
-    {% if project.status == 'Terminé' %}
-        <div class="projectCard projectOverContainer">
-            {% include "project/projectCard.html.twig" %}                    
+    {% if project.projectCompany|length >= 1 %}
+        <div class="talentContainer">
+            {% if project.projectCompany|length == 1 %}
+                <h2>Société participante :</h2>
+            {% else %}
+                <h2>Sociétés participantes :</h2>
+            {% endif %}
+            <div class="cardContainer">
+                {% for company in project.projectCompany %}
+                <div class="card">
+                    <div>
+                        {% if company.image is not null %}
+                            <img src="{{vich_uploader_asset(company)}}" alt="">
+                        {% else %}
+                            <img src="{{asset('images/placeholder.png')}}" alt="">
+                        {% endif %}
+                        <h2>Société : {{company.Name}}</h2>
+                    </div>
+                    <a href="{{path('app_group_company_detail',{id : company.id})}}" class="button">Lire plus</a>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
-    <a href="{{path('app_project_index')}}">Retour</a>
+    <a href="{{path('app_project_index')}}" class="button">Retour</a>
 </section>
 </main>
 {% endblock %}

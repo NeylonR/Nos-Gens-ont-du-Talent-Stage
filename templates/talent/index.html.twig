@@ -31,41 +31,7 @@
     <div class="talentContainer cardContainer">
         {% for talent in talents %}
         <div class="talentCard card">
-            <img src="{{asset('images/copium.png')}}" alt="">
-            <h2>{{talent.firstName}} {{talent.lastName}}</h2>
-
-            <p class="description">{{talent.description|striptags > 150 ? talent.description|striptags|slice(0, 151)|split(' ')|slice(0, -1)|join(' ') ~ '...' : talent.description}}</p>
-
-            <div class="socialsLink">
-                {% if talent.youtubeLink is not null %}
-                <a href="{{talent.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
-                {% endif %}
-                {% if talent.twitterLink is not null %}
-                <a href="{{talent.twitterLink}}"><i class="fa-brands fa-twitter-square"></i></a>
-                {% endif %}
-                {% if talent.facebookLink is not null %}
-                <a href="{{talent.facebookLink}}"><i class="fa-brands fa-facebook-square"></i></a>
-                {% endif %}
-                {% if talent.instagramLink is not null %}
-                <a href="{{talent.instagramLink}}"><i class="fa-brands fa-instagram"></i></a>
-                {% endif %}
-                {% if talent.linkedinLink is not null %}
-                <a href="{{talent.linkedinLink}}"><i class="fa-brands fa-linkedin"></i></a>
-                {% endif %}
-                {% if talent.webLink is not null %}
-                <a href="{{talent.webLink}}">Site web</a>
-                {% endif %}
-            </div>
-
-            {% if talent.talentCategory|length >= 1 %}
-                <div class="categories">
-                    {% for category in talent.talentCategory %}
-                        <span class="tags">{{category}} </span>
-                    {% endfor %}
-                </div>
-            {% endif %}
-                    
-            <a href="{{path('app_talent_detail',{id : talent.id})}}" class="button">Lire plus</a>
+            {% include "talent/talentCard.html.twig" with {talent: talent} %}
             {% if is_granted('ROLE_ADMIN') %}
                 {# <a href="{{path('admin',{crudAction : 'edit' , entityId : talent.id})}}">Modifier</a> #}
                 {% set url = ea_url()

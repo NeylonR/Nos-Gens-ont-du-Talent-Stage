@@ -4,27 +4,58 @@
 
 {% block body %}
 <main>
-<section class="agencyCompanyDetail">
-    <div class="groupCard">
-    <h2>Société : {{company.Name}}</h2>
-    <p class="description">{{company.description|raw}}</p>
-        {% if company.projects|length >= 1 %}
-            <ul>
-            <li>Projets : </li>
-                {% for project in company.projects %}
-                        <li><a href="{{path('app_project_detail', {id:project.id})}}">{{project}}</a></li>
-                {% endfor %}
-            </ul>
+<section class="detailSection">
+    <div class="profileContainer">
+        {% if company.image is not null %}
+            <img src="{{vich_uploader_asset(company)}}" alt="">
+        {% else %}
+            <img src="{{asset('images/placeholder.png')}}" alt="">
         {% endif %}
+        <div>
+            <h2>Société : {{company.Name}}</h2>
+            {% if company.adress is defined %}
+            <p>{{company.adress}}</p>
+            {% endif %}
 
-        {% if company.companyCategory|length >= 1 %}
-            <p>
-                {% for category in company.companyCategory %}
-                    #{{category}} 
-                {% endfor %}
-            </p>
+            {% if company.companyCategory|length >= 1 %}
+                <div class="categories">
+                {% if company.companyCategory|length > 1 %}
+                    <p>Spécialités :</p>
+                {% else %}
+                    <p>Spécialité :</p>
+                {% endif %}
+                    <div>
+                        {% for category in company.companyCategory %}
+                        <span class="tags">{{category}} </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="introContainer">
+        {{company.description|raw}}
+    </div>
+
+    {% if company.projects|length >= 1 %}
+    <div class="projectContainer">
+        {% if company.projects|length == 1 %}
+            <h2>Le projet auquel {{company.name}} a participé :</h2>
+        {% else %}
+            <h2>Les projets auxquels {{company.name}} a participé :</h2>
         {% endif %}
+        <div class="projects">
+            {% for project in company.projects %}
+                <a href="{{path('app_project_detail', {id:project.id})}}">{{project.name}}</a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 
+    <div class="contactInfoContainer">
+        <h2>Prise de contact</h2>
+        <p>Retrouvez l'agence {{company.name}} sur ses réseaux ou sur son site</p>
         <div class="socialsLink">
             {% if company.youtubeLink is not null %}
             <a href="{{company.youtubeLink}}"><i class="fa-brands fa-youtube"></i></a>
@@ -45,16 +76,19 @@
             <a href="{{company.webLink}}">Site web</a>
             {% endif %}
         </div>
-
+        <p>Vous pouvez aussi prendre contact par mail ou par téléphone</p>
+        <a href="" target="_blank" ><i class="fa-solid fa-envelope"></i> {{company.email}}</a>
+        <a href="" target="_blank" ><i class="fa-solid fa-phone"></i> {{company.phoneNumber}}</a>
+    </div>
         {% if is_granted('ROLE_ADMIN') %}
             {% set url = ea_url()
-            .setController('App\\Controller\\Admin\\CompanyCrudController')
+            .setController('App\\Controller\\Admin\\AgencyCrudController')
             .setAction('edit')
             .setEntityId(company.id) %}
-            <a href="{{ url }}">Modifier</a>
+            <a href="{{ url }}" class="button">Modifier</a> 
         {% endif %}
     </div>
-    <a href="{{path('app_group_index')}}">Retour</a>
+    <a href="{{path('app_group_index')}}" class="button">Retour</a>
 </section>
 </main>
 {% endblock %}

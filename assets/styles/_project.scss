@@ -9,9 +9,10 @@
         .project{
             display: grid;
             width: 100%;
-            grid-template-columns: repeat(3,minmax(100px,1fr));
-            grid-row-gap: 5em;
-            justify-items: center;
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            // grid-row-gap: 5em;
+            gap: 3em;
+            justify-items: start;
             justify-content: center;
             align-items: start;
             align-content: center;
@@ -25,9 +26,11 @@
             gap: .5em;
             padding: 1em;
             border-radius: 25px;
-            width: 80%;
+            width: 100%;
+            max-width: 400px;
             min-height: 200px;
             border: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: white;
         
             .socialsLink{
                 padding: .5em 0;
@@ -62,4 +65,31 @@
     @include flex($direction:column);
     gap: 2em;
     padding-top: 5em;
+}
+
+.projectDetail{
+    .profileContainer{
+        text-align: center;
+    }
+
+    .cardContainer{
+        width: 100%;
+    }
+
+    .card{
+        @include flex(center, column, center, nowrap);
+        img{
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        div{
+            @include flex(flex-start, $wrap:nowrap);
+            gap: 1em;
+            width: 100%;
+        }
+        .socialsLink, .categories, .description{
+            display: none;
+        }
+    }
 }

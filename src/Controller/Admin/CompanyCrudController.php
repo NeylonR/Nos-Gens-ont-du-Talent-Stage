@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Company;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -37,6 +38,9 @@ class CompanyCrudController extends AbstractCrudController
             TextField::new('adress', 'Adresse de la société'),
             NumberField::new('phoneNumber','Numéro de télephone'),
             TextEditorField::new('description', 'Description'),
+            ImageField::new('image')
+            ->setBasePath('images/company_image')
+            ->setUploadDir('public/images/company_image'),
             AssociationField::new('companyCategory', 'Categories lié à la société'),
             TextField::new('webLink', 'Lien du site web'),
             TextField::new('facebookLink', 'Lien profil Facebook')
