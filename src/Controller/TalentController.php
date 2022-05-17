@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/talent')]
 class TalentController extends AbstractController
@@ -20,14 +21,21 @@ class TalentController extends AbstractController
     public function talentIndex(TalentRepository $talentRepository, Request $request, PaginatorInterface $paginator, EntityManagerInterface $em,): Response
     {
         $filter = new FilterData();
-        $filter->page = $request->get('page', 1);
 
         $form = $this->createForm(FilterType::class, $filter);
         $form->handleRequest($request);
 
         $talents = $talentRepository->findFilter($filter);
+
         $talents = $paginator->paginate($talents, $request->query->getInt('page', 1), 8);
-        // dd($talents);
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('talent/talents.html.twig', ['talents' => $talents]),
+                'pagination' => $this->renderView('paginationAjax.html.twig', ['talents' => $talents]),
+            ]);
+        }
+
         return $this->render('talent/index.html.twig', [
             'talents' => $talents,
             'form' => $form->createView(),
@@ -44,9 +52,15 @@ class TalentController extends AbstractController
         $form = $this->createForm(FilterType::class, $filter);
         $form->handleRequest($request);
 
-        // $talents = $talentRepository->findBy(['ourTalent' => 'true']);
         $talents = $talentRepository->findFilterOurTalent($filter);
         $talents = $paginator->paginate($talents, $request->query->getInt('page', 1), 4);
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('talent/talents.html.twig', ['talents' => $talents]),
+                'pagination' => $this->renderView('paginationAjax.html.twig', ['talents' => $talents]),
+            ]);
+        }
 
         return $this->render('talent/index.html.twig', [
             'talents' => $talents,

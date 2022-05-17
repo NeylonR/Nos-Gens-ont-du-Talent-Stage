@@ -1,0 +1,13 @@
+{% for talent in talents %}
+    <div class="talentCard card">
+        {% include "talent/talentCard.html.twig" with {talent: talent} %}
+        {% if is_granted('ROLE_ADMIN') %}
+            {# <a href="{{path('admin',{crudAction : 'edit' , entityId : talent.id})}}">Modifier</a> #}
+            {% set url = ea_url()
+            .setController('App\\Controller\\Admin\\TalentCrudController')
+            .setAction('edit')
+            .setEntityId(talent.id) %}
+            <a href="{{ url }}" class="button">Modifier</a>
+        {% endif %}
+    </div>
+{% endfor %}

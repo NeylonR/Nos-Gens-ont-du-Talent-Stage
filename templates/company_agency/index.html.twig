@@ -4,7 +4,7 @@
 
 {% block body %}
 <main>
-<section id="groupSection">
+<section id="groupSection" class="filterSection">
     {% include "filter.html.twig" %}
     <div class="introContainer">
         <h1>A la recherche d’une Agence ou d’une Société.</h1>
@@ -14,35 +14,14 @@
 
         <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
     </div>
-    {% if group is empty %}
-    <p class="noResult">Aucun résultat n'a été trouvé.</p>
-    {% endif %}
-    <div class="groupContainer cardContainer">
-        {% for group in group %}
-        <div class="groupCard card">
-            {% if group.agencyAssociate is defined %}
-                {% include "company_agency/agencyCard.html.twig" %}
-                {% if is_granted('ROLE_ADMIN') %}
-                    {% set url = ea_url()
-                    .setController('App\\Controller\\Admin\\AgencyCrudController')
-                    .setAction('edit')
-                    .setEntityId(group.id) %}
-                    <a href="{{ url }}" class="button">Modifier</a>
-                {% endif %}
 
-            {% else %}
-                {% include "company_agency/companyCard.html.twig" %}
-                {% if is_granted('ROLE_ADMIN') %}
-                    {% set url = ea_url()
-                    .setController('App\\Controller\\Admin\\CompanyCrudController')
-                    .setAction('edit')
-                    .setEntityId(group.id) %}
-                    <a href="{{ url }}" class="button">Modifier</a> 
-                {% endif %}
-            {% endif %}
-        </div>
-        {% endfor %}
+    <div class="groupContainer cardContainer">
+        {% if group is empty %} 
+            <p class="noResult">Aucun résultat n'a été trouvé.</p>
+        {% endif %}
+        {% include "company_agency/group.html.twig" %}
     </div>
+
     <div class="navigation">
         {{ knp_pagination_render(group, 'pagination.html.twig') }}
     </div>

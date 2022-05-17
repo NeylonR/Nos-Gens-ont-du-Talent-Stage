@@ -1,0 +1,24 @@
+{% for group in group %}
+    <div class="groupCard card">
+        {% if group.agencyAssociate is defined %}
+            {% include "company_agency/agencyCard.html.twig" %}
+            {% if is_granted('ROLE_ADMIN') %}
+                {% set url = ea_url()
+                .setController('App\\Controller\\Admin\\AgencyCrudController')
+                .setAction('edit')
+                .setEntityId(group.id) %}
+                <a href="{{ url }}" class="button">Modifier</a>
+            {% endif %}
+
+        {% else %}
+            {% include "company_agency/companyCard.html.twig" %}
+            {% if is_granted('ROLE_ADMIN') %}
+                {% set url = ea_url()
+                .setController('App\\Controller\\Admin\\CompanyCrudController')
+                .setAction('edit')
+                .setEntityId(group.id) %}
+                <a href="{{ url }}" class="button">Modifier</a> 
+            {% endif %}
+        {% endif %}
+    </div>
+{% endfor %}

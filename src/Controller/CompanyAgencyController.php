@@ -5,13 +5,14 @@ namespace App\Controller;
 use App\Entity\Agency;
 use App\Entity\Company;
 use App\Data\FilterData;
-use App\Form\FilterAgencyCompanyType;
 use App\Repository\AgencyRepository;
+use App\Form\FilterAgencyCompanyType;
 use App\Repository\CompanyRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/groupe')]
@@ -41,7 +42,14 @@ class CompanyAgencyController extends AbstractController
             );
         }
         
-        $group = $paginator->paginate($group, $request->query->getInt('page', 1), 4);
+        $group = $paginator->paginate($group, $request->query->getInt('page', 1), 8);
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('company_agency/group.html.twig', ['group' => $group]),
+                'pagination' => $this->renderView('paginationAjax.html.twig', ['group' => $group]),
+            ]);
+        }
 
         return $this->render('company_agency/index.html.twig', [
             'group' => $group,

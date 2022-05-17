@@ -1,0 +1,5 @@
+{% if group is defined %}
+    {{ knp_pagination_render(group, 'pagination.html.twig') }}
+{% else %}
+    {{ knp_pagination_render(talents, 'pagination.html.twig') }}
+{% endif %}
