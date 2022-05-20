@@ -9,7 +9,13 @@
 @mixin transi($time : .3s) {
   transition: all $time ease-in-out;
 }
+// $primaryColor: #363062;
+// $secondaryColor: #4D4C7D;
 $primaryColor: #363062;
 $secondaryColor: #4D4C7D;
 $thirdColor: #4C69B3;
 $fourthColor: #E5CB9F;
+$fontColorWhite : #F9F4EA;
+$fontColorBlack : #000000;
+$backgroundColorGreen : #154854;
+$backgroundColorBeige : #EBE6DB;

@@ -10,3 +10,13 @@ getBurgerButton.addEventListener('click', function() {
     getBurgerNavbar.classList.toggle('active');
     getBody.classList.toggle('noScroll')
 })
+
+const getResetButton = document.querySelector('.filterForm .reset');
+const getFilter = document.querySelectorAll('.filterForm input');
+getResetButton.addEventListener('click', (e) => {
+    console.log('oui')
+    e.preventDefault();
+    getFilter.forEach(input => {
+        input.checked = false;
+    });
+})

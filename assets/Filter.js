@@ -1,6 +1,7 @@
 /**
  * @property {HTMLElement} pagination
  * @property {HTMLElement} cardContainer
+ * @property {HTMLElement} reset
  * @property {HTMLFormElement} form
  */
 export default class Filter{
@@ -10,14 +11,13 @@ export default class Filter{
      */
     constructor(element) {
         if(element === null) {
-            console.log('e')
             return;
         }
         this.pagination = element.querySelector('.navigation');
         this.cardContainer = element.querySelector('.cardContainer');
         this.form = element.querySelector('.filterForm');
+        this.reset = element.querySelector('.filterForm .reset');
         this.bindEvents();
-        console.log('oui')
     }
 
     bindEvents(){
@@ -30,6 +30,8 @@ export default class Filter{
         this.form.querySelectorAll('input[type=checkbox]').forEach(input => {
             input.addEventListener('change', this.loadForm.bind(this));
         });
+
+        this.reset.addEventListener('click', this.loadForm.bind(this));
 
         // this.pagination.addEventListener('click', aClickListener);
     }
