@@ -1,0 +1,45 @@
+@media screen and(max-width: 1100px){
+    #homeSection{
+        .homeIntro{
+            width: 85%;
+    
+        }
+    }
+}
+
+
+@media screen and(max-width: 850px){
+    #homeSection{
+        .homeIntro{
+            width: 90%;
+    
+        }
+
+        .homePresentation{
+            @include flex(center, column, center);
+            padding: 2em 0 6em;
+            gap: 3em;
+    
+            div{
+                @include flex($direction: column);
+                gap: 1em;
+                width: 60%;
+                min-width: 270px;
+                max-width: 500px;
+                text-align: center;
+                padding-bottom: 2em;
+                
+                &:not(:last-of-type){
+                    border-bottom: 1px solid black;
+                }
+            }
+        }
+
+        .homeContact{
+            p, h2{
+                width: 90%;
+            }
+        }
+    }
+}
+

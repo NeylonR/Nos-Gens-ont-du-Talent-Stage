@@ -5,22 +5,26 @@
 {% block body %}
 <main>
 <section id="groupSection" class="filterSection">
-    {% include "filter.html.twig" %}
-    <div class="introContainer">
+    
+    <article class="introContainer">
         <h1>A la recherche d’une Agence ou d’une Société.</h1>
 
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus alias quidem ipsa iste sunt facere, reprehenderit aliquid nisi nostrum asperiores dolores obcaecati ducimus in recusandae expedita debitis delectus architecto quis?
         Dolores nostrum tempora ad aut quidem ab magnam accusantium voluptatibus, illum, eveniet saepe veniam perferendis tempore adipisci doloribus natus, earum quaerat hic sed magni? Commodi ea nam possimus accusantium excepturi.</p>
 
         <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
-    </div>
+    </article>
 
-    <div class="groupContainer cardContainer">
-        {% if group is empty %} 
-            <p class="noResult">Aucun résultat n'a été trouvé.</p>
-        {% endif %}
-        {% include "company_agency/group.html.twig" %}
-    </div>
+    {% include "filter.html.twig" %}
+
+    <article class="cardContainerBackground">
+        <div class="groupContainer cardContainer">
+            {% if group is empty %} 
+                <p class="noResult">Aucun résultat n'a été trouvé.</p>
+            {% endif %}
+            {% include "company_agency/group.html.twig" %}
+        </div>
+    </article>
 
     <div class="navigation">
         {{ knp_pagination_render(group, 'pagination.html.twig') }}

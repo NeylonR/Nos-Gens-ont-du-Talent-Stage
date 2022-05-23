@@ -8,15 +8,39 @@ vich_uploader:
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_update: true
             delete_on_remove: true
+        talent_banner:
+            uri_prefix: /images/talent_banner
+            upload_destination: '%kernel.project_dir%/public/images/talent_banner'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
         agency_image:
             uri_prefix: /images/agency_image
             upload_destination: '%kernel.project_dir%/public/images/agency_image'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_update: true
             delete_on_remove: true
+        agency_banner:
+            uri_prefix: /images/agency_banner
+            upload_destination: '%kernel.project_dir%/public/images/agency_banner'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
         company_image:
             uri_prefix: /images/company_image
             upload_destination: '%kernel.project_dir%/public/images/company_image'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+        company_banner:
+            uri_prefix: /images/company_banner
+            upload_destination: '%kernel.project_dir%/public/images/company_banner'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+        project_banner:
+            uri_prefix: /images/project_banner
+            upload_destination: '%kernel.project_dir%/public/images/project_banner'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_update: true
             delete_on_remove: true

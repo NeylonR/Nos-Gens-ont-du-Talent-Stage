@@ -41,6 +41,9 @@ class CompanyCrudController extends AbstractCrudController
             ImageField::new('image')
             ->setBasePath('images/company_image')
             ->setUploadDir('public/images/company_image'),
+            ImageField::new('bannerImage')
+            ->setBasePath('images/company_banner')
+            ->setUploadDir('public/images/company_banner'),
             AssociationField::new('companyCategory', 'Categories lié à la société'),
             TextField::new('webLink', 'Lien du site web'),
             TextField::new('facebookLink', 'Lien profil Facebook')

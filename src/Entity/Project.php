@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjectRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Entity\File;
+use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
+/**
+ * @ORM\Entity
+ * @Vich\Uploadable
+ */
 class Project
 {
     #[ORM\Id]
@@ -33,6 +38,17 @@ class Project
 
     #[ORM\ManyToMany(targetEntity: Talent::class, inversedBy: 'projects')]
     private $projectTalent;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $updatedAt;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $bannerImage;
+
+    /** 
+     * @Vich\UploadableField(mapping= "project_banner", fileNameProperty="bannerImage")
+     */
+    private $bannerFile;
 
     public function __construct()
     {
@@ -144,5 +160,45 @@ class Project
         $this->projectTalent->removeElement($projectTalent);
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getBannerImage(): ?string
+    {
+        return $this->bannerImage;
+    }
+
+    public function setBannerImage(?string $bannerImage): self
+    {
+        $this->bannerImage = $bannerImage;
+
+        return $this;
+    }
+
+    public function getBannerFile(): ?File
+    {
+        return $this->bannerFile;
+    }
+
+    public function setBannerFile(?File $bannerFile = null): void
+    {
+        $this->bannerFile = $bannerFile;
+ 
+        if($bannerFile !== null){
+            $this->updatedAt = new \DateTime();
+        }
+
+        return;
     }
 }

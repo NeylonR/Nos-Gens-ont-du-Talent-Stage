@@ -72,6 +72,14 @@ class Agency
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $updatedAt;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $bannerImage;
+
+    /** 
+     * @Vich\UploadableField(mapping= "talent_banner", fileNameProperty="bannerImage")
+     */
+    private $bannerFile;
+
     public function __construct()
     {
         $this->agencyCategory = new ArrayCollection();
@@ -306,5 +314,33 @@ class Agency
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function getBannerImage(): ?string
+    {
+        return $this->bannerImage;
+    }
+
+    public function setBannerImage(?string $bannerImage): self
+    {
+        $this->bannerImage = $bannerImage;
+
+        return $this;
+    }
+
+    public function getBannerFile(): ?File
+    {
+        return $this->bannerFile;
+    }
+
+    public function setBannerFile(?File $bannerFile = null): void
+    {
+        $this->bannerFile = $bannerFile;
+ 
+        if($bannerFile !== null){
+            $this->updatedAt = new \DateTime();
+        }
+
+        return;
     }
 }

@@ -44,6 +44,9 @@ class TalentCrudController extends AbstractCrudController
             ImageField::new('image')
             ->setBasePath('images/talent_image')
             ->setUploadDir('public/images/talent_image'),
+            ImageField::new('bannerImage')
+            ->setBasePath('images/talent_banner')
+            ->setUploadDir('public/images/talent_banner'),
             // Field::new('imageFile')
             // ->setFormType(VichImageType::class)
             // ->hideOnIndex(),

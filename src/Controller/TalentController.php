@@ -18,14 +18,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class TalentController extends AbstractController
 {
     #[Route('/', name: 'app_talent_index')]
-    public function talentIndex(TalentRepository $talentRepository, Request $request, PaginatorInterface $paginator, EntityManagerInterface $em,): Response
+    public function talentIndex( TalentRepository $talentRepository, Request $request, PaginatorInterface $paginator, EntityManagerInterface $em,): Response
     {
         $filter = new FilterData();
 
         $form = $this->createForm(FilterType::class, $filter);
         $form->handleRequest($request);
 
-        $talents = $talentRepository->findFilter($filter);
+        $talents1 = $talentRepository->findFilter($filter);
+
+        $talents = [...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,];
 
         $talents = $paginator->paginate($talents, $request->query->getInt('page', 1), 8);
 
@@ -42,6 +44,16 @@ class TalentController extends AbstractController
             'version' => 'normal'
         ]);
     }
+    // #[Route('/{slug}', name: 'app_talent_index2')]
+    // public function test(string $slug)
+    // {
+    //     dd($slug);
+    //     if(str_contains($slug, 'ajax=1')){
+    //         // dd($slug);
+    //         return $this->redirectToRoute('app_talent_index');
+    //     }
+        
+    // }
 
     #[Route('/nos_talents', name: 'app_our_talents_index')]
     public function ourTalentIndex(TalentRepository $talentRepository, Request $request, PaginatorInterface $paginator): Response

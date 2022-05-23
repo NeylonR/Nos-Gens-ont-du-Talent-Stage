@@ -1,30 +1,76 @@
-.homeTopContainer{
-    background-image: linear-gradient(90deg, rgba(0,0,0,0.6) 0%,rgba(0,0,0,.6) 100%),url(../../public/images/bg.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: 0% 100%;
-    min-height: 70vh;
-    @include flex();
-    padding: 2em 0;
+#homeSection{
+    @include flex(center, column);
 
-    div{
-        width: 85%;
-        text-align: center;
-        @include flex(center, column);
-        gap: 1em;
-        color: white;
-
-        a{
-            color:white;
+    .homeTopContainer{
+        background-image: linear-gradient(90deg, rgba(0,0,0,0.6) 0%,rgba(0,0,0,.6) 100%),url(../../public/images/home_banner.jpg);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center center;
+        width: 100%;
+        min-height: 70vh;
+        @include flex(space-evenly, column, center);
+        padding: 2em 0;
+    
+        .logo{
+            width: 300px;
         }
-
-        .underTitle{
-            font-size: 20px;
+    
+        h1{
+            width: 85%;
+            text-align: center;
+            color: white;
+            font-size: 24px;
         }
     }
-}
+    
+    .homeIntro{
+        padding: 3em 0em;
+        text-align: center;
+        width: 70%;
+    
+        h2{
+            padding-bottom: 2em;
+        }
+    }
 
-.homeBody{
-    padding: 3em 2em;
-    text-align: center;
+    .homePresentation{
+        @include flex(space-evenly);
+        padding: 2em 0 6em;
+
+        div{
+            @include flex($direction: column);
+            gap: 1em;
+            width: 25%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        svg{
+            width: 120px;
+            height: 120px;
+            fill: $primaryColor;
+        }
+
+        span{
+            padding: 1em;
+            border-radius: 50%;
+            border: 2px solid $primaryColor;
+        }
+    }
+
+    .homeContact{
+        @include flex($direction: column);
+        background-image: url(../../public/images/home_contact.png);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center center;
+        padding: 8em 0;
+        gap: 2.5em;
+        text-align: center;
+        color: white;
+
+        p, h2{
+            width: 80%;
+        }
+    }
 }

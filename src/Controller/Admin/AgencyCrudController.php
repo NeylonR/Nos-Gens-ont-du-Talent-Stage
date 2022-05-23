@@ -40,6 +40,9 @@ class AgencyCrudController extends AbstractCrudController
             ImageField::new('image')
             ->setBasePath('images/agency_image')
             ->setUploadDir('public/images/agency_image'),
+            ImageField::new('bannerImage')
+            ->setBasePath('images/agency_banner')
+            ->setUploadDir('public/images/agency_banner'),
             AssociationField::new('agencyCategory', 'Categories lié à l\'agence'),
             AssociationField::new('agencyAssociate', 'Talent lié à l\'agence'),
             TextField::new('webLink', 'Lien du site web'),

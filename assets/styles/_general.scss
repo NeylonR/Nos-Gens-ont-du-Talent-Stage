@@ -19,10 +19,10 @@
 body{
     scroll-behavior: smooth;
     font-family: roboto;
-    background-color: #FFFFFF;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23FFFFFF' cx='50' cy='0' r='50'/%3E%3Cg fill='%23fdfdfd' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23fafafa' cx='50' cy='100' r='50'/%3E%3Cg fill='%23f8f8f8' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23f5f5f5' cx='50' cy='200' r='50'/%3E%3Cg fill='%23f3f3f3' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23f0f0f0' cx='50' cy='300' r='50'/%3E%3Cg fill='%23eeeeee' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ebebeb' cx='50' cy='400' r='50'/%3E%3Cg fill='%23e9e9e9' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23e6e6e6' cx='50' cy='500' r='50'/%3E%3Cg fill='%23e4e4e4' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%23e1e1e1' cx='50' cy='600' r='50'/%3E%3Cg fill='%23dfdfdf' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23dcdcdc' cx='50' cy='700' r='50'/%3E%3Cg fill='%23dadada' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23d8d8d8' cx='50' cy='800' r='50'/%3E%3Cg fill='%23d5d5d5' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23d3d3d3' cx='50' cy='900' r='50'/%3E%3Cg fill='%23d0d0d0' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23CECECE' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: contain;
+    // background-color: #FFFFFF;
+    // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23FFFFFF' cx='50' cy='0' r='50'/%3E%3Cg fill='%23fdfdfd' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23fafafa' cx='50' cy='100' r='50'/%3E%3Cg fill='%23f8f8f8' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23f5f5f5' cx='50' cy='200' r='50'/%3E%3Cg fill='%23f3f3f3' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23f0f0f0' cx='50' cy='300' r='50'/%3E%3Cg fill='%23eeeeee' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ebebeb' cx='50' cy='400' r='50'/%3E%3Cg fill='%23e9e9e9' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23e6e6e6' cx='50' cy='500' r='50'/%3E%3Cg fill='%23e4e4e4' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%23e1e1e1' cx='50' cy='600' r='50'/%3E%3Cg fill='%23dfdfdf' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23dcdcdc' cx='50' cy='700' r='50'/%3E%3Cg fill='%23dadada' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23d8d8d8' cx='50' cy='800' r='50'/%3E%3Cg fill='%23d5d5d5' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23d3d3d3' cx='50' cy='900' r='50'/%3E%3Cg fill='%23d0d0d0' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23CECECE' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+    // background-attachment: fixed;
+    // background-size: contain;
 }
 
 a{
@@ -31,7 +31,7 @@ a{
     color: black;
 
     &:hover{
-        color: $thirdColor;
+        color: $primaryColor;
     }
 }
 
@@ -71,52 +71,120 @@ button{
     @include flex();
     gap: .5em;
     background-color: transparent;
-    border-radius: 15px;
-    padding: 1em;
-    // width: 10%;
+    padding: 2em 1em 0;
     min-width: 150px;
     margin: 0 auto;
 
     li{
         background-color: white;
         font-family: robotoBold;
+        border-radius: 50%;
+        min-width: 40px;
+        min-height: 40px;
+        @include flex();
+        color: white;
+        background-color: $thirdColor;
+        padding: .5em;
+        @include transi();
+
+        &:hover:not(.current){
+            transform: scale(1.1);
+        }
         
         &.current{
-            padding: .8em;
-            border: 2px solid $fourthColor;
-            color: $fourthColor;
+            background-color: $primaryColor;
         }
 
         a{
             display: inline-block;
-            padding: .8em;
-            border: 2px solid black;
-
-            &:hover{
-                border: 2px solid $thirdColor;
-            }
+            color: white;
         }
+    }
+
+    .pagination-previous, .pagination-next{
+        border-radius: 10px;
+        padding: 0 .5em ;
     }
 
     .disabled{
         display: none;
     }
 }
+// separator line style
+.lineSeparator{
+    width: 60%;
+    height: 3px;
+    border-radius: 10px;
+    background-color: $primaryColor;
+    position: relative;
+    margin: 2em 0;
+
+    &:after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 50%) rotate(45deg);
+        // width: 15px;
+        // height: 15px;
+        background-color: transparent;
+        border-bottom : 25px solid $primaryColor;
+        border-left : 25px solid transparent;
+    }
+}
+// socials icon color
+.linkedinIcon{
+    color: $linkedinColor;
+}
+
+.facebookIcon{
+    color: $facebookColor;
+}
+
+.twitterIcon{
+    color: $twitterColor;
+}
+
+.youtubeIcon{
+    color: $youtubeColor;
+}
+
+.instagramIcon i{
+    background: $instagramColor;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color:transparent;
+    @include transi();
+
+    
+}
+.instagramIcon:hover i{
+    background : $instaHoverColor;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color:transparent;
+}
+
+.websiteIcon{
+    color: $websiteColor;
+}
 
 .filterForm{
     @include flex(center,column);
     gap: .5em;
-    background-color: white;
+    background-color: #F9FDFF;
     padding: 1em 3em;
-    position: sticky;
+    // position: sticky;
     top: 0;
     min-width: 60%;
     max-width: 900px;
     margin: 0 auto;
-    border: 1px black solid;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.541);
+    // border: 1px black solid;
     border-top: none;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    margin-bottom: 4em;
 }
 
 .categoryForm, .groupForm{
@@ -145,11 +213,6 @@ button{
     padding: 0;
 }
 
-// .home, .homeSection{
-//     @include flex();
-//     padding-top: 3em;
-//     text-align: center;
-// }
 
 .adminLogin{
     @include flex();
@@ -165,7 +228,9 @@ button{
     margin: 0 auto;
     text-align: center;
     padding: 1em 0;
+    font-size: 20px;
     font-family: robotoBold;
+    color: white;
 }
 
 //filter tags
@@ -207,12 +272,20 @@ button{
     .tags{
         padding: .3em .5em;
         border-radius: 8px;
-        cursor:auto;
+        // cursor:auto;
         font-family: robotoBold;
         font-size: 16px;
         color: white;
-        background-color: $secondaryColor;
+        background-color: $primaryColor;
     }
+}
+
+.cardContainerBackground{
+    background-image: url(../../public/images/card_container_banner.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    width: 100%;
 }
 
 .cardContainer{
@@ -222,13 +295,14 @@ button{
     gap: 3em;
     justify-items: center;
     justify-content: center;
-    align-items: start;
+    // align-items: start;
     align-content: center;
     margin: 0 auto;
     padding: 5em 0;
     width: 80%;
-}
 
+}
+// Cards style
 .card{
     @include flex(center, column, center);
     @include transi();
@@ -236,7 +310,7 @@ button{
     background-color: white;
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.753);
     padding: 1em;
-    border-radius: 25px;
+    border-radius: 10px;
     max-width: 350px;
     width: 100%;
     min-height: 200px;
@@ -254,8 +328,15 @@ button{
         // border: 1px solid black;
     }
 
+    .tagsIcon{
+        font-size: 26px;
+    }
+
+    .description{
+        padding: 0 .5em;
+    }
     .socialsLink{
-        align-self: flex-start;
+        // align-self: flex-start;
         padding: .5em 0;
         a{
             display: inline-block;
@@ -279,12 +360,21 @@ button{
 .introContainer{
     @include flex();
     gap: 1em;
-    padding: 2em;
-    width: 80%;
+    padding: 8em 0;
+    width: 100%;
     text-align: center;
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.6) 0%,rgba(0,0,0,.6) 100%),url(../../public/images/talent_banner.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    color:white;
 
     h1{
         padding-bottom: 1em;
+    }
+
+    h1, p{
+        width: 80%;
     }
 }
 

@@ -35,7 +35,7 @@ class CompanyAgencyController extends AbstractController
             $companies = $companyRepository->findFilter($filter);
             $agencies = $agencyRepository->findFilter($filter);
     
-            $group = [...$companies, ...$agencies];
+            $group = [...$companies,...$companies,...$agencies,...$agencies,...$agencies, ...$agencies];
     
             usort($group, fn($object1, $object2) =>
                 ($object1->getId() > $object2->getId())  ? -1 : 1

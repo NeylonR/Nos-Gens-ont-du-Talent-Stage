@@ -5,8 +5,8 @@
 {% block body %}
 <main>
 <section id="talentSection" class="filterSection">
-    {% include "filter.html.twig" %}
-    <div class="introContainer">
+
+    <article class="introContainer">
     {% if version == "normal" %}
         <h1>A la recherche d’un Talent ?</h1>
 
@@ -14,6 +14,7 @@
         Dolores nostrum tempora ad aut quidem ab magnam accusantium voluptatibus, illum, eveniet saepe veniam perferendis tempore adipisci doloribus natus, earum quaerat hic sed magni? Commodi ea nam possimus accusantium excepturi.</p>
 
         <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
+
     {% elseif version == "ourTalent" %}
         <h1>La liste de nos Talents</h1>
 
@@ -22,14 +23,18 @@
 
         <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
     {% endif %}
-    </div>
+    </article>
 
-    <div class="talentContainer cardContainer">
+    {% include "filter.html.twig" %}
+
+    <article class="cardContainerBackground">
+        <div class="talentContainer cardContainer">
         {% if talents is empty %}
             <p class="noResult">Aucun résultat n'a été trouvé.</p>
         {% endif %}
         {% include "talent/talents.html.twig" %}
     </div>
+    </article>
 
     <div class="navigation">
     {{ knp_pagination_render(talents, 'pagination.html.twig') }}
