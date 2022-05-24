@@ -58,18 +58,26 @@ class CompanyAgencyController extends AbstractController
     }
 
     #[Route('/societe/detail/{id<\d+>}', name: 'app_group_company_detail')]
-    public function groupCompanyDetail(Company $company): Response
+    public function groupCompanyDetail(Company $company, Request $request, PaginatorInterface $paginator): Response
     {
+        $companyProject = $company->getProjects();
+        $companyProject = $paginator->paginate($companyProject, $request->query->getInt('page', 1), 6); 
+
         return $this->render('company_agency/company_detail.html.twig', [
             'company' => $company,
+            'projects' => $companyProject,
         ]);
     }
 
     #[Route('/agency/detail/{id<\d+>}', name: 'app_group_agency_detail')]
-    public function groupAgencyDetail(Agency $agency): Response
+    public function groupAgencyDetail(Agency $agency, Request $request, PaginatorInterface $paginator): Response
     {
+        $agencyTalent = $agency->getAgencyAssociate();
+        $agencyTalent = $paginator->paginate($agencyTalent, $request->query->getInt('page', 1), 6);
+        
         return $this->render('company_agency/agency_detail.html.twig', [
             'agency' => $agency,
+            'talents' => $agencyTalent
         ]);
     }
 }

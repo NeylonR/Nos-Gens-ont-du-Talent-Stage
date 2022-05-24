@@ -29,11 +29,11 @@
 
     <article class="cardContainerBackground">
         <div class="talentContainer cardContainer">
-        {% if talents is empty %}
-            <p class="noResult">Aucun résultat n'a été trouvé.</p>
-        {% endif %}
-        {% include "talent/talents.html.twig" %}
-    </div>
+            {% if talents is empty %}
+                <p class="noResult">Aucun résultat n'a été trouvé.</p>
+            {% endif %}
+            {% include "talent/talents.html.twig" %}
+        </div>
     </article>
 
     <div class="navigation">

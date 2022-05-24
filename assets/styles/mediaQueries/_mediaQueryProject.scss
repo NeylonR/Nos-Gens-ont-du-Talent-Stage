@@ -1,0 +1,86 @@
+@media screen and(max-width: 900px){
+    #projectSection{
+        .projectContainer{
+            width: 90%;
+            // min-width: 320px;
+
+            h2{
+                padding: 0 1em;
+            }
+            .projectCard{
+                @include flex(center, column);
+                flex-wrap: nowrap;
+                @include transi();
+                overflow: visible;
+                gap: 0em;
+                border-radius: 5px;
+                width: 100%;
+                max-width: 900px;
+                min-height: 200px;
+                height: auto;
+                // padding: 1em;
+                background-color: transparent;
+    
+                img{
+                    height: 250px;
+                    width: 250px;
+                    line-height: 0;
+                    object-fit: cover;
+                }
+            
+                .textContainer{
+                    @include flex(space-around, column, flex-start);
+                    gap: 1em;
+                    padding: 1em;
+                    height: auto;
+                    border-radius: 5px;
+                    @include transi();
+                    background-color: white;
+                }
+            }
+
+            .projectCurrent, .projectLooking, .projectOver{
+                box-shadow: 0 0 0;
+                .textContainer{
+                    @include flex(space-around, column, center);
+                    gap: 1em;
+                    padding: 1em;
+                    height: auto;
+                }
+            }
+
+            .projectCurrent{
+                .textContainer{
+                    box-shadow: 4px 4px 3px 1px #4c69b39d;
+                    &:hover{
+                        box-shadow: 4px 4px 8px 1px #4c69b39d;
+                    }
+                }
+            }
+
+            .projectLooking{
+                .textContainer{
+                    box-shadow: 4px 4px 3px 1px #e5cb9f9d;
+                    &:hover{
+                        box-shadow: 4px 4px 8px 1px #e5cb9f9d;
+                    }
+                }
+            }
+
+            .projectOver{
+                .textContainer{
+                    box-shadow: 4px 4px 3px 1px hsla(120, 33%, 36%, 0.6);
+                    &:hover{
+                        box-shadow: 4px 4px 8px 1px hsl(120, 33%, 36%, 0.6);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and(max-width: 850px){
+   
+}
+

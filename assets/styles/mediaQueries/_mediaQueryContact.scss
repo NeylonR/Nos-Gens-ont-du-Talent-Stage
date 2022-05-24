@@ -1,0 +1,121 @@
+@media screen and(max-width: 1650px){
+    #contactSection{
+        .contactContainer{
+            width: 80%;
+    
+        }
+    }
+}
+
+@media screen and(max-width: 1300px){
+    #contactSection{
+        .contactContainer{
+            width: 95%;
+        }
+    }
+}
+
+@media screen and(max-width: 1150px){
+    #contactSection{
+        .contactContainer{
+            .contactFormContainer{
+                form{
+                    margin-left: -20%;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and(max-width: 1000px){
+    #contactSection{
+        @include flex(center, column, center);
+        padding-bottom: 4em;
+        .introContainer{
+            margin-bottom: 3em;
+            padding: 8em 0;
+            // background-image: url(../../public/images/contact_banner.png);
+        }
+    
+        .contactContainer{
+            @include flex(center, column, center);
+            width: 100%;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 0 0;
+            transform: translateY(0);
+            .contactInfo{
+                @include flex(center, column, center);
+                padding: 0em 0 2em;
+                width: 70%;
+                height: 100%;
+    
+                .description{
+                    width: 90%;
+                    min-width: auto;
+                    padding-bottom: 2em;
+                }
+            }
+    
+            .contactFormContainer{
+                width: 100%;
+    
+                form{
+                    width: 80%;
+                    border-radius: 10px;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and(max-width: 880px){
+    #contactSection{
+        .contactContainer{
+            @include flex(center, column, center);
+            width: 100%;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 0 0;
+            transform: translateY(0);
+            .contactInfo{
+                @include flex(center, column, center);
+                padding: 0em 0 2em;
+                width: 90%;
+                height: 100%;
+    
+                .description{
+                    width: 90%;
+                    min-width: auto;
+                    padding-bottom: 2em;
+                }
+            }
+        }
+    }
+}
+
+@media screen and(max-width: 580px){
+    #contactSection{
+        .introContainer{
+            margin-bottom: 3em;
+            padding: 4em 0;
+            background-attachment: scroll;
+        }
+    
+        .contactContainer{
+            .contactFormContainer{
+                width: 100%;
+    
+                form{
+                    width: 95%;
+                    border-radius: 10px;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+

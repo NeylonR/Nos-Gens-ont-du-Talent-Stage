@@ -76,7 +76,7 @@ class Agency
     private $bannerImage;
 
     /** 
-     * @Vich\UploadableField(mapping= "talent_banner", fileNameProperty="bannerImage")
+     * @Vich\UploadableField(mapping= "agency_banner", fileNameProperty="bannerImage")
      */
     private $bannerFile;
 

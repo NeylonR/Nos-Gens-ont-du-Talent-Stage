@@ -82,10 +82,24 @@ class TalentController extends AbstractController
     }
 
     #[Route('/detail/{id<\d+>}', name: 'app_talent_detail')]
-    public function detail(Talent $talent): Response
+    public function detail(Talent $talent, Request $request, PaginatorInterface $paginator): Response
     {
+        $talentProjects = $talent->getProjects();
+        $talentProject = [...$talentProjects,...$talentProjects,...$talentProjects,...$talentProjects,...$talentProjects,...$talentProjects,...$talentProjects, ];
+
+        $talentAgencys = $talent->getAgencies();
+        $talentAgency = [...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ];
+
+        $talentProject = $paginator->paginate($talentProject, $request->query->getInt('pageProjects', 1), 6,
+        ['pageParameterName' => 'pageProjects']);
+
+        $talentAgency = $paginator->paginate($talentAgency, $request->query->getInt('pageAgency', 1), 6,
+        ['pageParameterName' => 'pageAgency']);
+        // dd($talentAgency);
         return $this->render('talent/detail.html.twig', [
             'talent' => $talent,
+            'projects' => $talentProject,
+            'agencies' => $talentAgency,
         ]);
     }
 }

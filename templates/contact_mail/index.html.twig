@@ -1,27 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactMailController!{% endblock %}
+{% block title %}Nous contacter{% endblock %}
 
 {% block body %}
 <main>
 <section id="contactSection">
     <div class="introContainer">
-        <h1>Nous contacter</h1>
+        {# <h1>Nous contacter</h1>
 
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus alias quidem ipsa iste sunt facere, reprehenderit aliquid nisi nostrum asperiores dolores obcaecati ducimus in recusandae expedita debitis delectus architecto quis?
         Dolores nostrum tempora ad aut quidem ab magnam accusantium voluptatibus, illum, eveniet saepe veniam perferendis tempore adipisci doloribus natus, earum quaerat hic sed magni? Commodi ea nam possimus accusantium excepturi.</p>
 
-        <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p>
+        <p>Maxime, cum ullam delectus aliquam perferendis enim, totam quis quod recusandae provident, dolores commodi quas a voluptatibus et ad excepturi! Sed illo obcaecati quasi libero natus numquam sit. Ipsum, rem?</p> #}
     </div>
 
-    {{ form_start(form, {'attr': {'class': 'formContact'}})}}
-        {{ form_widget(form.firstName, {'attr': {'placeholder': 'Nom'}})}}
-        {{ form_widget(form.lastName, {'attr': {'placeholder': 'Prenom'}})}}
-        {{ form_widget(form.subject, {'attr': {'placeholder': 'Objet'}})}}
-        {{ form_widget(form.email, {'attr': {'placeholder': 'Email'}})}}
-        {{ form_widget(form.content, {'attr': {'placeholder': 'Vos questions...', 'rows': '8'}})}}
-        <button type="submit" class="button">Envoyer</button>
-    {{ form_end(form) }}
+    <article class="contactContainer">
+        <div class="contactInfo">
+            <h1>Contact</h1>
+            <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis voluptatem possimus ad? Placeat reiciendis repellat minus error quaerat, ratione itaque assumenda quam pariatur cumque eligendi alias ab quis blanditiis autem.</p>
+            <h2>Coordonnées</h2>
+            <ul>
+                <li><i class="fa-solid fa-location-dot"></i> Adresse du lieu 01234</li>
+                <li><i class="fa-solid fa-phone"></i> <a href="tel:0606060606">06 06 06 06 60</a></li>
+                <li><i class="fa-solid fa-envelope"></i> <a href="mailto:deed@deed.fr">mail@mail.mail</a></li>
+            </ul>
+            <div class="socialsLink">
+                <a href="http://google.com" target="_blank" class="youtubeIcon"><i class="fa-brands fa-youtube"></i></a>
+                <a href="http://google.com" target="_blank" class="twitterIcon"><i class="fa-brands fa-twitter-square"></i></a>
+                <a href="http://google.com" target="_blank" class="facebookIcon"><i class="fa-brands fa-facebook-square"></i></a>
+                <a href="http://google.com" target="_blank" class="instagramIcon"><i class="fa-brands fa-instagram"></i></a>
+                <a href="http://google.com" target="_blank" class="linkedinIcon"><i class="fa-brands fa-linkedin"></i></a>
+                {# <a href="http://google.com" target="_blank" class="websiteIcon"><i class="fa-solid fa-globe"></i></a> #}
+            </div>
+        </div>
+
+        <div class="contactFormContainer">
+            {{ form_start(form, {'attr': {'class': 'formContact'}})}}
+            {{ form_widget(form.firstName, {'attr': {'placeholder': 'Nom'}})}}
+            {{ form_widget(form.lastName, {'attr': {'placeholder': 'Prenom'}})}}
+            {{ form_widget(form.subject, {'attr': {'placeholder': 'Objet'}})}}
+            {{ form_widget(form.email, {'attr': {'placeholder': 'Email'}})}}
+            {{ form_widget(form.content, {'attr': {'placeholder': 'Vos questions...', 'rows': '8'}})}}
+            <button type="submit" class="button">Envoyer</button>
+            {{ form_end(form) }}
+        </div>
+    </article>
+
 </section>
 </main>
 

@@ -1,10 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des agences Talentueuses{% endblock %}
+{% block title %}{{agency.name}}{% endblock %}
 
 {% block body %}
 <main>
-<section class="detailSection">
+<section id="detailSection" class="detailSection">
+    {% if agency.bannerImage is not null %}
+        <div class="introContainer" style="background-image: url('{{vich_uploader_asset(agency, 'bannerFile')}}');"></div>
+    {% else %}
+        <div class="introContainer" style="background-image: url('{{asset('images/placeholder.png')}}');"></div>
+    {% endif %}
+
     <div class="profileContainer">
         {% if agency.image is not null %}
             <img src="{{vich_uploader_asset(agency)}}" alt="">
@@ -14,7 +20,7 @@
         <div>
             <h2>Agence : {{agency.Name}}</h2>
             {% if agency.adress is defined %}
-            <p>{{agency.adress}}</p>
+            <p class="adress"><i class="fa-solid fa-location-dot"></i> {{agency.adress}}</p>
             {% endif %}
 
             {% if agency.agencyCategory|length >= 1 %}
@@ -34,23 +40,32 @@
         </div>
     </div>
 
-    <div class="introContainer">
+    <ul class="profileNav">
+        <a href="#description"><li>A propos</li></a>
+        <a href="#projectContainer"><li>Talents</li></a>
+        <a href="#contactInfoContainer"><li>Contact</li></a>
+    </ul>
+
+    <div class="aboutDescription">
         {{agency.description|raw}}
     </div>
 
-    {% if agency.agencyAssociate|length >= 1 %}
-        <div class="talentContainer">
-            {% if agency.agencyAssociate|length == 1 %}
+    {% if talents|length >= 1 %}
+        <div class="talentContainer cardContainerBackground">
+            {% if talents|length == 1 %}
                 <h2>Talent de l’agence :</h2>
             {% else %}
                 <h2>Talents de l’agence :</h2>
             {% endif %}
             <div class="cardContainer">
-                {% for talent in agency.agencyAssociate %}
+                {% for talent in talents %}
                 <div class="card">
                     {% include "talent/talentCard.html.twig" with {talent: talent} %}
                 </div>
                 {% endfor %}
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(talents, 'pagination.html.twig') }}
             </div>
         </div>
     {% endif %}
@@ -90,7 +105,7 @@
             .setController('App\\Controller\\Admin\\AgencyCrudController')
             .setAction('edit')
             .setEntityId(agency.id) %}
-            <a href="{{ url }}" class="button">Modifier</a> 
+            <a href="{{ url }}" class="button edit">Modifier</a> 
         {% endif %}
     </div>
     <a href="{{path('app_group_index')}}" class="button">Retour</a>

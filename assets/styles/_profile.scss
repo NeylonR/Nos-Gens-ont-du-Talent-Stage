@@ -1,0 +1,160 @@
+.detailSection{
+    @include flex(center, column, center);
+    padding-bottom: 4em;
+
+    .introContainer{
+        height: 450px;
+
+        p{
+            width: auto;
+        }
+    }
+
+    img{
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .profileContainer{
+        @include flex(flex-start);
+        flex-wrap: nowrap;
+        align-self: flex-start;
+        transform: translateY(-50%);
+        gap: 3em;
+        color:black;
+        background-color: white;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+        padding: 2em 9em 2em 1em;
+        border-bottom-right-radius: 100px;
+        border-top-right-radius: 100px;
+
+        div{
+            @include flex(flex-start, column, flex-start);
+            gap: .5em;
+        }
+
+        .categories{
+            @include flex(flex-start, column, flex-start);
+
+            div{
+                @include flex(flex-start);
+            }
+        }
+    }
+
+    .profileNav{
+        @include flex(flex-start);
+        gap: 1em;
+        width: 80%;
+
+        li{
+            @include transi();
+        }
+
+        li:hover{
+            color: $thirdColor;
+        }
+    }
+
+    .aboutDescription{
+        width: 80%;
+        padding: 2em 0;
+        margin-bottom: 3em;
+    }
+
+    .projectContainer{
+        @include flex(center, column, center);
+        width: 80%;
+        margin-bottom: 3em;
+        
+        h2{
+            padding-bottom: 1em;
+        }
+
+        .navigation{
+            padding-bottom: 2em;
+        }
+    }
+
+    .projectCard{
+        @include flex();
+        flex-wrap: nowrap;
+        @include transi();
+        overflow: hidden;
+        gap: .5em;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 1000px;
+        min-height: 200px;
+        height: 250px;
+        background-color: white;
+
+        img{
+            height: 250px;
+            width: 250px;
+            min-width: 250px;
+            line-height: 0;
+            object-fit: cover;
+            border-radius: 0;
+        }
+    
+        .textContainer{
+            @include flex(space-around, column, flex-start);
+            gap: 1em;
+            padding: 1em;
+            height: 250px;
+        }
+    }
+
+    .projects{
+        width: 100%;
+        @include flex(center, column, center);
+        gap: 2em;
+        padding: 1em 0 2em;  
+    }
+
+    .agencyContainer, .talentContainer{
+        @include flex(center, column, center);
+        padding-bottom: 2em;
+        margin-bottom: 3em;
+
+        h2:first-child{
+            transform: translateY(-105%);
+            width: 80%;
+            text-align: center;
+        }
+
+        .cardContainer{
+            padding: 2em 0;
+        }
+    }
+
+    .contactInfoContainer{
+        @include flex(center,column);
+        gap: 1em;
+        padding: 2em;
+        border-radius: 15px;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+        background-color: $fourthColor;
+        max-width: 500px;
+        width: 90%;
+        margin-bottom: 3em;
+    
+        .socialsLink{
+            padding: .5em 0;
+            a{
+                display: inline-block;
+                margin-right: .3em;
+            }
+            i{
+                font-size: 36px;
+            }
+        }
+    }
+
+    .edit{
+        margin-bottom: 1em;
+    }
+}

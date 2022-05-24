@@ -1,10 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Sociétés Talentueuses{% endblock %}
+{% block title %}{{company.name}}{% endblock %}
 
 {% block body %}
 <main>
-<section class="detailSection">
+<section id="detailSection" class="detailSection">
+    {% if company.bannerImage is not null %}
+        <div class="introContainer" style="background-image: url('{{vich_uploader_asset(company, 'bannerFile')}}');"></div>
+    {% else %}
+        <div class="introContainer" style="background-image: url('{{asset('images/placeholder.png')}}');"></div>
+    {% endif %}
+
     <div class="profileContainer">
         {% if company.image is not null %}
             <img src="{{vich_uploader_asset(company)}}" alt="">
@@ -12,9 +18,9 @@
             <img src="{{asset('images/placeholder.png')}}" alt="">
         {% endif %}
         <div>
-            <h2>Société : {{company.Name}}</h2>
+            <h2>Société : {{company.name}}</h2>
             {% if company.adress is defined %}
-            <p>{{company.adress}}</p>
+            <p class="adress"><i class="fa-solid fa-location-dot"></i> {{company.adress}}</p>
             {% endif %}
 
             {% if company.companyCategory|length >= 1 %}
@@ -26,7 +32,7 @@
                 {% endif %}
                     <div>
                         {% for category in company.companyCategory %}
-                        <span class="tags">{{category}} </span>
+                            <span class="tags">{{category}} </span>
                         {% endfor %}
                     </div>
                 </div>
@@ -34,21 +40,48 @@
         </div>
     </div>
 
-    <div class="introContainer">
+    <ul class="profileNav">
+        <a href="#description"><li>A propos</li></a>
+        <a href="#projectContainer"><li>Projets</li></a>
+        <a href="#contactInfoContainer"><li>Contact</li></a>
+    </ul>
+
+    <div class="aboutDescription">
         {{company.description|raw}}
     </div>
 
-    {% if company.projects|length >= 1 %}
+    {% if projects|length >= 1 %}
     <div class="projectContainer">
-        {% if company.projects|length == 1 %}
+        {% if projects|length == 1 %}
             <h2>Le projet auquel {{company.name}} a participé :</h2>
         {% else %}
             <h2>Les projets auxquels {{company.name}} a participé :</h2>
         {% endif %}
         <div class="projects">
-            {% for project in company.projects %}
-                <a href="{{path('app_project_detail', {id:project.id})}}">{{project.name}}</a>
+            {% for project in projects %}
+                {# <div class="projectCard">{% include "project/projectCard.html.twig" %}</div> #}
+            {% if project.status == 'En cours' %}
+                <div class="projectCard projectCurrent">
+                    {% include "project/projectCard.html.twig" %}                    
+                </div>
+            {% endif %}
+
+            {% if project.status == 'En recherche de talents' %}
+                    <div class="projectCard projectLooking">
+                        {% include "project/projectCard.html.twig" %}                    
+                    </div>
+            {% endif %}
+
+            {% if project.status == 'Terminé' %}
+                    <div class="projectCard projectOver">
+                        {% include "project/projectCard.html.twig" %}                    
+                    </div>
+            {% endif %}                        
             {% endfor %}
+        </div>
+
+        <div class="navigation">
+        {{ knp_pagination_render(projects, 'pagination.html.twig') }}
         </div>
     </div>
     {% endif %}
@@ -85,7 +118,7 @@
             .setController('App\\Controller\\Admin\\AgencyCrudController')
             .setAction('edit')
             .setEntityId(company.id) %}
-            <a href="{{ url }}" class="button">Modifier</a> 
+            <a href="{{ url }}" class="button edit">Modifier</a> 
         {% endif %}
     </div>
     <a href="{{path('app_group_index')}}" class="button">Retour</a>

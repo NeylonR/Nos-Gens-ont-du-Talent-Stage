@@ -1,10 +1,15 @@
 {# <div class="projectCard"> #}
+{% if project.imageBanner is not null %}
+    <img src="{{vich_uploader_asset(project, 'bannerFile')}}" alt="">
+{% else %}
+    <img src="{{asset('images/placeholder.png')}}" alt="">
+{% endif %}
     <h2>{{project.name}}</h2>
     <p>{{project.description|striptags}}</p>
     <a href="{{project.link}}">Lien web</a>
     <p>Status : {{project.status}}</p>
     {% if project.projectTalent|length >= 1 %}
-    <ul>
+    <ul> 
         <p>
             {% if project.projectTalent|length == 1 %}
                 Talent lié :

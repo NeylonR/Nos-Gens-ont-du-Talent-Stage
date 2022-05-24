@@ -1,0 +1,165 @@
+// @media screen and(max-width: 1100px){
+//     #detailSection{
+//         .profileContainer{
+//             @include flex(flex-start);
+//             flex-wrap: nowrap;
+//             // position: absolute;
+//             // bottom: 0;
+//             // left: 0;
+//             // transform: translateY(50%);
+//             // gap: 3em;
+//             color:black;
+//             background-color: white;
+//             box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+//             padding: 2em 9em 2em 1em;
+//             border-bottom-right-radius: 100px;
+//             border-top-right-radius: 100px;
+//             // width: 80%;
+//             // min-width: 600px;
+    
+//             div{
+//                 @include flex(flex-start, column, flex-start);
+//                 gap: .5em;
+//             }
+    
+//             .categories{
+//                 @include flex(flex-start, column, flex-start);
+    
+//                 div{
+//                     @include flex(flex-start);
+//                 }
+//             }
+//         }
+//     }
+// }
+
+@media screen and(max-width: 900px){
+    #detailSection{
+        .projectContainer{
+            // width: 90%;
+            // min-width: 320px;
+            width: 90%;
+            .projects{
+                width: 100%;
+            }
+    
+            h2{
+                // padding: 0 1em;
+                text-align: center;
+            }
+            .projectCard{
+                @include flex(center, column);
+                flex-wrap: nowrap;
+                @include transi();
+                overflow: visible;
+                gap: 0em;
+                border-radius: 5px;
+                width: 100%;
+                max-width: 900px;
+                min-height: 200px;
+                height: auto;
+                // padding: 1em;
+                background-color: transparent;
+    
+                img{
+                    height: 250px;
+                    width: 250px;
+                    line-height: 0;
+                    object-fit: cover;
+                }
+            
+                .textContainer{
+                    @include flex(space-around, column, flex-start);
+                    gap: 1em;
+                    padding: 1em;
+                    height: auto;
+                    border-radius: 5px;
+                    @include transi();
+                    background-color: white;
+                }
+            }
+    
+            .projectCurrent, .projectLooking, .projectOver{
+                box-shadow: 0 0 0;
+                .textContainer{
+                    @include flex(space-around, column, center);
+                    gap: 1em;
+                    padding: 1em;
+                    height: auto;
+                }
+            }
+    
+            .projectCurrent{
+                .textContainer{
+                    box-shadow: 4px 4px 3px 1px #4c69b39d;
+                    &:hover{
+                        box-shadow: 4px 4px 8px 1px #4c69b39d;
+                    }
+                }
+            }
+    
+            .projectLooking{
+                .textContainer{
+                    box-shadow: 4px 4px 3px 1px #e5cb9f9d;
+                    &:hover{
+                        box-shadow: 4px 4px 8px 1px #e5cb9f9d;
+                    }
+                }
+            }
+    
+            .projectOver{
+                .textContainer{
+                    box-shadow: 4px 4px 3px 1px hsla(120, 33%, 36%, 0.6);
+                    &:hover{
+                        box-shadow: 4px 4px 8px 1px hsl(120, 33%, 36%, 0.6);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and(max-width: 800px){
+    #detailSection{
+        .introContainer{
+            height: 400px;
+        }
+
+        .profileContainer{
+            transform: translateY(0%);
+            padding: 2em;
+            border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+            width: 100%;
+            margin-bottom: 3em;
+        }
+    }
+}
+
+
+@media screen and(max-width: 600px){
+    #detailSection{
+        .introContainer{
+            height: 400px;
+        }
+
+        .profileContainer{
+            @include flex(center, column);
+            div{
+                @include flex(center, row, center);
+            }
+
+            .categories{
+                @include flex(flex-start);
+            }
+
+            .adress{
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+
+    }
+}
+

@@ -24,6 +24,17 @@ body{
     // background-attachment: fixed;
     // background-size: contain;
 }
+h1{
+    font-size: 26px;
+}
+
+h2{
+    font-size: 24px;
+}
+
+h3{
+    font-size: 20px;
+}
 
 a{
     @include transi();
@@ -75,8 +86,9 @@ button{
     min-width: 150px;
     margin: 0 auto;
 
-    li{
-        background-color: white;
+    a{
+        display: inline-block;
+        color: white;
         font-family: robotoBold;
         border-radius: 50%;
         min-width: 40px;
@@ -86,19 +98,19 @@ button{
         background-color: $thirdColor;
         padding: .5em;
         @include transi();
-
         &:hover:not(.current){
-            transform: scale(1.1);
-        }
-        
-        &.current{
             background-color: $primaryColor;
         }
+    }
 
-        a{
-            display: inline-block;
-            color: white;
-        }
+    .current{
+        background-color: $primaryColor;
+        font-family: robotoBold;
+        border-radius: 50%;
+        min-width: 40px;
+        min-height: 40px;
+        @include flex();
+        color: white;
     }
 
     .pagination-previous, .pagination-next{
@@ -375,98 +387,5 @@ button{
 
     h1, p{
         width: 80%;
-    }
-}
-
-.detailSection{
-    @include flex(center, column, center);
-    padding-top: 3em;
-    padding-bottom: 4em;
-    gap: 3em;
-    img{
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 50%;
-        // border: 1px solid black;
-    }
-
-    .profileContainer{
-        @include flex();
-        gap: 3em;
-
-        div{
-            @include flex(flex-start, column, flex-start);
-            gap: .5em;
-        }
-
-        .categories{
-            @include flex(flex-start, column, flex-start);
-
-            div{
-                @include flex(flex-start);
-            }
-        }
-    }
-
-    .projectContainer{
-        @include flex(center, column, center);
-        width: 80%;
-        
-        h2{
-            padding-bottom: 1em;
-        }
-        a{
-            display: inline-block;
-            padding: .5em;
-            box-shadow: 0 3px 4px rgb(87, 87, 87);
-            background-color: white;
-
-            &:hover{
-                box-shadow: 0 3px 4px $thirdColor;
-            }
-        }
-    }
-
-    .projects{
-        display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(80px,1fr));
-        grid-row-gap: 1em;
-        gap: 2em;
-        justify-items: center;
-        justify-content: center;
-        align-items: start;
-        align-content: center;
-        margin: 0 auto;
-        width: 100%;
-        
-    }
-
-    .agencyContainer, .talentContainer{
-        @include flex(center, column, center);
-        width: 80%;
-    }
-
-    .contactInfoContainer{
-        @include flex(center,column);
-        gap: 1em;
-        padding: 2em;
-        border: 1px solid black;
-        border-radius: 15px;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-        background-color: white;
-        max-width: 500px;
-        width: 90%;
-    
-        .socialsLink{
-            padding: .5em 0;
-            a{
-                display: inline-block;
-                margin-right: .3em;
-            }
-            i{
-                font-size: 36px;
-            }
-        }
     }
 }

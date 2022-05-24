@@ -14,28 +14,9 @@
     }
 }
 
-@media screen and(max-width: 600px){
-    .detailSection{
-        .profileContainer{
-            width: 80%;
-            @include flex(center, column);
-            div{
-                @include flex(flex-start, column, flex-start);
-            }
-
-            .categories{
-                @include flex(flex-start);
-                p{
-                    width: 100%;
-                }
-            }
-        }
-    }
-}
-
 @media screen and(max-width: 550px){
     .introContainer{
-        padding: 2em 1em;
+        padding: 4em 1em;
     }
 
     .formContact, #adminForm{

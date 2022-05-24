@@ -1,7 +1,13 @@
 {# <div class="projectCard"> #}
-    <h2>{{project.name}}</h2>
-    <p>{{project.description|striptags > 250 ? project.description|striptags|slice(0, 251)|split(' ')|slice(0, -1)|join(' ') ~ '...' : project.description}}</p>
-    <a href="{{project.link}}">Lien web</a>
+{% if project.bannerImage is not null %}
+    <img src="{{vich_uploader_asset(project, 'bannerFile')}}" alt="">
+{% else %}
+    <img src="{{asset('images/placeholder.png')}}" alt="">
+{% endif %}
+<div class="textContainer">
+    <h3>{{project.name}}</h3>
+    <p>{{project.description|striptags > 300 ? project.description|striptags|slice(0, 301)|split(' ')|slice(0, -1)|join(' ') ~ '...' : project.description}}</p>
+    {# <a href="{{project.link}}">Lien web</a> #}
 
     <a href="{{path('app_project_detail', {id:project.id})}}" class="button">Détails</a>
 
@@ -12,4 +18,5 @@
         .setEntityId(project.id) %}
         <a href="{{ url }}" class="button">Modifier</a>
     {% endif %}
+</div>
 {# </div> #}

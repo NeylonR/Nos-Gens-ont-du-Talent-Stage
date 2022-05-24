@@ -4,7 +4,7 @@
         <ul class="pagination{{ classAlign }}">
 
             {% if previous is defined %}
-                <a rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
+                <a rel="prev" class="pagination-previous" href="{{ path(route, query|merge({(pageParameterName): previous}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
                 <li class="pagination-previous">
                     {{ 'Précédant'|trans({}, 'KnpPaginatorBundle') }}
                 </li>
@@ -52,7 +52,7 @@
             {% endif %}
 
             {% if next is defined %}               
-                <a rel="next" href="{{ path(route, query|merge({(pageParameterName): next}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
+                <a rel="next" class="pagination-next" href="{{ path(route, query|merge({(pageParameterName): next}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
                     <li class="pagination-next">
                         {{ 'Suivant'|trans({}, 'KnpPaginatorBundle') }}
                     </li>
