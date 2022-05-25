@@ -96,6 +96,13 @@ class TalentController extends AbstractController
         $talentAgency = $paginator->paginate($talentAgency, $request->query->getInt('pageAgency', 1), 6,
         ['pageParameterName' => 'pageAgency']);
         // dd($talentAgency);
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => 'azerazerazerazer',
+            ]);
+        }
+
         return $this->render('talent/detail.html.twig', [
             'talent' => $talent,
             'projects' => $talentProject,

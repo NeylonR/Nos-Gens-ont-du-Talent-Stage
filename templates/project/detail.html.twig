@@ -4,20 +4,55 @@
 
 {% block body %}
 <main>
-<section class="projectDetail detailSection">
-    <div class="profileContainer">
-        <div>
-            <h2>{{project.name}}</h2>
-            <p>Status du projet : {{project.status}}</p>
-            <a href="{{project.link}}">Voir le site.</a>
+<section id="detailSection" class="projectDetail detailSection">
+    {% if project.bannerImage is not null %}
+        <div class="introContainer projectIntroContainer" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%,rgba(0,0,0,.5) 100%), url('{{vich_uploader_asset(project, 'bannerFile')}}');">
+            <div class="profileProjectContainer">
+                <h3>{{project.status}}</h3>
+                <h1>{{project.name}}</h1>
+                {# <a href="{{project.link}}">Voir le site.</a> #}
+            </div> 
         </div>
-    </div>
+    {% else %}
+        <div class="introContainer" style="background-image: linear-gradient(90deg, rgba(0,0,0,0.5) 0%,rgba(0,0,0,.5) 100%), url('{{asset('images/placeholder.png')}}');">
+       
+        </div>
+    {% endif %}
 
-    <div class="introContainer">
+    <ul class="profileNav">
+        <a href="#description"><li>Description</li></a>
+        <a href="#projectContainer"><li>Talents</li></a>
+        <a href="#contactInfoContainer"><li>Sociétés</li></a>
+    </ul>
+
+    <div class="aboutDescription">
         {{project.description|raw}}
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{project.videoLink}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-    {% if project.projectTalent|length >= 1 %}
+    {% if talents|length >= 1 %}
+        <div class="talentContainer cardContainerBackground">
+            {% if talents|length == 1 %}
+                <h2>Talent ayant travaillé sur le projet : </h2>
+                <div class="lineSeparator"></div>
+            {% else %}
+                <h2>Talents ayant travaillé sur le projet : </h2>
+                <div class="lineSeparator"></div>
+            {% endif %}
+            <div class="cardContainer">
+                {% for talent in talents %}
+                <div class="card">
+                    {% include "talent/talentCard.html.twig" with {talent: talent} %}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(talents, 'pagination.html.twig') }}
+            </div>
+        </div>
+    {% endif %}
+
+    {# {% if project.projectTalent|length >= 1 %}
         <div class="talentContainer">
             {% if project.projectTalent|length == 1 %}
                 <h2>Talent ayant travaillé sur le projet :</h2>
@@ -40,17 +75,19 @@
                 {% endfor %}
             </div>
         </div>
-    {% endif %}
+    {% endif %} #}
 
-    {% if project.projectCompany|length >= 1 %}
-        <div class="talentContainer">
-            {% if project.projectCompany|length == 1 %}
+    {% if companies|length >= 1 %}
+        <div class="companyContainer cardContainerBackground">
+            {% if companies|length == 1 %}
                 <h2>Société participante :</h2>
+                <div class="lineSeparator"></div>
             {% else %}
                 <h2>Sociétés participantes :</h2>
+                <div class="lineSeparator"></div>
             {% endif %}
             <div class="cardContainer">
-                {% for company in project.projectCompany %}
+                {% for company in companies %}
                 <div class="card">
                     <div>
                         {% if company.image is not null %}
@@ -64,8 +101,12 @@
                 </div>
                 {% endfor %}
             </div>
+            <div class="navigation">
+                {{ knp_pagination_render(companies, 'pagination.html.twig') }}
+            </div>
         </div>
     {% endif %}
+
     <a href="{{path('app_project_index')}}" class="button">Retour</a>
 </section>
 </main>

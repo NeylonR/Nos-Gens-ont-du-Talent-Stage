@@ -51,10 +51,21 @@ class Project
      */
     private $bannerFile;
 
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectTextContent::class, orphanRemoval: true)]
+    private $projectText;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $videoLink;
+
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectImage::class, orphanRemoval: true)]
+    private $projectImage;
+
     public function __construct()
     {
         $this->projectCompany = new ArrayCollection();
         $this->projectTalent = new ArrayCollection();
+        $this->projectText = new ArrayCollection();
+        $this->projectImage = new ArrayCollection();
     }
 
     public function __toString()
@@ -201,5 +212,77 @@ class Project
         }
 
         return;
+    }
+
+    /**
+     * @return Collection<int, projectTextContent>
+     */
+    public function getProjectText(): Collection
+    {
+        return $this->projectText;
+    }
+
+    public function addProjectText(projectTextContent $projectText): self
+    {
+        if (!$this->projectText->contains($projectText)) {
+            $this->projectText[] = $projectText;
+            $projectText->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectText(projectTextContent $projectText): self
+    {
+        if ($this->projectText->removeElement($projectText)) {
+            // set the owning side to null (unless already changed)
+            if ($projectText->getProject() === $this) {
+                $projectText->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, projectImage>
+     */
+    public function getProjectImage(): Collection
+    {
+        return $this->projectImage;
+    }
+
+    public function addProjectImage(projectImage $projectImage): self
+    {
+        if (!$this->projectImage->contains($projectImage)) {
+            $this->projectImage[] = $projectImage;
+            $projectImage->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectImage(projectImage $projectImage): self
+    {
+        if ($this->projectImage->removeElement($projectImage)) {
+            // set the owning side to null (unless already changed)
+            if ($projectImage->getProject() === $this) {
+                $projectImage->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getVideoLink(): ?string
+    {
+        return $this->videoLink;
+    }
+
+    public function setVideoLink(?string $videoLink): self
+    {
+        $this->videoLink = $videoLink;
+
+        return $this;
     }
 }

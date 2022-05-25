@@ -10,6 +10,24 @@
         }
     }
 
+    // for project detail page
+    .projectIntroContainer{
+        @include flex(flex-start);
+        margin-bottom: 4em;
+        .profileProjectContainer{
+            @include flex(flex-start,column,flex-start);
+            width: 100%;
+            padding-left: 10%;
+            h1{
+                width: auto;
+                font-size: 40px;
+            }
+            h3{
+                font-size: 26px;
+            }
+        }
+    }
+
     img{
         width: 120px;
         height: 120px;
@@ -59,9 +77,21 @@
     }
 
     .aboutDescription{
+        @include flex(flex-start, column, flex-start);
         width: 80%;
         padding: 2em 0;
         margin-bottom: 3em;
+
+        div:last-of-type{
+            padding-bottom: 2em;
+        }
+
+        iframe{
+            width: 100%;
+            max-width: 600px;
+            align-self: center;
+            // margin: 0 auto;
+        }
     }
 
     .projectContainer{
@@ -115,15 +145,26 @@
         padding: 1em 0 2em;  
     }
 
-    .agencyContainer, .talentContainer{
+    .agencyContainer, .talentContainer, .companyContainer{
         @include flex(center, column, center);
         padding-bottom: 2em;
         margin-bottom: 3em;
 
         h2:first-child{
-            transform: translateY(-105%);
+            // transform: translateY(-105%);
             width: 80%;
             text-align: center;
+            color:white;
+            padding-top: .5em;
+        }
+
+        .lineSeparator{
+            background-color:white;
+            margin: .4em 0 2em;
+            min-width: 290px;
+            &:after{
+                border-bottom: 25px solid white;
+            }
         }
 
         .cardContainer{

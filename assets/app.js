@@ -7,9 +7,12 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
-import './script.js';
+
 import Filter from './Filter';
+import ProfileNav from './ProfileNav';
+import './script.js';
 
 new Filter(document.querySelector('.filterSection'));
+new ProfileNav(document.querySelector('#detailSection'));
 // start the Stimulus application
 import './bootstrap';

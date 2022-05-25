@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Repository\ProjectRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,10 +40,20 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/detail/{id<\d+>}', name: 'app_project_detail')]
-    public function detail(Project $project): Response
+    public function detail(Project $project, Request $request, PaginatorInterface $paginator): Response
     {
+        $projectCompany = $project->getProjectCompany();
+        $projectCompany = $paginator->paginate($projectCompany, $request->query->getInt('page', 1), 6,
+        ['pageParameterName' => 'pageCompany'] );
+
+        $projectTalent = $project->getProjectTalent();
+        $projectTalent = $paginator->paginate($projectTalent, $request->query->getInt('page', 1), 6,
+        ['pageParameterName' => 'pageTalents']);
+        
         return $this->render('project/detail.html.twig', [
             'project' => $project,
+            'talents' => $projectTalent,
+            'companies' => $projectCompany,
         ]);
     }
 }

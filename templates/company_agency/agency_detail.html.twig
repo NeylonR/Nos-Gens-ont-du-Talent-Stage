@@ -54,8 +54,10 @@
         <div class="talentContainer cardContainerBackground">
             {% if talents|length == 1 %}
                 <h2>Talent de l’agence :</h2>
+                <div class="lineSeparator"></div>
             {% else %}
                 <h2>Talents de l’agence :</h2>
+                <div class="lineSeparator"></div>
             {% endif %}
             <div class="cardContainer">
                 {% for talent in talents %}
@@ -97,8 +99,6 @@
         <a href="" target="_blank" ><i class="fa-solid fa-envelope"></i> {{agency.email}}</a>
         <a href="" target="_blank" ><i class="fa-solid fa-phone"></i> {{agency.phoneNumber}}</a>
     </div>
-
-
 
         {% if is_granted('ROLE_ADMIN') %}
             {% set url = ea_url()

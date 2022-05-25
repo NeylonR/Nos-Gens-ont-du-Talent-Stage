@@ -40,11 +40,13 @@
     </div>
 
     <ul class="profileNav">
-    <a href="#description"><li>A propos</li></a>
-    <a href="#projectContainer"><li>Projets</li></a>
-    <a href="#agencyContainer"><li>Agences</li></a>
-    <a href="#contactInfoContainer"><li>Contact</li></a>
+    <a href="#description" class="navAbout"><li>A propos</li></a>
+    <a  class="navProject"><li>Projets</li></a>
+    <a href="#agencyContainer" class="navAgency"><li>Agences</li></a>
+    <a href="#contactInfoContainer" class="navContact"><li>Contact</li></a>
     </ul>
+
+    <div class="testest"></div>
 
     <div class="aboutDescription">
         {{talent.description|raw}}
@@ -90,8 +92,10 @@
     <div class="agencyContainer cardContainerBackground">
         {% if agencies|length == 1 %}
             <h2>{{talent.firstName}} fait partie d'une agence :</h2>
+            <div class="lineSeparator"></div>
         {% else %}
             <h2>{{talent.firstName}} fait partie des agences :</h2>
+            <div class="lineSeparator"></div>
         {% endif %}
         <div class="cardContainer">
             {% for agency in agencies %}
