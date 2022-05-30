@@ -1,13 +1,9 @@
 /**
- * @property {HTMLElement} navTalent
- * @property {HTMLElement} navProject
- * @property {HTMLElement} navAgency
- * @property {HTMLElement} navCompany
- * @property {HTMLElement} navAbout
- * @property {HTMLElement} navContact
+ * @property {HTMLElement} projectContainer
  * @property {HTMLElement} profileNav
- * @property {HTMLElement} testest
- * @property {HTMLFormElement} form
+ * @property {HTMLElement} agencyContainer
+ * @property {HTMLElement} companyContainer
+ * @property {HTMLElement} talentContainer
  */
  export default class ProfileNav{
 
@@ -19,31 +15,53 @@
             return;
         }
         this.profileNav = element.querySelector('.profileNav');
-        this.navTalent = element.querySelector('.navTalent');
-        this.navProject = element.querySelector('.navProject');
-        this.navAgency = element.querySelector('.navAgency');
-        this.navCompany = element.querySelector('.navCompany');
-        this.navAbout = element.querySelector('.navAbout');
-        this.navContact = element.querySelector('.navContact');
-        this.testest = element.querySelector('.testest');
+        this.projectContainer = element.querySelector('.projectContainer');
+        this.agencyContainer = element.querySelector('.agencyContainer');
+        this.companyContainer = element.querySelector('.companyContainer');
+        this.talentContainer = element.querySelector('.talentContainer');
         this.bindEvents();
     }
 
     bindEvents(){
-        this.navProject.addEventListener('click', this.loadForm.bind(this));
+        const aClickListener = e => {
+            this.loadUrl(e.target.getAttribute('href'))
+        }
 
-        // this.pagination.addEventListener('click', aClickListener);
-    }
+        if(this.projectContainer){
+            this.projectContainer.addEventListener('click', function(e){
+                if(e.target.classList.contains("ajax")){
+                    e.preventDefault();
+                    aClickListener(e);
+                }
+            })
+        }
 
-    async loadForm(){
-        console.log(this.navProject.innerText)
-        const data = this.navProject.innerText;
-        const url = new URL(window.location.href);
-        const params = new URLSearchParams();
-        // data.forEach((value, key) => {
-        //     params.append(key, value);
-        // })
-        return this.loadUrl(url.pathname + '?' + data.toString());
+        if(this.agencyContainer){
+            this.agencyContainer.addEventListener('click', function(e){
+                if(e.target.classList.contains("ajax")){
+                    e.preventDefault();
+                    aClickListener(e);
+                }
+            })
+        }
+
+        if(this.talentContainer){
+            this.talentContainer.addEventListener('click', function(e){
+                if(e.target.classList.contains("ajax")){
+                    e.preventDefault();
+                    aClickListener(e);
+                }
+            })
+        }
+
+        if(this.companyContainer){
+            this.companyContainer.addEventListener('click', function(e){
+                if(e.target.classList.contains("ajax")){
+                    e.preventDefault();
+                    aClickListener(e);
+                }
+            })
+        }
     }
 
     async loadUrl(url) {
@@ -56,9 +74,19 @@
 
         if(response.status >= 200 && response.status < 300){
             const data = await response.json();
-            console.log(data)
-            this.testest.innerHTML = data.content;
-            // this.pagination.innerHTML = data.pagination;
+            // console.log(data);
+            if(this.projectContainer && url.includes('pageProjects')){
+                this.projectContainer.innerHTML = data.project;
+            }
+            if(this.agencyContainer && url.includes('pageAgency')){
+                this.agencyContainer.innerHTML = data.agency;
+            }
+            if(this.companyContainer && url.includes('pageCompany')){
+                this.companyContainer.innerHTML = data.company;
+            }
+            if(this.talentContainer && url.includes('pageTalents')){
+                this.talentContainer.innerHTML = data.talent;
+            }
             history.replaceState({}, '', url);
         } else{
             console.error(response)

@@ -40,28 +40,26 @@
     </div>
 
     <ul class="profileNav">
-    <a href="#description" class="navAbout"><li>A propos</li></a>
-    <a  class="navProject"><li>Projets</li></a>
-    <a href="#agencyContainer" class="navAgency"><li>Agences</li></a>
-    <a href="#contactInfoContainer" class="navContact"><li>Contact</li></a>
+    <li class="navAbout" data-status="selected" data-link="description">A propos</li>
+    <li class="navProject" data-status="unselected" data-link="project">Projets</li>
+    <li class="navAgency" data-status="unselected" data-link="agency">Agences</li>
+    <li class="navContact" data-status="unselected" data-link="contact">Contact</li>
     </ul>
 
-    <div class="testest"></div>
-
-    <div class="aboutDescription">
+    <div class="aboutDescription" data-link="description" data-status="visible">
         {{talent.description|raw}}
     </div>
     
     {% if projects|length >= 1 %}
-    <div class="projectContainer">
-        {% if projects|length == 1 %}
+    <div class="projectContainer" data-link="project" data-status="hidden">
+        {% include "talent/profileProject.html.twig" %}
+        {# {% if projects|length == 1 %}
             <h2>Le projet auquel {{talent.firstName}} a participé :</h2>
         {% else %}
             <h2>Les projets auxquels {{talent.firstName}} a participé :</h2>
         {% endif %}
         <div class="projects">
             {% for project in projects %}
-                {# <div class="projectCard">{% include "project/projectCard.html.twig" %}</div> #}
             {% if project.status == 'En cours' %}
                 <div class="projectCard projectCurrent">
                     {% include "project/projectCard.html.twig" %}                    
@@ -84,13 +82,14 @@
 
         <div class="navigation">
         {{ knp_pagination_render(projects, 'pagination.html.twig') }}
-        </div>
+        </div> #}
     </div>
+
     {% endif %}
 
     {% if agencies|length >= 1 %}
-    <div class="agencyContainer cardContainerBackground">
-        {% if agencies|length == 1 %}
+    <div class="agencyContainer cardContainerBackground" data-link="agency" data-status="hidden">
+        {# {% if agencies|length == 1 %}
             <h2>{{talent.firstName}} fait partie d'une agence :</h2>
             <div class="lineSeparator"></div>
         {% else %}
@@ -106,11 +105,12 @@
         </div>
         <div class="navigation">
         {{ knp_pagination_render(agencies, 'pagination.html.twig') }}
-        </div>
+        </div> #}
+        {% include "talent/profileAgency.html.twig" %}
     </div>
     {% endif %}
 
-    <div class="contactInfoContainer">
+    <div class="contactInfoContainer" data-link="contact" data-status="hidden">
         <h2>Prise de contact</h2>
         <p>Retrouvez {{talent.firstName}} {{talent.lastName}} sur ses réseaux ou sur son site</p>
         <div class="socialsLink">

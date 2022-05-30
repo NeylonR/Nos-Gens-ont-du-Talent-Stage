@@ -1,0 +1,31 @@
+{% if projects|length == 1 %}
+    <h2>Le projet auquel {{talent.firstName}} a participé :</h2>
+{% else %}
+    <h2>Les projets auxquels {{talent.firstName}} a participé :</h2>
+{% endif %}
+<div class="projects">
+    {% for project in projects %}
+        {# <div class="projectCard">{% include "project/projectCard.html.twig" %}</div> #}
+    {% if project.status == 'En cours' %}
+        <div class="projectCard projectCurrent">
+            {% include "project/projectCard.html.twig" %}                    
+        </div>
+    {% endif %}
+
+    {% if project.status == 'En recherche de talents' %}
+            <div class="projectCard projectLooking">
+                {% include "project/projectCard.html.twig" %}                    
+            </div>
+    {% endif %}
+
+    {% if project.status == 'Terminé' %}
+            <div class="projectCard projectOver">
+                {% include "project/projectCard.html.twig" %}                    
+            </div>
+    {% endif %}                        
+    {% endfor %}
+</div>
+
+<div class="navigation">
+{{ knp_pagination_render(projects, 'pagination.html.twig') }}
+</div>

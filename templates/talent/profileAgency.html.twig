@@ -1,0 +1,17 @@
+{% if agencies|length == 1 %}
+    <h2>{{talent.firstName}} fait partie d'une agence :</h2>
+    <div class="lineSeparator"></div>
+    {% else %}
+        <h2>{{talent.firstName}} fait partie des agences :</h2>
+        <div class="lineSeparator"></div>
+    {% endif %}
+    <div class="cardContainer">
+        {% for agency in agencies %}
+        <div class="card">
+            {% include "company_agency/agencyCard.html.twig" with {group: agency} %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="navigation">
+    {{ knp_pagination_render(agencies, 'pagination.html.twig') }}
+</div>

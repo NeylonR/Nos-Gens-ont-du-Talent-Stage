@@ -41,17 +41,17 @@
     </div>
 
     <ul class="profileNav">
-        <a href="#description"><li>A propos</li></a>
-        <a href="#projectContainer"><li>Projets</li></a>
-        <a href="#contactInfoContainer"><li>Contact</li></a>
+    <li class="navAbout" data-status="selected" data-link="description">A propos</li>
+    <li class="navProject" data-status="unselected" data-link="project">Projet</li>
+    <li class="navContact" data-status="unselected" data-link="contact">Contact</li>
     </ul>
 
-    <div class="aboutDescription">
+    <div class="aboutDescription" data-status="visible" data-link="description">
         {{company.description|raw}}
     </div>
 
     {% if projects|length >= 1 %}
-    <div class="projectContainer">
+    <div class="projectContainer" data-status="hidden" data-link="project">
         {% if projects|length == 1 %}
             <h2>Le projet auquel {{company.name}} a participé :</h2>
         {% else %}
@@ -86,7 +86,7 @@
     </div>
     {% endif %}
 
-    <div class="contactInfoContainer">
+    <div class="contactInfoContainer" data-status="hidden" data-link="contact">
         <h2>Prise de contact</h2>
         <p>Retrouvez l'agence {{company.name}} sur ses réseaux ou sur son site</p>
         <div class="socialsLink">

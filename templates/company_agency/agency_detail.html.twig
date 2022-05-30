@@ -39,19 +39,19 @@
             {% endif %}
         </div>
     </div>
-
+    
     <ul class="profileNav">
-        <a href="#description"><li>A propos</li></a>
-        <a href="#projectContainer"><li>Talents</li></a>
-        <a href="#contactInfoContainer"><li>Contact</li></a>
+    <li class="navAbout" data-status="selected" data-link="description">A propos</li>
+    <li class="navTalent" data-status="unselected" data-link="talent">Talents</li>
+    <li class="navContact" data-status="unselected" data-link="contact">Contact</li>
     </ul>
 
-    <div class="aboutDescription">
+    <div class="aboutDescription" data-status="visible" data-link="description">
         {{agency.description|raw}}
     </div>
 
     {% if talents|length >= 1 %}
-        <div class="talentContainer cardContainerBackground">
+        <div class="talentContainer cardContainerBackground" data-status="hidden" data-link="talent">
             {% if talents|length == 1 %}
                 <h2>Talent de l’agence :</h2>
                 <div class="lineSeparator"></div>
@@ -72,7 +72,7 @@
         </div>
     {% endif %}
 
-    <div class="contactInfoContainer">
+    <div class="contactInfoContainer" data-status="hidden" data-link="contact">
         <h2>Prise de contact</h2>
         <p>Retrouvez l'agence {{agency.name}} sur ses réseaux ou sur son site</p>
         <div class="socialsLink">

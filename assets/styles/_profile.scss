@@ -66,8 +66,11 @@
         @include flex(flex-start);
         gap: 1em;
         width: 80%;
+        margin-bottom: 3em;
 
         li{
+            font-family: robotoBold;
+            cursor: pointer;
             @include transi();
         }
 
@@ -79,7 +82,7 @@
     .aboutDescription{
         @include flex(flex-start, column, flex-start);
         width: 80%;
-        padding: 2em 0;
+        padding-bottom: 2em;
         margin-bottom: 3em;
 
         div:last-of-type{

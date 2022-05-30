@@ -1,0 +1,17 @@
+{% if talents|length == 1 %}
+    <h2>Talent ayant travaillé sur le projet : </h2>
+    <div class="lineSeparator"></div>
+{% else %}
+    <h2>Talents ayant travaillé sur le projet : </h2>
+    <div class="lineSeparator"></div>
+{% endif %}
+<div class="cardContainer">
+    {% for talent in talents %}
+    <div class="card">
+        {% include "talent/talentCard.html.twig" with {talent: talent} %}
+    </div>
+    {% endfor %}
+</div>
+<div class="navigation">
+    {{ knp_pagination_render(talents, 'pagination.html.twig') }}
+</div>

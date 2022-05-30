@@ -389,3 +389,22 @@ button{
         width: 80%;
     }
 }
+[data-status="visible"]{
+    opacity: 1;
+    visibility: visible;
+    position: static;
+    transition: opacity .2s ease-in-out;
+    height: auto;
+}
+
+[data-status="hidden"]{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+}
+
+[data-status="selected"]{
+    color: $thirdColor;
+}

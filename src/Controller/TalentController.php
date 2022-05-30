@@ -90,18 +90,42 @@ class TalentController extends AbstractController
         $talentAgencys = $talent->getAgencies();
         $talentAgency = [...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ...$talentAgencys, ];
 
+        if ($request->get('ajax')) {
+            if($request->get('pageProjects') && $request->get('pageAgency')){
+                $talentProject = $paginator->paginate($talentProject, $request->query->getInt('pageProjects', $request->get('pageProjects')), 6,
+                ['pageParameterName' => 'pageProjects']);
+
+                $talentAgency = $paginator->paginate($talentAgency, $request->query->getInt('pageAgency', $request->get('pageAgency')), 6,
+                ['pageParameterName' => 'pageAgency']);
+        
+                return new JsonResponse([
+                    'project' => $this->renderView('talent/profileProject.html.twig', ['projects' => $talentProject, 'talent'=>$talent]),
+                    'agency' => $this->renderView('talent/profileAgency.html.twig', ['agencies' => $talentAgency, 'talent'=>$talent])
+                ]);
+            }
+            if($request->get('pageProjects')){
+                $talentProject = $paginator->paginate($talentProject, $request->query->getInt('pageProjects', $request->get('pageProjects')), 6,
+                ['pageParameterName' => 'pageProjects']);
+        
+                return new JsonResponse([
+                    'project' => $this->renderView('talent/profileProject.html.twig', ['projects' => $talentProject, 'talent'=>$talent])
+                ]);
+            }
+            if($request->get('pageAgency')){
+                $talentAgency = $paginator->paginate($talentAgency, $request->query->getInt('pageAgency', $request->get('pageAgency')), 6,
+                ['pageParameterName' => 'pageAgency']);
+
+                return new JsonResponse([
+                    'agency' => $this->renderView('talent/profileAgency.html.twig', ['agencies' => $talentAgency, 'talent'=>$talent])
+                ]);
+            }
+        }
+
         $talentProject = $paginator->paginate($talentProject, $request->query->getInt('pageProjects', 1), 6,
         ['pageParameterName' => 'pageProjects']);
 
         $talentAgency = $paginator->paginate($talentAgency, $request->query->getInt('pageAgency', 1), 6,
         ['pageParameterName' => 'pageAgency']);
-        // dd($talentAgency);
-
-        if ($request->get('ajax')) {
-            return new JsonResponse([
-                'content' => 'azerazerazerazer',
-            ]);
-        }
 
         return $this->render('talent/detail.html.twig', [
             'talent' => $talent,

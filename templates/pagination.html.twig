@@ -4,7 +4,7 @@
         <ul class="pagination{{ classAlign }}">
 
             {% if previous is defined %}
-                <a rel="prev" class="pagination-previous" href="{{ path(route, query|merge({(pageParameterName): previous}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
+                <a class="ajax pagination-previous" rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
                 <li class="pagination-previous">
                     {{ 'Précédant'|trans({}, 'KnpPaginatorBundle') }}
                 </li>
@@ -16,9 +16,9 @@
             {% endif %}
 
             {% if startPage > 1 %}
-                <a href="{{ path(route, query|merge({(pageParameterName): 1}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}"><li>1</li></a>       
+                <a class="ajax" href="{{ path(route, query|merge({(pageParameterName): 1}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}"><li>1</li></a>       
                 {% if startPage == 3 %}
-                    <a href="{{ path(route, query|merge({(pageParameterName): 2}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}"><li>2</li>
+                    <a class="ajax" href="{{ path(route, query|merge({(pageParameterName): 2}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}"><li>2</li>
                     </a>                   
                 {% elseif startPage != 2 %}
                     {# <li class="ellipsis"></li> #}
@@ -27,7 +27,7 @@
 
             {% for page in pagesInRange %}
                 {% if page != current %}
-                    <a href="{{ path(route, query|merge({(pageParameterName): page}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
+                    <a class="ajax" href="{{ path(route, query|merge({(pageParameterName): page}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
                         <li>{{ page }}</li>
                     </a>
                 {% else %}
@@ -40,7 +40,7 @@
                     {% if pageCount > (endPage + 2) %}
                         {# <li class="ellipsis"></li> #}
                     {% else %}      
-                        <a href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
+                        <a class="ajax" href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
                         <li>
                             {{ pageCount -1 }}
                         </li>
@@ -48,11 +48,11 @@
                     {% endif %}
                 {% endif %}
 
-                <a href="{{ path(route, query|merge({(pageParameterName): pageCount}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}"><li>{{ pageCount }}</li></a> 
+                <a class="ajax" href="{{ path(route, query|merge({(pageParameterName): pageCount}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}"><li>{{ pageCount }}</li></a> 
             {% endif %}
 
             {% if next is defined %}               
-                <a rel="next" class="pagination-next" href="{{ path(route, query|merge({(pageParameterName): next}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
+                <a class="ajax pagination-next" rel="next" href="{{ path(route, query|merge({(pageParameterName): next}))|replace({"ajax=1":"", "&ajax=1":"", "ajax=1&":""}) }}">
                     <li class="pagination-next">
                         {{ 'Suivant'|trans({}, 'KnpPaginatorBundle') }}
                     </li>

@@ -19,20 +19,26 @@
         </div>
     {% endif %}
 
-    <ul class="profileNav">
+    {# <ul class="profileNav">
         <a href="#description"><li>Description</li></a>
         <a href="#projectContainer"><li>Talents</li></a>
         <a href="#contactInfoContainer"><li>Sociétés</li></a>
+    </ul> #}
+    <ul class="profileNav">
+    <li class="navAbout" data-status="selected" data-link="description">Description</li>
+    <li class="navTalent" data-status="unselected" data-link="talent">Talents</li>
+    <li class="navCompany" data-status="unselected" data-link="company">Sociétés</li>
     </ul>
 
-    <div class="aboutDescription">
+    <div class="aboutDescription" data-link="description" data-status="visible">
         {{project.description|raw}}
         <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{project.videoLink}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     {% if talents|length >= 1 %}
-        <div class="talentContainer cardContainerBackground">
-            {% if talents|length == 1 %}
+        <div class="talentContainer cardContainerBackground" data-link="talent" data-status="hidden">
+            {% include "profileTalent.html.twig" %}
+            {# {% if talents|length == 1 %}
                 <h2>Talent ayant travaillé sur le projet : </h2>
                 <div class="lineSeparator"></div>
             {% else %}
@@ -48,7 +54,7 @@
             </div>
             <div class="navigation">
                 {{ knp_pagination_render(talents, 'pagination.html.twig') }}
-            </div>
+            </div> #}
         </div>
     {% endif %}
 
@@ -78,8 +84,9 @@
     {% endif %} #}
 
     {% if companies|length >= 1 %}
-        <div class="companyContainer cardContainerBackground">
-            {% if companies|length == 1 %}
+        <div class="companyContainer cardContainerBackground" data-link="company" data-status="hidden">
+            {% include "profileCompany.html.twig" %}
+            {# {% if companies|length == 1 %}
                 <h2>Société participante :</h2>
                 <div class="lineSeparator"></div>
             {% else %}
@@ -103,7 +110,7 @@
             </div>
             <div class="navigation">
                 {{ knp_pagination_render(companies, 'pagination.html.twig') }}
-            </div>
+            </div> #}
         </div>
     {% endif %}
 

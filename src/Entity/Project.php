@@ -57,7 +57,9 @@ class Project
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $videoLink;
 
-    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectImage::class, orphanRemoval: true)]
+    /**
+     * @ORM\OneToMany(targetEntity=ProjectImage::class, mappedBy= "project", orphanRemoval= true, cascade={"persist"})
+     */
     private $projectImage;
 
     public function __construct()
