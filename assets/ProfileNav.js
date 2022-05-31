@@ -75,7 +75,7 @@
         if(response.status >= 200 && response.status < 300){
             const data = await response.json();
             // console.log(data);
-            if(this.projectContainer && url.includes('pageProjects')){
+            if(this.projectContainer && url.includes('pageProjects') || this.projectContainer && url.includes('page')){
                 this.projectContainer.innerHTML = data.project;
             }
             if(this.agencyContainer && url.includes('pageAgency')){
@@ -84,7 +84,7 @@
             if(this.companyContainer && url.includes('pageCompany')){
                 this.companyContainer.innerHTML = data.company;
             }
-            if(this.talentContainer && url.includes('pageTalents')){
+            if(this.talentContainer && url.includes('pageTalents') || this.talentContainer && url.includes('page')){
                 this.talentContainer.innerHTML = data.talent;
             }
             history.replaceState({}, '', url);

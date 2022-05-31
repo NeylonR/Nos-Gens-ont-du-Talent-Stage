@@ -61,6 +61,16 @@ class CompanyAgencyController extends AbstractController
     public function groupCompanyDetail(Company $company, Request $request, PaginatorInterface $paginator): Response
     {
         $companyProject = $company->getProjects();
+
+        if ($request->get('ajax')) {
+            $companyProject = $paginator->paginate($companyProject, $request->query->getInt('page', $request->get('page')), 6);
+    
+            return new JsonResponse([
+                'project' => $this->renderView('profileCompanyProject.html.twig', ['projects' => $companyProject,
+                'company' => $company,])
+            ]);
+        }
+        
         $companyProject = $paginator->paginate($companyProject, $request->query->getInt('page', 1), 6); 
 
         return $this->render('company_agency/company_detail.html.twig', [
@@ -73,6 +83,15 @@ class CompanyAgencyController extends AbstractController
     public function groupAgencyDetail(Agency $agency, Request $request, PaginatorInterface $paginator): Response
     {
         $agencyTalent = $agency->getAgencyAssociate();
+
+        if ($request->get('ajax')) {
+            $agencyTalent = $paginator->paginate($agencyTalent, $request->query->getInt('page', $request->get('page')), 6);
+    
+            return new JsonResponse([
+                'talent' => $this->renderView('profileTalent.html.twig', ['talents' => $agencyTalent])
+            ]);
+        }
+
         $agencyTalent = $paginator->paginate($agencyTalent, $request->query->getInt('page', 1), 6);
         
         return $this->render('company_agency/agency_detail.html.twig', [

@@ -44,9 +44,12 @@ function renderProfileDom(e, profileString){
             targetElement[1].dataset.status = "visible";
 }
 
-getNavAbout.addEventListener('click', function(e){
-    renderProfileDom(e, 'description');
-});
+
+if(getNavAbout){
+    getNavAbout.addEventListener('click', function(e){
+        renderProfileDom(e, 'description');
+    });
+}
 if(getNavProject){
    getNavProject.addEventListener('click', function(e){
     renderProfileDom(e, 'project');

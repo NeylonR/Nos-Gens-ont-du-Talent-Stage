@@ -52,14 +52,14 @@
 
     {% if projects|length >= 1 %}
     <div class="projectContainer" data-status="hidden" data-link="project">
-        {% if projects|length == 1 %}
+    {% include "profileCompanyProject.html.twig" %}
+        {# {% if projects|length == 1 %}
             <h2>Le projet auquel {{company.name}} a participé :</h2>
         {% else %}
             <h2>Les projets auxquels {{company.name}} a participé :</h2>
         {% endif %}
         <div class="projects">
             {% for project in projects %}
-                {# <div class="projectCard">{% include "project/projectCard.html.twig" %}</div> #}
             {% if project.status == 'En cours' %}
                 <div class="projectCard projectCurrent">
                     {% include "project/projectCard.html.twig" %}                    
@@ -82,7 +82,7 @@
 
         <div class="navigation">
         {{ knp_pagination_render(projects, 'pagination.html.twig') }}
-        </div>
+        </div> #}
     </div>
     {% endif %}
 

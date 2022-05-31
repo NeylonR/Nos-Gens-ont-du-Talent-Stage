@@ -52,7 +52,7 @@
     
     {% if projects|length >= 1 %}
     <div class="projectContainer" data-link="project" data-status="hidden">
-        {% include "talent/profileProject.html.twig" %}
+        {% include "profileProject.html.twig" %}
         {# {% if projects|length == 1 %}
             <h2>Le projet auquel {{talent.firstName}} a participé :</h2>
         {% else %}
@@ -106,7 +106,7 @@
         <div class="navigation">
         {{ knp_pagination_render(agencies, 'pagination.html.twig') }}
         </div> #}
-        {% include "talent/profileAgency.html.twig" %}
+        {% include "profileAgency.html.twig" %}
     </div>
     {% endif %}
 

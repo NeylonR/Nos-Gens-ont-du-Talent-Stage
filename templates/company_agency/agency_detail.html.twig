@@ -52,7 +52,8 @@
 
     {% if talents|length >= 1 %}
         <div class="talentContainer cardContainerBackground" data-status="hidden" data-link="talent">
-            {% if talents|length == 1 %}
+        {% include "profileTalent.html.twig" %}
+            {# {% if talents|length == 1 %}
                 <h2>Talent de l’agence :</h2>
                 <div class="lineSeparator"></div>
             {% else %}
@@ -68,7 +69,7 @@
             </div>
             <div class="navigation">
                 {{ knp_pagination_render(talents, 'pagination.html.twig') }}
-            </div>
+            </div> #}
         </div>
     {% endif %}
 

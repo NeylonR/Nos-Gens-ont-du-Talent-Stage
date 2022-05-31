@@ -25,9 +25,9 @@ class TalentController extends AbstractController
         $form = $this->createForm(FilterType::class, $filter);
         $form->handleRequest($request);
 
-        $talents1 = $talentRepository->findFilter($filter);
+        $talents = $talentRepository->findFilter($filter);
 
-        $talents = [...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,];
+        // $talents = [...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,...$talents1,];
 
         $talents = $paginator->paginate($talents, $request->query->getInt('page', 1), 8);
 
@@ -99,8 +99,8 @@ class TalentController extends AbstractController
                 ['pageParameterName' => 'pageAgency']);
         
                 return new JsonResponse([
-                    'project' => $this->renderView('talent/profileProject.html.twig', ['projects' => $talentProject, 'talent'=>$talent]),
-                    'agency' => $this->renderView('talent/profileAgency.html.twig', ['agencies' => $talentAgency, 'talent'=>$talent])
+                    'project' => $this->renderView('profileProject.html.twig', ['projects' => $talentProject, 'talent'=>$talent]),
+                    'agency' => $this->renderView('profileAgency.html.twig', ['agencies' => $talentAgency, 'talent'=>$talent])
                 ]);
             }
             if($request->get('pageProjects')){
@@ -108,7 +108,7 @@ class TalentController extends AbstractController
                 ['pageParameterName' => 'pageProjects']);
         
                 return new JsonResponse([
-                    'project' => $this->renderView('talent/profileProject.html.twig', ['projects' => $talentProject, 'talent'=>$talent])
+                    'project' => $this->renderView('profileProject.html.twig', ['projects' => $talentProject, 'talent'=>$talent])
                 ]);
             }
             if($request->get('pageAgency')){
@@ -116,7 +116,7 @@ class TalentController extends AbstractController
                 ['pageParameterName' => 'pageAgency']);
 
                 return new JsonResponse([
-                    'agency' => $this->renderView('talent/profileAgency.html.twig', ['agencies' => $talentAgency, 'talent'=>$talent])
+                    'agency' => $this->renderView('profileAgency.html.twig', ['agencies' => $talentAgency, 'talent'=>$talent])
                 ]);
             }
         }

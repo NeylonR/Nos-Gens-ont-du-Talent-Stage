@@ -1,6 +1,7 @@
 {% for group in group %}
-    <div class="groupCard card">
+    {# <div class="groupCard card"> #}
         {% if group.agencyAssociate is defined %}
+        <div class="groupCard card" id="a{{group.id}}">
             {% include "company_agency/agencyCard.html.twig" %}
             {% if is_granted('ROLE_ADMIN') %}
                 {% set url = ea_url()
@@ -9,8 +10,9 @@
                 .setEntityId(group.id) %}
                 <a href="{{ url }}" class="button">Modifier</a>
             {% endif %}
-
-        {% else %}
+        </div>
+        {% elseif group.projects is defined %}
+        <div class="groupCard card" id="c{{group.id}}">
             {% include "company_agency/companyCard.html.twig" %}
             {% if is_granted('ROLE_ADMIN') %}
                 {% set url = ea_url()
@@ -19,6 +21,7 @@
                 .setEntityId(group.id) %}
                 <a href="{{ url }}" class="button">Modifier</a> 
             {% endif %}
+        </div>
         {% endif %}
-    </div>
+    {# </div> #}
 {% endfor %}

@@ -1,3 +1,4 @@
+import {Flipper, spring} from 'flip-toolkit';
 /**
  * @property {HTMLElement} pagination
  * @property {HTMLElement} cardContainer
@@ -21,19 +22,11 @@ export default class Filter{
     }
 
     bindEvents(){
-        // const aClickListener = e => {
-        //     if (e.target.tagName === 'A') {
-        //       e.preventDefault()
-        //       this.loadUrl(e.target.getAttribute('href'))
-        //     }
-        //   };
         this.form.querySelectorAll('input[type=checkbox]').forEach(input => {
             input.addEventListener('change', this.loadForm.bind(this));
         });
 
         this.reset.addEventListener('click', this.loadForm.bind(this));
-
-        // this.pagination.addEventListener('click', aClickListener);
     }
 
     async loadForm(){
@@ -56,11 +49,71 @@ export default class Filter{
 
         if(response.status >= 200 && response.status < 300){
             const data = await response.json();
-            this.cardContainer.innerHTML = data.content;
+            // this.cardContainer.innerHTML = data.content;
+            this.flipContent(data.content);
             this.pagination.innerHTML = data.pagination;
             history.replaceState({}, '', url);
         } else{
             console.error(response)
         }
+    }
+    /**
+     * 
+     * @param {string} content 
+     */
+    flipContent(content){
+        const exitSpring = function(element, index, removeElement){
+            spring({
+                config: "stiff",
+                values: {
+                    opacity: [1, 0],
+                    scale: [1,0]
+                },
+                onUpdate: ({opacity, scale}) => {
+                    element.style.opacity = opacity;
+                    element.style.transform = `scaleX(${scale})`;
+                },
+                onComplete: removeElement
+            })
+        }
+        const appearSpring = function(element, index){
+            spring({
+                config: "stiff",
+                values: {
+                    opacity: [0, 1],
+                    scale: [0,1]
+                },
+                onUpdate: ({opacity, scale}) => {
+                    element.style.opacity = opacity;
+                    element.style.transform = `scaleX(${scale})`;
+                },
+
+            })
+        }
+        const flipper = new Flipper({
+            element: this.cardContainer
+        })
+
+        Array.from(this.cardContainer.children).forEach(element => {
+            flipper.addFlipped({
+                element,
+                spring: "stiff",
+                flipId: element.id,
+                shouldFlip: false,
+                onExit: exitSpring
+            })
+        })
+        flipper.recordBeforeUpdate();
+
+        this.cardContainer.innerHTML = content;
+        Array.from(this.cardContainer.children).forEach(element => {
+            flipper.addFlipped({
+                element,
+                spring: "stiff",
+                flipId: element.id,
+                onAppear: appearSpring
+            })
+        })
+        flipper.update();
     }
 }
