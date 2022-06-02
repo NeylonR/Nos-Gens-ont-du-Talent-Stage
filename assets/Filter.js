@@ -67,13 +67,16 @@ export default class Filter{
                 config: "stiff",
                 values: {
                     opacity: [1, 0],
-                    scale: [1,0]
+                    scale: [1,0],
+                    translateY: [0, 0],
                 },
-                onUpdate: ({opacity, scale}) => {
+                onUpdate: ({opacity, scale, translateY}) => {
                     element.style.opacity = opacity;
-                    element.style.transform = `scaleX(${scale})`;
+                    element.style.transform = `scaleX(${scale}) translateY(${translateY}px)`;
                 },
-                onComplete: removeElement
+                delay: index * 25,
+                onComplete: removeElement,
+
             })
         }
         const appearSpring = function(element, index){
@@ -81,36 +84,51 @@ export default class Filter{
                 config: "stiff",
                 values: {
                     opacity: [0, 1],
-                    scale: [0,1]
+                    scale: [0,1],
+                    translateY: [-0, 0],
                 },
-                onUpdate: ({opacity, scale}) => {
+                onUpdate: ({opacity, scale, translateY}) => {
                     element.style.opacity = opacity;
-                    element.style.transform = `scaleX(${scale})`;
+                    element.style.transform = `scaleX(${scale}) translateY(${translateY}px)`;
                 },
-
+                delay: index * 25,
             })
         }
         const flipper = new Flipper({
             element: this.cardContainer
         })
 
-        Array.from(this.cardContainer.children).forEach(element => {
+        Array.from(this.cardContainer.children).forEach((element, index) => {
             flipper.addFlipped({
                 element,
                 spring: "stiff",
                 flipId: element.id,
-                shouldFlip: false,
+                // staggerConfig:{
+                //     default: {
+                //     reverse: true,
+                //     speed: 1
+                //     }
+                // },
+                stagger: false,
+                // shouldFlip: false,
                 onExit: exitSpring
             })
         })
         flipper.recordBeforeUpdate();
 
         this.cardContainer.innerHTML = content;
-        Array.from(this.cardContainer.children).forEach(element => {
+        Array.from(this.cardContainer.children).forEach((element, index) => {
             flipper.addFlipped({
                 element,
                 spring: "stiff",
                 flipId: element.id,
+                // staggerConfig:{
+                //     default: {
+                //     reverse: true,
+                //     speed: 1
+                //     }
+                // },
+                stagger: false,
                 onAppear: appearSpring
             })
         })

@@ -37,10 +37,22 @@
         <div class="contactFormContainer">
             {{ form_start(form, {'attr': {'class': 'formContact'}})}}
             {{ form_widget(form.firstName, {'attr': {'placeholder': 'Nom'}})}}
+            {{form_errors(form.firstName)}}
+            
             {{ form_widget(form.lastName, {'attr': {'placeholder': 'Prenom'}})}}
+            {{form_errors(form.lastName)}}
+
             {{ form_widget(form.subject, {'attr': {'placeholder': 'Objet'}})}}
+            {{form_errors(form.subject)}}
+
             {{ form_widget(form.email, {'attr': {'placeholder': 'Email'}})}}
+            {{form_errors(form.email)}}
+
             {{ form_widget(form.content, {'attr': {'placeholder': 'Vos questions...', 'rows': '8'}})}}
+            {{form_errors(form.content)}}
+
+            {{form_widget(form.captcha)}}
+            {{form_errors(form.captcha)}}
             <button type="submit" class="button">Envoyer</button>
             {{ form_end(form) }}
         </div>

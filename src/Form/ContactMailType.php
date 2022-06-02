@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use Beelab\Recaptcha2Bundle\Form\Type\RecaptchaType;
 use App\Entity\ContactMail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +20,7 @@ class ContactMailType extends AbstractType
             ->add('email', EmailType::class)
             ->add('subject')
             ->add('content', TextareaType::class)
+            ->add('captcha', RecaptchaType::class)
         ;
     }
 
