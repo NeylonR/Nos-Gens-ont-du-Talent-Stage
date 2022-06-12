@@ -97,41 +97,50 @@ export default class Filter{
         const flipper = new Flipper({
             element: this.cardContainer
         })
-
-        Array.from(this.cardContainer.children).forEach((element, index) => {
-            flipper.addFlipped({
-                element,
-                spring: "stiff",
-                flipId: element.id,
-                // staggerConfig:{
-                //     default: {
-                //     reverse: true,
-                //     speed: 1
-                //     }
-                // },
-                stagger: false,
-                // shouldFlip: false,
-                onExit: exitSpring
+        
+        if(Array.from(this.cardContainer.children).includes(document.querySelector('.noResult')) != true){
+            Array.from(this.cardContainer.children).forEach((element, index) => {
+                flipper.addFlipped({
+                    element,
+                    spring: "stiff",
+                    flipId: element.id,
+                    // staggerConfig:{
+                    //     default: {
+                    //     reverse: true,
+                    //     speed: 1
+                    //     }
+                    // },
+                    stagger: false,
+                    // shouldFlip: false,
+                    onExit: exitSpring
+                })
             })
-        })
+            
+        }
         flipper.recordBeforeUpdate();
 
+
         this.cardContainer.innerHTML = content;
-        Array.from(this.cardContainer.children).forEach((element, index) => {
-            flipper.addFlipped({
-                element,
-                spring: "stiff",
-                flipId: element.id,
-                // staggerConfig:{
-                //     default: {
-                //     reverse: true,
-                //     speed: 1
-                //     }
-                // },
-                stagger: false,
-                onAppear: appearSpring
+        console.log(Array.from(this.cardContainer.children).includes(document.querySelector('.noResult')));
+
+        if(Array.from(this.cardContainer.children).includes(document.querySelector('.noResult')) != true){
+            Array.from(this.cardContainer.children).forEach((element, index) => {
+                flipper.addFlipped({
+                    element,
+                    spring: "stiff",
+                    flipId: element.id,
+                    // staggerConfig:{
+                    //     default: {
+                    //     reverse: true,
+                    //     speed: 1
+                    //     }
+                    // },
+                    stagger: false,
+                    onAppear: appearSpring
+                })
             })
-        })
+        }
         flipper.update();
+
     }
 }

@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Project;
 use App\Form\ProjectTextType;
-// use App\Form\ProjectImageType;
+use App\Form\ProjectImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -30,13 +30,13 @@ class ProjectCrudController extends AbstractCrudController
             ImageField::new('bannerImage')
             ->setBasePath('images/project_banner')
             ->setUploadDir('public/images/project_banner'),
-            // CollectionField::new('projectText')
-            // ->setEntryType(ProjectTextType::class)
-            // ->onlyOnForms(),
-            // CollectionField::new('projectImage')
-            // ->setEntryType(ProjectImageType::class)
-            // ->setFormTypeOption('by_reference', false)
-            // ->onlyOnForms(),
+            CollectionField::new('projectText')
+            ->setEntryType(ProjectTextType::class)
+            ->onlyOnForms(),
+            CollectionField::new('projectImage')
+            ->setEntryType(ProjectImageType::class)
+            ->setFormTypeOption('by_reference', false)
+            ->onlyOnForms(),
             TextField::new('videoLink','Url de la vidéo'),
             TextField::new('link','Url du projet'),
             AssociationField::new('status', 'Status actuel du projet'),

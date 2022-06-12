@@ -49,16 +49,20 @@ class Project
     /** 
      * @Vich\UploadableField(mapping= "project_banner", fileNameProperty="bannerImage")
      */
-    private $bannerFile;
+    private $bannerFile; 
 
-    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectTextContent::class, orphanRemoval: true)]
+     /**
+      * old : # [ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectTextContent::class, orphanRemoval: true)]
+     * @ORM\OneToMany(targetEntity='ProjectTextContent', mappedBy= 'project', orphanRemoval= true, cascade={"persist"})
+     */
     private $projectText;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $videoLink;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProjectImage::class, mappedBy= "project", orphanRemoval= true, cascade={"persist"})
+     * old :  # [ORM\Column(type: 'string', length: 255, nullable: true)]
+     * @ORM\OneToMany(targetEntity="ProjectImage", mappedBy= "project", orphanRemoval= true, cascade={"persist"})
      */
     private $projectImage;
 
@@ -217,9 +221,10 @@ class Project
     }
 
     /**
-     * @return Collection<int, projectTextContent>
+     * old: @ return Collection<int, projectTextContent> + no ? before Collection
+     * @return Collection<int|null, projectTextContent>
      */
-    public function getProjectText(): Collection
+    public function getProjectText(): ?Collection
     {
         return $this->projectText;
     }
@@ -247,9 +252,10 @@ class Project
     }
 
     /**
-     * @return Collection<int, projectImage>
+     * old : @ return Collection<int, projectImage> + no ? before Collection
+     * @return Collection<int|projectImage[]|null
      */
-    public function getProjectImage(): Collection
+    public function getProjectImage(): ?Collection
     {
         return $this->projectImage;
     }

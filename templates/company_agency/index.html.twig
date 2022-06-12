@@ -19,9 +19,10 @@
 
     <article class="cardContainerBackground">
         <div class="groupContainer cardContainer">
-            {% if group is empty %} 
+        {# {{dump(group)}} #}
+            {# {% if group is empty %} 
                 <p class="noResult">Aucun résultat n'a été trouvé.</p>
-            {% endif %}
+            {% endif %} #}
             {% include "company_agency/group.html.twig" %}
         </div>
     </article>

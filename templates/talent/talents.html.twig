@@ -1,3 +1,6 @@
+{% if talents is empty %}
+    <p class="noResult">Aucun résultat n'a été trouvé.</p>
+{% endif %}
 {% for talent in talents %}
     <div class="talentCard card" id="t{{talent.id}}">
         {% include "talent/talentCard.html.twig" with {talent: talent} %}
