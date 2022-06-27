@@ -51,20 +51,14 @@ class Project
      */
     private $bannerFile; 
 
-     /**
-      * old : # [ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectTextContent::class, orphanRemoval: true)]
-     * @ORM\OneToMany(targetEntity='ProjectTextContent', mappedBy= 'project', orphanRemoval= true, cascade={"persist"})
-     */
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectTextContent::class, orphanRemoval: true)]
     private $projectText;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $videoLink;
 
-    /**
-     * old :  # [ORM\Column(type: 'string', length: 255, nullable: true)]
-     * @ORM\OneToMany(targetEntity="ProjectImage", mappedBy= "project", orphanRemoval= true, cascade={"persist"})
-     */
-    private $projectImage;
+    // #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    // private $projectImage;
 
     public function __construct()
     {
